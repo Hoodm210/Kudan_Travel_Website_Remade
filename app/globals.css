@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { 
+  color-scheme: light; 
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+body {
+  margin: 0;
+  color: #0f172a;
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* { 
+  box-sizing: border-box; 
+}
+
+::selection { 
+  background: #d1fae5; 
+  color: #064e3b; 
+}
+
+@layer components {
+  .container-x { 
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10; 
+  }
+
+  .eyebrow { 
+    @apply text-xs font-bold uppercase tracking-[0.22em];
+    color: #047857; /* emerald-700 fallback */
+  }
+
+  .section-title { 
+    @apply mt-2 text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl;
+    color: #020617; /* slate-950 fallback */
+  }
+
+  .section-copy { 
+    @apply mt-4 max-w-2xl text-base leading-7;
+    color: #475569; /* slate-600 fallback */
+  }
+
+  .btn-primary { 
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold text-white transition hover:-translate-y-0.5;
+    background-color: #ea580c; /* sunrise/orange-600 */
+    box-shadow: 0 10px 15px -3px rgba(254, 215, 170, 0.5);
+  }
+  .btn-primary:hover {
+    background-color: #c2410c; /* orange-700 */
+  }
+
+  .btn-secondary { 
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-bold text-slate-800 transition hover:-translate-y-0.5;
+  }
+  .btn-secondary:hover {
+    border-color: #6ee7b7; /* emerald-300 */
+    color: #047857; /* emerald-700 */
+  }
+
+  .glass { 
+    @apply border border-white/20 bg-white/10 backdrop-blur-xl; 
+  }
+
+  .card { 
+    @apply rounded-3xl border border-slate-200 bg-white;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  }
+}
+
+/* Background Utility Classes */
+.hero-bg {
+  background:
+    linear-gradient(90deg, rgba(2,6,23,.86) 0%, rgba(2,6,23,.60) 44%, rgba(2,6,23,.12) 100%),
+    url("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2200&q=90") center/cover;
+}
+
+.nepal-bg {
+  background:
+    linear-gradient(180deg, rgba(15,23,42,.08), rgba(15,23,42,.66)),
+    url("https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1800&q=85") center/cover;
+}
+
+.thailand-bg { 
+  background: linear-gradient(180deg, rgba(15,23,42,.05), rgba(15,23,42,.68)), url("https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85") center/cover; 
+}
+
+.dubai-bg { 
+  background: linear-gradient(180deg, rgba(15,23,42,.05), rgba(15,23,42,.72)), url("https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85") center/cover; 
+}
+
+.bali-bg { 
+  background: linear-gradient(180deg, rgba(15,23,42,.05), rgba(15,23,42,.72)), url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85") center/cover; 
+}
+
+.singapore-bg { 
+  background: linear-gradient(180deg, rgba(15,23,42,.05), rgba(15,23,42,.72)), url("https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85") center/cover; 
+}
+
+.vietnam-bg { 
+  background: linear-gradient(180deg, rgba(15,23,42,.05), rgba(15,23,42,.72)), url("https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85") center/cover; 
+}

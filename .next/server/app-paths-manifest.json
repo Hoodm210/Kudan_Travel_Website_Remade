@@ -1,0 +1,6 @@
+{
+  "/page": "app/page.js",
+  "/inbound/page": "app/inbound/page.js",
+  "/inbound/[slug]/page": "app/inbound/[slug]/page.js",
+  "/domestic-flights/page": "app/domestic-flights/page.js"
+}

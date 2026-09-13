@@ -308,7 +308,7 @@ const teamMembers: TeamMember[] = [
     id: "dipendra-khadka",
     name: "Dipendra Khadka",
     role: "Accountant",
-    image: "/dipendra.jpeg",
+    image: "/dipendra.jpg",
     languages: ["English", "Nepali"],
     phone: "+977 9851000007",
     email: "dipendra@kudantravel.com",

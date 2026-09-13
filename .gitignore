@@ -6,4 +6,4 @@ out/
 .env
 .env.local
 .vercel/
-*.log
+*.lognode_modules/

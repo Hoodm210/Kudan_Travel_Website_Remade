@@ -49,7 +49,7 @@ export default function Header() {
             onClick={() => setOpen(false)}
           >
             <img
-              src="/logo.jpeg"
+              src="/logo.png"
               alt="Kudan Travel & Tours Logo"
               className="h-14 w-auto max-h-[60px] object-contain sm:h-16" 
             />

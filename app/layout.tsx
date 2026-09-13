@@ -2,7 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import "./globals.css";
+// TypeScript may not have declarations for CSS side-effect imports in some setups.
+// Next.js still processes this stylesheet during the build.
+// @ts-expect-error CSS side-effect import
+import "@/app/globals.css";
 
 const sansFont = Inter({
   subsets: ["latin"],
@@ -107,7 +110,7 @@ const jsonLd = {
       name: "Kudan Travel & Tours Pvt. Ltd.",
       legalName: "Kudan Travel and Tours Pvt. Ltd.",
       url: SITE_URL,
-      logo: `${SITE_URL}/logo.png`,
+      logo: `${SITE_URL}/logo.jpeg`,
       image: `${SITE_URL}/og-image.jpg`,
       telephone: "+977-1-4005191",
       email: "info@kudantravel.com",

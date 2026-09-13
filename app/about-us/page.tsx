@@ -242,45 +242,23 @@ const teamMembers: TeamMember[] = [
     id: "hari-parajuli",
     name: "Hari Parajuli",
     role: "Managing Director",
-    image: "/hari.png",
+    image: "/hari.jpeg",
     languages: ["English", "Nepali"],
     phone: "+977 9851000001",
     email: "hari@kudantravel.com",
     experienceYears: 15,
-    overview: "Hari brings over 15 years of tourism management experience, leading Kudan Travel with a vision of high-standard hospitality, strategic partner network development, and tailored destination packages across Nepal and South Asia."
+    overview: "Hari leads Kudan Travel with strategic leadership, driving business development, regional partnerships, and high-standard travel operations."
   },
   {
-    id: "kamal-paudyal",
-    name: "Kamal Paudyal",
+    id: "neha-shrestha",
+    name: "Neha Shrestha",
     role: "Operations Manager",
-    image: "/kamal.jpeg",
+    image: "/neha.jpeg",
     languages: ["English", "Nepali"],
     phone: "+977 9851000002",
-    email: "kamal@kudantravel.com",
-    experienceYears: 10,
-    overview: "Kamal handles end-to-end trip execution, overseeing daily logistics, trekking permits, high-altitude safety protocols, and regional ground coordination for seamless customer experiences."
-  },
-  {
-    id: "ramesh-bhandari",
-    name: "Ramesh Bhandari",
-    role: "Account Manager",
-    image: "/ramesh.jpeg",
-    languages: ["English", "Nepali"],
-    phone: "+977 9851000003",
-    email: "ramesh@kudantravel.com",
+    email: "neha@kudantravel.com",
     experienceYears: 8,
-    overview: "Ramesh manages Kudan's financial pipelines, corporate billing, vendor settlements, and secure online booking transactions."
-  },
-  {
-    id: "rana-jung-thapa-chhetri",
-    name: "Rana Jung Thapa Chhetri",
-    role: "Relationship Manager",
-    image: "/ranajung.jpeg",
-    languages: ["English", "Nepali"],
-    phone: "+977 9851000004",
-    email: "ranajung@kudantravel.com",
-    experienceYears: 9,
-    overview: "Rana builds long-term agency partnerships and ensures high traveler satisfaction through dedicated client communication and account management."
+    overview: "Neha manages core travel operations, overseeing group itineraries, reservation workflows, and guest hospitality services."
   },
   {
     id: "milan-khadgi",
@@ -288,10 +266,10 @@ const teamMembers: TeamMember[] = [
     role: "Transport Manager",
     image: "/milan.jpeg",
     languages: ["English", "Nepali"],
-    phone: "+977 9851000005",
+    phone: "+977 9851000003",
     email: "milan@kudantravel.com",
     experienceYears: 11,
-    overview: "Milan directs vehicle fleet maintenance, airport transfers, luxury private rentals, and driver dispatch across top tourist routes."
+    overview: "Milan directs overall vehicle logistics, driver scheduling, luxury tourist transport, and airport transfer services."
   },
   {
     id: "binod-maharjan",
@@ -299,32 +277,131 @@ const teamMembers: TeamMember[] = [
     role: "Japanese Assistance Lead",
     image: "/binod.jpeg",
     languages: ["Japanese", "English", "Nepali"],
-    phone: "+977 9851000006",
+    phone: "+977 9851000004",
     email: "binod@kudantravel.com",
     experienceYears: 12,
-    overview: "Binod is a dedicated Japanese-speaking support specialist catering to outbound tours, translation services, and tailored itineraries for Japanese travelers."
+    overview: "Binod specializes in Japanese client relations, providing custom itinerary planning, translation, and dedicated guest assistance."
+  },
+  {
+    id: "ramesh-bhandari",
+    name: "Ramesh Bhandari",
+    role: "Account Manager",
+    image: "/ramesh.jpeg",
+    languages: ["English", "Nepali"],
+    phone: "+977 9851000005",
+    email: "ramesh@kudantravel.com",
+    experienceYears: 8,
+    overview: "Ramesh handles corporate account accounts, billing administration, partner settlement tracking, and financial reconciliation."
+  },
+  {
+    id: "kamal-paudyal",
+    name: "Kamal Paudyal",
+    role: "Field Operations Lead",
+    image: "/kamal.jpeg",
+    languages: ["English", "Nepali"],
+    phone: "+977 9851000006",
+    email: "kamal@kudantravel.com",
+    experienceYears: 10,
+    overview: "Kamal coordinates ground execution for trekking and tour packages, overseeing logistics permits and field safety."
+  },
+  {
+    id: "rana-jung-thapa",
+    name: "Rana Jung Thapa",
+    role: "Relationship Manager",
+    image: "/ranajung.jpeg",
+    languages: ["English", "Nepali"],
+    phone: "+977 9851000007",
+    email: "ranajung@kudantravel.com",
+    experienceYears: 9,
+    overview: "Rana manages long-term client relations, agency partnerships, and pre-departure consultation services."
   },
   {
     id: "dipendra-khadka",
     name: "Dipendra Khadka",
-    role: "Accountant",
-    image: "/dipendra.jpg",
-    languages: ["English", "Nepali"],
-    phone: "+977 9851000007",
-    email: "dipendra@kudantravel.com",
-    experienceYears: 6,
-    overview: "Dipendra leads financial reporting, audit compliance, partner reconciliations, and daily accounting operations."
-  },
-  {
-    id: "krishna-mukhiya",
-    name: "Krishna Mukhiya",
-    role: "IT & Digital Officer",
-    image: "/krishna.jpeg",
+    role: "Senior Accountant",
+    image: "/dipendra.jpeg",
     languages: ["English", "Nepali"],
     phone: "+977 9851000008",
+    email: "dipendra@kudantravel.com",
+    experienceYears: 7,
+    overview: "Dipendra oversees internal audits, general ledger accounts, tax compliance, and vendor financial transactions."
+  },
+  {
+    id: "krishna-prasad-mukhiya",
+    name: "Krishna Prasad Mukhiya",
+    role: "Accountant & IT Officer",
+    image: "/krishna.jpeg",
+    languages: ["English", "Nepali"],
+    phone: "+977 9851000009",
     email: "krishna@kudantravel.com",
     experienceYears: 5,
-    overview: "Krishna oversees Kudan's digital booking platforms, IT infrastructure, web applications, and automated guest communication channels."
+    overview: "Krishna leads financial tracking, daily ledger operations, digital platform updates, and IT infrastructure management."
+  },
+  {
+    id: "naisha-khadgi",
+    name: "Naisha Khadgi",
+    role: "Operations Assistant",
+    image: "/naisha.jpeg",
+    languages: ["English", "Nepali"],
+    phone: "+977 9851000010",
+    email: "naisha@kudantravel.com",
+    experienceYears: 4,
+    overview: "Naisha supports daily office administration, tour reservations, hotel bookings, and customer coordination."
+  },
+  {
+    id: "rasul-maharjan",
+    name: "Rasul Maharjan",
+    role: "Jr. Accountant",
+    image: "/rasul.jpeg",
+    languages: ["English", "Nepali"],
+    phone: "+977 9851000011",
+    email: "rasul@kudantravel.com",
+    experienceYears: 3,
+    overview: "Rasul manages invoicing records, receipt processing, payment collection entries, and financial documentation."
+  },
+  {
+    id: "adikshya-maharjan",
+    name: "Adikshya Maharjan",
+    role: "Front Desk Officer",
+    image: "/adikshya.jpeg",
+    languages: ["English", "Nepali"],
+    phone: "+977 9851000012",
+    email: "info@kudantravel.com",
+    experienceYears: 3,
+    overview: "Adikshya manages front desk reception, handles incoming calls, and assists walk-in clients with preliminary inquiries."
+  },
+  {
+    id: "aditya-chaudhary",
+    name: "Aditya Chaudhary",
+    role: "Client Interaction Officer",
+    image: "/aditya.jpeg",
+    languages: ["English", "Nepali"],
+    phone: "+977 9851000013",
+    email: "aditya@kudantravel.com",
+    experienceYears: 4,
+    overview: "Aditya acts as the key contact point for incoming tourists, facilitating tour briefings, feedback, and special requests."
+  },
+  {
+    id: "lekhnath-dhungel",
+    name: "Lekhnath Dhungel",
+    role: "Senior Fleet Driver",
+    image: "/lekhnath.jpeg",
+    languages: ["Nepali"],
+    phone: "+977 9851000014",
+    email: "transport@kudantravel.com",
+    experienceYears: 12,
+    overview: "Lekhnath provides safe and reliable long-distance driving services for tourist groups and private overland travel."
+  },
+  {
+    id: "dinesh-manandhar",
+    name: "Dinesh Manandhar",
+    role: "Transport Operator",
+    image: "/dinesh.jpeg",
+    languages: ["Nepali"],
+    phone: "+977 9851000015",
+    email: "transport@kudantravel.com",
+    experienceYears: 9,
+    overview: "Dinesh manages vehicle readiness, route navigation, and local ground transport operations for incoming guests."
   }
 ];
 

@@ -8,7 +8,7 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "Inbound Nepal", href: "/inbound" },
   { name: "Domestic Flights", href: "/domestic-flights" },
-  { name: "Outbound Tours", href: "/outbound-tours" }, // Updated href to match folder path
+  { name: "Outbound Tours", href: "/outbound-tours" },
   { name: "Transport", href: "/transportation" },
   { name: "Gallery", href: "/gallery" },
   { name: "Achievements", href: "/achievements" },
@@ -49,7 +49,7 @@ export default function Header() {
             onClick={() => setOpen(false)}
           >
             <img
-              src="/logo.png"
+              src="/logo.jpeg"
               alt="Kudan Travel & Tours Logo"
               className="h-14 w-auto max-h-[60px] object-contain sm:h-16" 
             />

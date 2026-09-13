@@ -1,2 +1,9 @@
 .vercel
 node_modules
+node_modules/
+.next/
+out/
+.env
+.env.local
+.vercel/
+*.log

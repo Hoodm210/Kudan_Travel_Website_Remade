@@ -13,6 +13,7 @@ interface TourDetails {
 }
 
 const INBOUND_DATA: Record<string, TourDetails> = {
+  // --- HERITAGE & CULTURAL ---
   "ktm-bandipur-pokhara-nagarkot": {
     title: "7N/8D Kathmandu, Bandipur, Pokhara & Nagarkot Heritage",
     locations: "Kathmandu • Bandipur • Pokhara • Nagarkot • Bhaktapur",
@@ -21,7 +22,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
     description: "An immersive 8-day journey across Nepal's iconic hill stations, heritage cities, and serene lakes. Experience Boudhanath, Patan, scenic drives to Bandipur, Phewa Lake boating, Sarangkot sunrise, Nagarkot Himalayan views, traditional rickshaw rides, and authentic cultural dance dinners.",
     highlights: [
-      "Day 1: Arrival KTM (Turkish Airlines), Boudhanath Stupa & Patan Durbar Square",
+      "Day 1: Arrival KTM, Boudhanath Stupa & Patan Durbar Square",
       "Day 2: Scenic countryside drive to hilltop Bandipur & evening village stroll",
       "Day 3: Drive to Pokhara, Phewa Lake boating & Taal Barahi Temple",
       "Day 4: Sarangkot Himalayan Sunrise, Devi's Fall, Gupteshwor Cave & Mountain Museum",
@@ -78,8 +79,99 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     price: "NPR 25,000",
     image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
     description: "Explore UNESCO World Heritage Sites including Pashupatinath, Swayambhunath, and the historic Durbar Squares of Kathmandu, Patan, and Bhaktapur.",
-    highlights: ["Swayambhunath Stupa (Monkey Temple)", "Bhaktapur Durbar Square Architectural Tour", "Pashupatinath Temple Evening Aarti", "Traditional Newari Dinner Experience"],
+    highlights: [
+      "Day 1: Arrival in Kathmandu & transfer to hotel",
+      "Day 2: UNESCO Heritage Tour: Swayambhunath & Kathmandu Durbar Square",
+      "Day 3: Patan Durbar Square, Bhaktapur medieval city & Pashupatinath Evening Aarti",
+      "Day 4: Final shopping at Thamel & airport departure transfer"
+    ],
   },
+
+  // --- TREKKING ITINERARIES ---
+  "ebc-trek": {
+    title: "14 Days Everest Base Camp & Kala Patthar Expedition",
+    locations: "Lukla • Namche Bazaar • Tengboche • Gorakshep • EBC",
+    duration: "13N / 14D",
+    price: "NPR 115,000",
+    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+    description: "The ultimate Himalayan trek to the base of Mount Everest (5,364m). Walk through iconic Sherpa villages, ancient monasteries, suspension bridges over the Dudh Koshi river, and stand face-to-face with the world's highest peak from Kala Patthar viewpoint (5,545m).",
+    highlights: [
+      "Day 1: Arrival in Kathmandu & trip briefing with guide",
+      "Day 2: Thrilling flight to Lukla (2,860m) & trek to Phakding (2,610m)",
+      "Day 3: Trek to Namche Bazaar (3,440m) through Sagarmatha National Park",
+      "Day 4: Acclimatization day in Namche Bazaar & hike to Everest View Hotel",
+      "Day 5: Trek from Namche to Tengboche Monastery (3,867m) with Ama Dablam views",
+      "Day 6: Trek to Dingboche (4,410m) through alpine forest landscapes",
+      "Day 7: Second acclimatization day in Dingboche with ridge hike to Nangkartshang Peak",
+      "Day 8: Trek to Lobuche (4,940m) past the Everest Memorial at Thukla Pass",
+      "Day 9: Trek to Gorakshep (5,164m) & push to Everest Base Camp (5,364m)",
+      "Day 10: Early morning summit of Kala Patthar (5,545m) for Everest sunrise & trek down to Pheriche",
+      "Day 11: Trek down to Namche Bazaar",
+      "Day 12: Final day of trekking down to Lukla",
+      "Day 13: Flight back to Kathmandu & celebration dinner",
+      "Day 14: Final hotel check-out & international departure transfer"
+    ],
+  },
+  "annapurna-circuit": {
+    title: "12 Days Annapurna Circuit & Thorong La Pass Trek",
+    locations: "Besisahar • Manang • Thorong La Pass • Muktinath • Pokhara",
+    duration: "11N / 12D",
+    price: "NPR 88,000",
+    image: "https://images.unsplash.com/photo-1585864970145-325863508113?auto=format&fit=crop&w=1200&q=80",
+    description: "Traverse one of the world's most renowned classic treks. Cross the formidable Thorong La Pass at 5,416m, descend to the sacred temple of Muktinath, explore apple orchards in Marpha, and relax at Pokhara's Fewa Lake.",
+    highlights: [
+      "Day 1: Scenic drive from Kathmandu to Besisahar & Chame",
+      "Day 2: Trek from Chame to Pisang (3,200m) along Marsyangdi river",
+      "Day 3: Trek to Manang Valley (3,540m) with views of Annapurna II & IV",
+      "Day 4: Rest & acclimatization day in Manang (hike to Gangapurna Glacier lake)",
+      "Day 5: Trek from Manang to Ledar / Yak Kharka (4,050m)",
+      "Day 6: Trek to Thorong Phedi / High Camp (4,900m)",
+      "Day 7: Cross Thorong La Pass (5,416m) & descend to Muktinath Temple (3,800m)",
+      "Day 8: Explore Muktinath 108 spouts & drive/trek to Marpha apple village",
+      "Day 9: Drive through Kali Gandaki valley to Tatopani natural hot springs",
+      "Day 10: Drive/trek to Pokhara via Nayapul",
+      "Day 11: Pokhara sightseeing & scenic drive back to Kathmandu",
+      "Day 12: Departure transfer to airport"
+    ],
+  },
+  "annapurna-base-camp-trek": {
+    title: "Annapurna Base Camp Trek",
+    locations: "Pokhara • Ghandruk • ABC (4,130m)",
+    duration: "9N / 10D",
+    price: "NPR 65,000",
+    image: "https://images.unsplash.com/photo-1585869110973-7280be312084?auto=format&fit=crop&w=1200&q=80",
+    description: "Trek through lush rhododendron forests, traditional Gurung villages, and natural hot springs, culminating in the 360-degree mountain amphitheater inside the Annapurna Sanctuary at 4,130m.",
+    highlights: [
+      "Day 1: Drive from Kathmandu to Pokhara & transfer to Lakeside",
+      "Day 2: Drive to Nayapul / Jhinu & trek to Ghandruk village (1,940m)",
+      "Day 3: Trek from Ghandruk to Chhomrong village (2,170m)",
+      "Day 4: Trek through bamboo forests to Himalaya / Dovan (2,600m)",
+      "Day 5: Trek past Machhapuchhre Base Camp (MBC) to Annapurna Base Camp (4,130m)",
+      "Day 6: Sunrise over Annapurna I (8,091m) & trek down to Bamboo (2,310m)",
+      "Day 7: Trek from Bamboo down to Jhinu Danda natural hot springs",
+      "Day 8: Trek to Siwai/Nayapul & drive back to Pokhara",
+      "Day 9: Scenic highway drive back to Kathmandu",
+      "Day 10: Final hotel check-out & international departure"
+    ],
+  },
+  "mustang-overland": {
+    title: "6 Days Muktinath & Lower Mustang Overland Safari",
+    locations: "Pokhara • Tatopani • Jomsom • Muktinath • Marpha",
+    duration: "5N / 6D",
+    price: "NPR 45,000",
+    image: "https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=1200&q=80",
+    description: "Experience the rain-shadow desert landscapes of Mustang without arduous high-altitude walking. Ride in a private 4WD vehicle through Kali Gandaki gorge, visit Muktinath 108 water spouts, and taste apple brandy in Marpha.",
+    highlights: [
+      "Day 1: Kathmandu to Pokhara scenic tourist bus / drive",
+      "Day 2: Overland Scorpio drive to Tatopani hot springs & Ghasa",
+      "Day 3: Drive along Kali Gandaki river to Jomsom & Muktinath Temple (3,800m)",
+      "Day 4: Muktinath Darshan, Kagbeni sacred confluence & Marpha village walk",
+      "Day 5: Drive back to Pokhara & evening boat ride on Phewa Lake",
+      "Day 6: Return drive to Kathmandu & departure transfer"
+    ],
+  },
+
+  // --- ADVENTURE & LEISURE ---
   "pokhara-leisure-tour": {
     title: "Pokhara Lake & Mountain Escape",
     locations: "Pokhara • Sarangkot • Peace Pagoda",
@@ -87,25 +179,28 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     price: "NPR 35,000",
     image: "https://images.unsplash.com/photo-1540411608474-4325bbd12869?auto=format&fit=crop&w=1200&q=80",
     description: "Relax by Fewa Lake, witness breathtaking Annapurna views from Sarangkot sunrise, and explore caves, waterfalls, and peaceful temples.",
-    highlights: ["Sarangkot Sunrise over Annapurna Range", "Boating on Fewa Lake to Tal Barahi Temple", "Davis Falls & Gupteshwor Cave", "World Peace Pagoda Hike"],
+    highlights: [
+      "Day 1: Arrival in Pokhara & Lakeside stroll",
+      "Day 2: Sarangkot Sunrise over Annapurna Range & ZipFlyer adventure",
+      "Day 3: Boating on Fewa Lake to Tal Barahi Temple & World Peace Pagoda hike",
+      "Day 4: Devi's Fall, Gupteshwor Cave & International Mountain Museum",
+      "Day 5: Return transfer to Kathmandu"
+    ],
   },
-  "annapurna-base-camp-trek": {
-    title: "Annapurna Base Camp Trek",
-    locations: "Pokhara • Ghandruk • ABC",
-    duration: "9N / 10D",
-    price: "NPR 65,000",
-    image: "https://images.unsplash.com/photo-1585869110973-7280be312084?auto=format&fit=crop&w=1200&q=80",
-    description: "Trek through rhododendron forests, Gurung villages, and hot springs, culminating in the 360-degree mountain amphitheater at Annapurna Base Camp (4,130m).",
-    highlights: ["Annapurna Sanctuary at 4,130m", "Jhinu Danda Natural Hot Springs", "Traditional Gurung Village of Ghandruk", "Full Licensed Trekking Guide & Porters"],
-  },
+
+  // --- WILDLIFE SAFARI ---
   "chitwan-national-park-safari": {
     title: "Chitwan Wildlife Jungle Safari",
-    locations: "Chitwan National Park",
+    locations: "Chitwan National Park • Rapti River",
     duration: "2N / 3D",
     price: "NPR 28,000",
     image: "https://images.unsplash.com/photo-1575550959106-5a7defe28b56?auto=format&fit=crop&w=1200&q=80",
     description: "Venture into Nepal's first national park to spot rare One-Horned Rhinos, Bengal Tigers, exotic birds, and experience Tharu cultural dance.",
-    highlights: ["Jeep Safari into Deep Jungle", "Canoe Ride on Rapti River", "Tharu Cultural Dance Performance", "Jungle Walk with Wildlife Experts"],
+    highlights: [
+      "Day 1: Drive to Chitwan, Tharu village walk & evening cultural dance show",
+      "Day 2: Full day safari: Jeep safari into deep jungle, Rapti canoe ride & elephant breeding center",
+      "Day 3: Morning bird watching walk & return drive to Kathmandu or Pokhara"
+    ],
   },
 };
 
@@ -175,7 +270,7 @@ export default async function InboundDetailPage({
             <div>
               <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">Price Per Person</span>
               <p className="text-3xl font-black text-[#D4AF37] mt-1">{tour.price}</p>
-              
+
               <div className="mt-6 flex items-center gap-2 border-t border-b border-slate-800 py-4 text-xs font-bold text-slate-300">
                 <Calendar size={16} className="text-[#D4AF37]" />
                 <span>Duration: {tour.duration}</span>

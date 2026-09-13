@@ -12,7 +12,6 @@ import {
   ShieldCheck, 
   UserCheck, 
   CheckCircle2,
-  Sparkles,
   Plane,
   Compass,
   Navigation,
@@ -174,7 +173,7 @@ function Aeroplane3DCanvas() {
 
     // Animation Loop
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -185,9 +184,9 @@ function Aeroplane3DCanvas() {
       targetY += (mouseY - targetY) * 0.05;
 
       // Banking/Rolling mechanics based on movement speed
-      planeGroup.rotation.z = -targetX * 0.6; // Bank angle
-      planeGroup.rotation.x = targetY * 0.4 + Math.sin(elapsedTime * 2) * 0.05; // Pitch angle + gentle turbulence
-      planeGroup.rotation.y = targetX * 0.5; // Yaw angle
+      planeGroup.rotation.z = -targetX * 0.6; 
+      planeGroup.rotation.x = targetY * 0.4 + Math.sin(elapsedTime * 2) * 0.05; 
+      planeGroup.rotation.y = targetX * 0.5; 
 
       // Floating Flight Elevation based on Page Scroll Position
       planeGroup.position.x = targetX * 2.5;
@@ -216,6 +215,7 @@ function Aeroplane3DCanvas() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
       cancelAnimationFrame(animationFrameId);
+      renderer.setAnimationLoop(null);
       if (currentMount.contains(renderer.domElement)) {
         currentMount.removeChild(renderer.domElement);
       }
@@ -231,7 +231,7 @@ function Aeroplane3DCanvas() {
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full pointer-events-none z-10 overflow-hidden">
+    <div className="fixed inset-0 w-full h-full pointer-events-none z-10 overflow-hidden" aria-hidden="true">
       <div ref={mountRef} className="w-full h-full opacity-60 sm:opacity-90" />
     </div>
   );
@@ -367,6 +367,11 @@ const corePillars: Pillar[] = [
 export default function About() {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [activePillar, setActivePillar] = useState<Pillar | null>(null);
+  const [imgError, setImgError] = useState<Record<string, boolean>>({});
+
+  const handleImageError = (id: string) => {
+    setImgError((prev) => ({ ...prev, [id]: true }));
+  };
 
   return (
     <div className="bg-[#060910] text-slate-100 min-h-screen font-sans relative overflow-x-hidden">
@@ -424,7 +429,15 @@ export default function About() {
             return (
               <div
                 key={pillar.id}
+                role="button"
+                tabIndex={0}
                 onClick={() => setActivePillar(isSelected ? null : pillar)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setActivePillar(isSelected ? null : pillar);
+                  }
+                }}
                 className={`group cursor-pointer rounded-2xl border p-8 shadow-2xl transition-all duration-300 flex flex-col justify-between backdrop-blur-md ${
                   isSelected 
                     ? "border-[#C5A059] bg-[#151e33]/90 ring-1 ring-[#C5A059]" 
@@ -448,7 +461,7 @@ export default function About() {
                 {isSelected && (
                   <div className="mt-6 pt-6 border-t border-slate-700/80 animate-fadeIn space-y-4">
                     <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic bg-[#060910]/70 p-3 rounded-lg border border-slate-800">
-                      "{pillar.fullDesc}"
+                      &quot;{pillar.fullDesc}&quot;
                     </p>
                     <div className="space-y-2">
                       <h4 className="text-xs font-bold uppercase tracking-wider text-[#E5C158]">Key Highlights</h4>
@@ -477,25 +490,35 @@ export default function About() {
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {teamMembers.map((member, i) => (
+            {teamMembers.map((member) => (
               <div
                 key={member.id}
+                role="button"
+                tabIndex={0}
                 onClick={() => setSelectedMember(member)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedMember(member);
+                  }
+                }}
                 className="group cursor-pointer flex flex-col justify-between rounded-2xl border border-slate-700/80 bg-[#111827]/80 p-6 shadow-xl hover:border-[#C5A059] hover:bg-[#151e33] transition-all transform hover:-translate-y-2 hover:shadow-2xl backdrop-blur-md"
               >
                 <div>
                   <div className="relative h-48 w-full overflow-hidden rounded-xl border-2 border-slate-800 bg-[#060910] shadow-2xl group-hover:border-[#C5A059] transition-all">
-                    {member.image ? (
+                    {member.image && !imgError[member.id] ? (
                       <Image
                         src={member.image}
                         alt={member.name}
                         fill
                         className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
+                        onError={() => handleImageError(member.id)}
                       />
-                    ) : null}
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center text-3xl font-black text-[#E5C158]">
+                        {member.name.substring(0, 2).toUpperCase()}
+                      </div>
+                    )}
                     
                     <div className="absolute top-3 right-3 rounded-full bg-[#060910]/80 backdrop-blur-md p-2 text-xs text-[#E5C158] border border-[#C5A059]/40 shadow-lg">
                       <Users className="h-4 w-4" />
@@ -556,12 +579,13 @@ export default function About() {
                 
                 <div className="text-center space-y-3">
                   <div className="relative h-44 w-44 mx-auto rounded-2xl overflow-hidden border-2 border-[#C5A059] bg-[#060910] shadow-2xl">
-                    {selectedMember.image ? (
+                    {selectedMember.image && !imgError[selectedMember.id] ? (
                       <Image
                         src={selectedMember.image}
                         alt={selectedMember.name}
                         fill
                         className="object-cover object-top"
+                        onError={() => handleImageError(selectedMember.id)}
                       />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center text-4xl font-black text-[#E5C158]">
@@ -641,4 +665,4 @@ export default function About() {
 
     </div>
   );
-} 
+}

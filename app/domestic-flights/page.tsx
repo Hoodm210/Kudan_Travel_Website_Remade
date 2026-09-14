@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plane, ArrowRightLeft, ShieldCheck, CreditCard, Sparkles, ChevronRight } from "lucide-react";
+import { Plane, ArrowRightLeft, ShieldCheck, CreditCard, Sparkles, ChevronRight, Clock, PhoneCall, MessageSquare } from "lucide-react";
 
 // Popular Buddha Air Destinations in Nepal
 const DESTINATIONS = [
@@ -77,8 +77,49 @@ export default function DomesticFlightsPage() {
         </div>
       </div>
 
+      {/* Under Construction Contact Banner */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl -mt-8 relative z-30 mb-6">
+        <div className="rounded-3xl border border-amber-300/80 bg-gradient-to-r from-amber-500/10 via-amber-100/60 to-amber-500/10 backdrop-blur-xl p-6 sm:p-8 shadow-xl text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-amber-300 bg-amber-100 text-amber-800 shrink-0">
+              <Clock className="h-6 w-6" />
+            </div>
+            <div>
+              <span className="inline-block text-[11px] font-black uppercase tracking-wider text-amber-800 bg-amber-200/60 border border-amber-300 px-2.5 py-0.5 rounded-md mb-1">
+                Notice: Online Engine Upgrading
+              </span>
+              <h2 className="text-lg sm:text-xl font-black text-slate-900">
+                Online Flight Booking is Currently Under Construction
+              </h2>
+              <p className="text-xs sm:text-sm font-medium text-slate-600 mt-1">
+                For immediate domestic flight ticket issuance and inquiries, please reach out to us directly:
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">
+            <a
+              href="https://wa.me/9779851196584"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto rounded-xl bg-emerald-600 hover:bg-emerald-700 px-5 py-3 text-xs font-black uppercase tracking-wider text-white shadow-md transition flex items-center justify-center gap-2"
+            >
+              <MessageSquare className="h-4 w-4" />
+              <span>WhatsApp (+977 9851196584)</span>
+            </a>
+            <a
+              href="tel:+977014005191"
+              className="w-full sm:w-auto rounded-xl bg-slate-900 hover:bg-slate-800 px-5 py-3 text-xs font-black uppercase tracking-wider text-amber-400 shadow-md transition flex items-center justify-center gap-2"
+            >
+              <PhoneCall className="h-4 w-4" />
+              <span>Call +977-01-4005191</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* Light Glassmorphic Search Container */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl -mt-10 relative z-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-20">
         <div className="relative rounded-3xl p-[1px] bg-gradient-to-b from-white via-slate-200 to-slate-300/80 shadow-2xl shadow-slate-200/80">
           <div className="rounded-[23px] bg-white/75 backdrop-blur-xl p-6 sm:p-8 border border-white/60">
 

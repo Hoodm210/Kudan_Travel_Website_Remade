@@ -231,7 +231,7 @@ export default function Footer() {
 
                 <div className="mt-5 flex justify-center rounded-2xl border border-slate-700 bg-white p-4 shadow-inner">
                   <img
-                    src="/QR.png"
+                    src="/MBL.jpeg"
                     alt="Kudan Travel Fonepay QR Code"
                     className="h-60 w-60 object-contain"
                   />
@@ -250,7 +250,7 @@ export default function Footer() {
 
                 <div className="mt-5 flex justify-center rounded-2xl border border-slate-700 bg-white p-4 shadow-inner">
                   <img
-                    src="/QR.png"
+                    src="/everest.jpeg"
                     alt="Kudan Travel eSewa QR Code"
                     className="h-52 w-52 object-contain"
                   />

@@ -297,7 +297,7 @@ export default function Contact() {
 
               <div className="mt-5 sm:mt-6 flex justify-center rounded-2xl border border-slate-700 bg-white p-3 sm:p-4 shadow-inner">
                 <img
-                  src="/QR.png"
+                  src="/everest.jpeg"
                   alt="Kudan Travel Payment QR Code"
                   className="h-48 w-48 sm:h-64 sm:w-64 object-contain"
                 />

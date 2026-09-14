@@ -29,6 +29,7 @@ export interface Tour {
   reviewsCount: number;
   image: string;
   badge?: string;
+  path?: string; // Optional custom route path override
 }
 
 const INBOUND_TOURS: Tour[] = [
@@ -146,12 +147,23 @@ export default function CorporateLandingSection() {
   const [activeTab, setActiveTab] = useState<"inbound" | "outbound">("inbound");
   const currentTours = activeTab === "inbound" ? INBOUND_TOURS : OUTBOUND_TOURS;
 
+  // Helper function to resolve dynamic routes cleanly
+  const getTourHref = (tour: Tour) => {
+    if (tour.path) return tour.path;
+    return activeTab === "inbound" 
+      ? `/inbound/${tour.slug}` 
+      : `/outbound/${tour.slug}`;
+  };
+
+  const getCategoryOverviewHref = () => {
+    return activeTab === "inbound" ? "/inbound" : "/outbound";
+  };
+
   return (
     <div className="bg-[#070A11] text-slate-100 font-sans selection:bg-[#D4AF37] selection:text-slate-950">
       
-      {/* 1. COMPANY OVERVIEW & BRAND HERO SECTION WITH 50% LIGHTER GRADIENT OVERLAYS */}
+      {/* 1. COMPANY OVERVIEW & BRAND HERO SECTION */}
       <section className="relative border-b border-slate-800/80 py-24 lg:py-36 overflow-hidden">
-        {/* Crisp Himalayan Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 transform scale-100 opacity-85 filter contrast-105 brightness-110"
           style={{
@@ -159,14 +171,12 @@ export default function CorporateLandingSection() {
           }}
         />
 
-        {/* 50% Lighter Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#070A11]/45 via-[#070A11]/25 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#070A11]/50 via-transparent to-[#070A11]/20" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Left Content Column */}
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 rounded-full bg-slate-950/60 backdrop-blur-md px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-[#D4AF37] border border-[#D4AF37]/40 mb-6 shadow-2xl">
                 <Building2 size={16} />
@@ -181,7 +191,6 @@ export default function CorporateLandingSection() {
                 We are a top-tier DMC and leading seller for inbound Himalayan expeditions and international outbound tours in Nepal. Partnering with global travel agencies and corporate leaders, we provide ground handling, wholesale group rates, and customized itineraries.
               </p>
 
-              {/* Key Institutional Trust Badges */}
               <div className="mt-8 grid grid-cols-3 gap-4 border-t border-slate-700/50 pt-6 backdrop-blur-sm rounded-xl px-2 bg-slate-950/30">
                 <div>
                   <span className="block text-3xl font-black text-white drop-shadow">14+</span>
@@ -198,7 +207,6 @@ export default function CorporateLandingSection() {
               </div>
             </div>
 
-            {/* Right Side: Visual Card & Highlights */}
             <div className="lg:col-span-5 bg-slate-950/60 rounded-3xl border border-slate-700/60 p-6 sm:p-8 backdrop-blur-md shadow-2xl">
               <h3 className="text-base font-bold text-white mb-4 flex items-center gap-2">
                 <ShieldCheck className="text-[#D4AF37]" size={20} />
@@ -234,7 +242,6 @@ export default function CorporateLandingSection() {
 
           </div>
 
-          {/* B2B PARTNERSHIP & BEST SELLER BANNER (Lighter Background Gradient) */}
           <div className="mt-16 rounded-2xl border border-[#D4AF37]/40 bg-gradient-to-r from-slate-950/60 via-slate-900/60 to-slate-950/60 p-6 backdrop-blur-md shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <div className="h-12 w-12 rounded-xl bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] shrink-0">
@@ -262,7 +269,7 @@ export default function CorporateLandingSection() {
             </Link>
           </div>
 
-          {/* 2. INDUSTRY AFFILIATIONS & ACCREDITATIONS SECTION */}
+          {/* ACCREDITATIONS */}
           <div className="mt-16 pt-12 border-t border-slate-700/50">
             <div className="text-center mb-8">
               <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
@@ -274,7 +281,6 @@ export default function CorporateLandingSection() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-              {/* NATTA CARD */}
               <a
                 href="https://natta.org.np/"
                 target="_blank"
@@ -302,7 +308,6 @@ export default function CorporateLandingSection() {
                 </div>
               </a>
 
-              {/* TAAN CARD */}
               <a
                 href="https://www.taan.org.np/"
                 target="_blank"
@@ -330,7 +335,6 @@ export default function CorporateLandingSection() {
                 </div>
               </a>
 
-              {/* NTB CARD */}
               <a
                 href="https://ntb.gov.np/"
                 target="_blank"
@@ -364,7 +368,7 @@ export default function CorporateLandingSection() {
         </div>
       </section>
 
-      {/* 3. FEATURED PACKAGES SHOWCASE */}
+      {/* 2. FEATURED PACKAGES SHOWCASE */}
       <section className="relative py-20 border-b border-slate-800/80 bg-slate-950">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
           
@@ -378,7 +382,6 @@ export default function CorporateLandingSection() {
               </h2>
             </div>
 
-            {/* Inbound / Outbound Switcher */}
             <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-900 border border-slate-800 shrink-0">
               <button
                 onClick={() => setActiveTab("inbound")}
@@ -405,12 +408,11 @@ export default function CorporateLandingSection() {
             </div>
           </div>
 
-          {/* Compact Streamlined Tour Cards */}
           <div className="space-y-3.5">
             {currentTours.map((tour) => (
               <Link
                 key={tour.id}
-                href={`/${activeTab}/${tour.slug}`}
+                href={getTourHref(tour)}
                 className="group flex flex-col md:flex-row items-stretch rounded-2xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-sm p-3 hover:border-[#D4AF37]/50 transition-all duration-200 hover:bg-slate-900/90 shadow-md gap-4"
               >
                 <div className="relative h-40 md:h-24 md:w-40 shrink-0 rounded-xl overflow-hidden">
@@ -467,7 +469,7 @@ export default function CorporateLandingSection() {
 
           <div className="mt-8 text-center">
             <Link
-              href={`/${activeTab}`}
+              href={getCategoryOverviewHref()}
               className="inline-flex items-center gap-2 text-xs font-bold text-[#D4AF37] hover:underline"
             >
               <span>Explore All {activeTab === "inbound" ? "Inbound Nepal" : "Outbound"} Packages</span>
@@ -478,7 +480,7 @@ export default function CorporateLandingSection() {
         </div>
       </section>
 
-      {/* 4. CLIENT TESTIMONIALS & REVIEWS SECTION WITH 50% LIGHTER OVERLAY */}
+      {/* 3. REVIEWS & TESTIMONIALS */}
       <section className="relative py-24 bg-slate-950 overflow-hidden border-b border-slate-800/80">
         <div 
           className="absolute inset-0 opacity-40 bg-cover bg-center pointer-events-none filter brightness-110 contrast-110"
@@ -486,7 +488,6 @@ export default function CorporateLandingSection() {
             backgroundImage: `url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2560&q=95')`,
           }}
         />
-        {/* Lighter Top/Bottom Fade */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#070A11] via-[#070A11]/20 to-[#070A11]" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">

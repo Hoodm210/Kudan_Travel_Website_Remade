@@ -1,21 +1,24 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
-import * as THREE from "three";
 import { 
   Users, 
   X, 
   Mail, 
   Phone, 
-  ChevronRight, 
   ShieldCheck, 
   UserCheck, 
   CheckCircle2,
-  Plane,
   Compass,
-  Navigation,
-  Globe
+  Globe,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Eye,
+  Mountain,
+  MapPin
 } from "lucide-react";
 
 export interface TeamMember {
@@ -38,205 +41,6 @@ interface Pillar {
   keyPoints: string[];
 }
 
-// 3D Aeroplane Scene Component with Mouse Tracking & Scroll Interaction
-function Aeroplane3DCanvas() {
-  const mountRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const currentMount = mountRef.current;
-    if (!currentMount) return;
-
-    // Scene & Camera
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      50,
-      currentMount.clientWidth / currentMount.clientHeight,
-      0.1,
-      1000
-    );
-    camera.position.set(0, 0, 8);
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    currentMount.appendChild(renderer.domElement);
-
-    // BUILD 3D AEROPLANE PROCEDURALLY
-    const planeGroup = new THREE.Group();
-
-    // Fuselage (Body)
-    const bodyGeo = new THREE.ConeGeometry(0.6, 4.2, 16);
-    bodyGeo.rotateX(Math.PI / 2);
-    const goldMaterial = new THREE.MeshStandardMaterial({
-      color: 0xC5A059,
-      metalness: 0.8,
-      roughness: 0.2,
-      emissive: 0x1f1605
-    });
-    const body = new THREE.Mesh(bodyGeo, goldMaterial);
-    planeGroup.add(body);
-
-    // Main Wings
-    const wingGeo = new THREE.BoxGeometry(5.2, 0.05, 0.9);
-    const darkMaterial = new THREE.MeshStandardMaterial({
-      color: 0x1a233a,
-      metalness: 0.5,
-      roughness: 0.3
-    });
-    const mainWings = new THREE.Mesh(wingGeo, darkMaterial);
-    mainWings.position.set(0, 0, 0.3);
-    planeGroup.add(mainWings);
-
-    // Tail Wing (Horizontal Stabilizer)
-    const tailWingGeo = new THREE.BoxGeometry(2.0, 0.04, 0.5);
-    const tailWings = new THREE.Mesh(tailWingGeo, darkMaterial);
-    tailWings.position.set(0, 0, -1.6);
-    planeGroup.add(tailWings);
-
-    // Vertical Fin (Rudder)
-    const finGeo = new THREE.BoxGeometry(0.04, 0.8, 0.6);
-    const fin = new THREE.Mesh(finGeo, goldMaterial);
-    fin.position.set(0, 0.4, -1.6);
-    planeGroup.add(fin);
-
-    // Jet Engines
-    const engineGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.8, 12);
-    engineGeo.rotateX(Math.PI / 2);
-    const leftEngine = new THREE.Mesh(engineGeo, goldMaterial);
-    leftEngine.position.set(-1.2, -0.2, 0.4);
-    const rightEngine = new THREE.Mesh(engineGeo, goldMaterial);
-    rightEngine.position.set(1.2, -0.2, 0.4);
-    planeGroup.add(leftEngine);
-    planeGroup.add(rightEngine);
-
-    scene.add(planeGroup);
-
-    // Flight Path Rings (Air Currents)
-    const ringGroup = new THREE.Group();
-    for (let i = 0; i < 5; i++) {
-      const ringGeo = new THREE.TorusGeometry(2.2 + i * 0.8, 0.015, 8, 48);
-      const ringMat = new THREE.MeshBasicMaterial({
-        color: 0xE5C158,
-        transparent: true,
-        opacity: 0.15 - i * 0.02
-      });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = Math.PI / 3;
-      ring.position.z = -i * 1.5;
-      ringGroup.add(ring);
-    }
-    scene.add(ringGroup);
-
-    // Floating Altitude Particle Clouds
-    const particleGeo = new THREE.BufferGeometry();
-    const particleCount = 150;
-    const posArray = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount * 3; i++) {
-      posArray[i] = (Math.random() - 0.5) * 16;
-    }
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    const particleMat = new THREE.PointsMaterial({
-      size: 0.04,
-      color: 0xE5C158,
-      transparent: true,
-      opacity: 0.5
-    });
-    const particles = new THREE.Points(particleGeo, particleMat);
-    scene.add(particles);
-
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-    scene.add(ambientLight);
-
-    const sunLight = new THREE.DirectionalLight(0xF5D880, 2);
-    sunLight.position.set(5, 8, 5);
-    scene.add(sunLight);
-
-    // MOUSE & SCROLL INTERACTION STATE
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
-    let scrollY = 0;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
-    };
-
-    const handleScroll = () => {
-      scrollY = window.scrollY;
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("scroll", handleScroll);
-
-    // Animation Loop
-    let animationFrameId: number;
-    const clock = new THREE.Clock();
-
-    const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
-
-      // Smooth Mouse Pitch & Yaw Response
-      targetX += (mouseX - targetX) * 0.05;
-      targetY += (mouseY - targetY) * 0.05;
-
-      // Banking/Rolling mechanics based on movement speed
-      planeGroup.rotation.z = -targetX * 0.6; 
-      planeGroup.rotation.x = targetY * 0.4 + Math.sin(elapsedTime * 2) * 0.05; 
-      planeGroup.rotation.y = targetX * 0.5; 
-
-      // Floating Flight Elevation based on Page Scroll Position
-      planeGroup.position.x = targetX * 2.5;
-      planeGroup.position.y = targetY * 1.5 + Math.sin(elapsedTime * 1.8) * 0.2 - (scrollY * 0.001);
-      planeGroup.position.z = Math.cos(elapsedTime * 1.5) * 0.3;
-
-      // Rotate Air Current Rings
-      ringGroup.rotation.z += 0.002;
-      particles.rotation.y -= 0.001;
-
-      renderer.render(scene, camera);
-    };
-    animate();
-
-    // Resize Handler
-    const handleResize = () => {
-      if (!currentMount) return;
-      camera.aspect = currentMount.clientWidth / currentMount.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
-      cancelAnimationFrame(animationFrameId);
-      renderer.setAnimationLoop(null);
-      if (currentMount.contains(renderer.domElement)) {
-        currentMount.removeChild(renderer.domElement);
-      }
-      bodyGeo.dispose();
-      wingGeo.dispose();
-      tailWingGeo.dispose();
-      finGeo.dispose();
-      engineGeo.dispose();
-      goldMaterial.dispose();
-      darkMaterial.dispose();
-      renderer.dispose();
-    };
-  }, []);
-
-  return (
-    <div className="fixed inset-0 w-full h-full pointer-events-none z-10 overflow-hidden" aria-hidden="true">
-      <div ref={mountRef} className="w-full h-full opacity-60 sm:opacity-90" />
-    </div>
-  );
-}
-
 const teamMembers: TeamMember[] = [
   {
     id: "hari-parajuli",
@@ -252,7 +56,7 @@ const teamMembers: TeamMember[] = [
   {
     id: "neha-shrestha",
     name: "Neha Shrestha",
-    role: "Genral Manager",
+    role: "General Manager",
     image: "/neha.jpg",
     languages: ["English", "Nepali"],
     phone: "+977 9851247722",
@@ -371,7 +175,7 @@ const teamMembers: TeamMember[] = [
     overview: "Adikshya manages front desk reception, handles incoming calls, and assists walk-in clients with preliminary inquiries."
   },
   {
-    id: "Sushant Bista",
+    id: "sushant-bista",
     name: "Sushant Bista",
     role: "Client Interaction Officer",
     image: "/sushant.jpg",
@@ -442,9 +246,70 @@ const corePillars: Pillar[] = [
 ];
 
 export default function About() {
-  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  const [viewMember, setViewMember] = useState<TeamMember | null>(null);
   const [activePillar, setActivePillar] = useState<Pillar | null>(null);
   const [imgError, setImgError] = useState<Record<string, boolean>>({});
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  // Smooth Zoom & Pan State
+  const [scale, setScale] = useState<number>(1);
+  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const dragStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (viewMember) {
+      document.body.style.overflow = "hidden";
+      setScale(1);
+      setPosition({ x: 0, y: 0 });
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [viewMember]);
+
+  const handleZoomIn = () => setScale((prev) => Math.min(prev + 0.4, 4));
+  const handleZoomOut = () => {
+    setScale((prev) => {
+      const nextScale = Math.max(prev - 0.4, 1);
+      if (nextScale === 1) setPosition({ x: 0, y: 0 });
+      return nextScale;
+    });
+  };
+
+  const handleResetZoom = () => {
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const zoomDelta = e.deltaY < 0 ? 0.25 : -0.25;
+    setScale((prev) => {
+      const nextScale = Math.min(Math.max(prev + zoomDelta, 1), 4);
+      if (nextScale === 1) setPosition({ x: 0, y: 0 });
+      return nextScale;
+    });
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (scale <= 1) return;
+    setIsDragging(true);
+    dragStartRef.current = { x: e.clientX - position.x, y: e.clientY - position.y };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || scale <= 1) return;
+    setPosition({
+      x: e.clientX - dragStartRef.current.x,
+      y: e.clientY - dragStartRef.current.y,
+    });
+  };
+
+  const handleMouseUp = () => setIsDragging(false);
 
   const handleImageError = (id: string) => {
     setImgError((prev) => ({ ...prev, [id]: true }));
@@ -453,39 +318,49 @@ export default function About() {
   return (
     <div className="bg-[#060910] text-slate-100 min-h-screen font-sans relative overflow-x-hidden">
       
-      {/* 3D AEROPLANE SCENE OVERLAY */}
-      <Aeroplane3DCanvas />
+      {/* HERO SECTION WITH LANDSCAPE BACKGROUND */}
+      <section className="relative min-h-[640px] overflow-hidden border-b border-slate-800 py-28 flex items-center">
+        {/* Landscape Overlay Background */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/landscape-hero.jpg" 
+            alt="Scenic Mountain Landscape"
+            fill
+            priority
+            className="object-cover object-center opacity-35 filter brightness-90 contrast-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#060910] via-[#060910]/70 to-[#0d1322]/85" />
+        </div>
 
-      {/* HERO SECTION */}
-      <section className="relative min-h-[600px] overflow-hidden border-b border-slate-800 bg-gradient-to-b from-[#0d1322] via-[#080c16] to-[#060910] py-28 flex items-center z-20">
-        <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent" />
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#C5A059]/50 bg-[#111827]/80 backdrop-blur-md px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#E5C158] shadow-md">
-            <Plane className="h-4 w-4 text-amber-300 animate-pulse" />
-            <span>Interactive 3D Flight Experience</span>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#C5A059]/50 bg-[#111827]/90 backdrop-blur-md px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#E5C158] shadow-md">
+            <Mountain className="h-4 w-4 text-amber-300" />
+            <span>Extraordinary Journeys Across South Asia</span>
           </div>
 
           <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Local expertise. <br className="hidden sm:inline" />
-            Global reach.{" "}
+            Explore Beyond. <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-[#F5D880] via-[#C5A059] to-[#A07D32] bg-clip-text text-transparent">
-              Elevated Journeys.
+              Guided by Experts.
             </span>
           </h1>
 
-          <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-slate-200 bg-[#060910]/60 backdrop-blur-md p-5 rounded-xl border border-slate-800/80 shadow-2xl">
-            Move your cursor across the screen to control the flight trajectory. Kudan Travel & Tours Pvt. Ltd. connects global travelers to authentic regional destinations across Nepal and South Asia.
+          <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-slate-200 bg-[#060910]/80 backdrop-blur-md p-5 rounded-xl border border-slate-800/80 shadow-2xl">
+            Kudan Travel & Tours Pvt. Ltd. delivers breathtaking alpine expeditions, cultural heritage tours, and seamless logistics across Nepal and beyond.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4 text-xs font-bold uppercase tracking-wider text-[#E5C158]">
-            <div className="flex items-center gap-2 bg-[#111827]/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-slate-800">
-              <Navigation className="h-4 w-4 text-[#C5A059]" />
-              <span>Interactive Navigation</span>
+            <div className="flex items-center gap-2 bg-[#111827]/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-slate-800">
+              <MapPin className="h-4 w-4 text-[#C5A059]" />
+              <span>Himalayan Expeditions</span>
             </div>
-            <div className="flex items-center gap-2 bg-[#111827]/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-slate-800">
+            <div className="flex items-center gap-2 bg-[#111827]/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-slate-800">
               <Globe className="h-4 w-4 text-[#C5A059]" />
-              <span>Worldwide Tours</span>
+              <span>International Group Tours</span>
+            </div>
+            <div className="flex items-center gap-2 bg-[#111827]/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-slate-800">
+              <Users className="h-4 w-4 text-[#C5A059]" />
+              <span>Dedicated Local Specialists</span>
             </div>
           </div>
         </div>
@@ -494,7 +369,7 @@ export default function About() {
       {/* CORE PILLARS SECTION */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-20">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#E5C158]">Our Flight Path</span>
+          <span className="text-xs font-bold uppercase tracking-widest text-[#E5C158]">Our Values</span>
           <h2 className="mt-2 text-3xl font-black text-white sm:text-4xl">What Drives Kudan Travel</h2>
           <p className="mt-2 text-xs sm:text-sm text-slate-400">Click any card below to explore our operational pillars.</p>
         </div>
@@ -561,9 +436,9 @@ export default function About() {
       <section className="border-t border-slate-800 bg-[#080c16]/90 backdrop-blur-sm py-20 relative z-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#E5C158]">Flight Crew</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-[#E5C158]">OUR TEAM</span>
             <h2 className="mt-2 text-3xl font-black text-white sm:text-4xl">Meet the Team Behind the Journey</h2>
-            <p className="mt-2 text-xs sm:text-sm text-slate-400">Click on any staff card to open direct contacts and profile bios.</p>
+            <p className="mt-2 text-xs sm:text-sm text-slate-400">Click any card to open the interactive photo viewer & full profile.</p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -572,14 +447,14 @@ export default function About() {
                 key={member.id}
                 role="button"
                 tabIndex={0}
-                onClick={() => setSelectedMember(member)}
+                onClick={() => setViewMember(member)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    setSelectedMember(member);
+                    setViewMember(member);
                   }
                 }}
-                className="group cursor-pointer flex flex-col justify-between rounded-2xl border border-slate-700/80 bg-[#111827]/80 p-6 shadow-xl hover:border-[#C5A059] hover:bg-[#151e33] transition-all transform hover:-translate-y-2 hover:shadow-2xl backdrop-blur-md"
+                className="group cursor-pointer flex flex-col justify-between rounded-2xl border border-slate-700/80 bg-[#111827]/80 p-6 shadow-xl hover:border-[#C5A059] hover:bg-[#151e33] transition-all transform hover:-translate-y-2 hover:shadow-2xl backdrop-blur-md relative"
               >
                 <div>
                   <div className="relative h-48 w-full overflow-hidden rounded-xl border-2 border-slate-800 bg-[#060910] shadow-2xl group-hover:border-[#C5A059] transition-all">
@@ -596,9 +471,11 @@ export default function About() {
                         {member.name.substring(0, 2).toUpperCase()}
                       </div>
                     )}
-                    
-                    <div className="absolute top-3 right-3 rounded-full bg-[#060910]/80 backdrop-blur-md p-2 text-xs text-[#E5C158] border border-[#C5A059]/40 shadow-lg">
-                      <Users className="h-4 w-4" />
+
+                    <div className="absolute top-3 right-3 flex items-center gap-1.5">
+                      <div className="rounded-full bg-[#060910]/80 backdrop-blur-md p-2 text-xs text-[#E5C158] border border-[#C5A059]/40 shadow-lg group-hover:bg-[#C5A059] group-hover:text-black transition-colors">
+                        <Eye className="h-3.5 w-3.5" />
+                      </div>
                     </div>
                   </div>
 
@@ -606,7 +483,6 @@ export default function About() {
                     <h3 className="text-lg font-black text-white group-hover:text-amber-300 transition-colors">
                       {member.name}
                     </h3>
-                    <ChevronRight className="h-4 w-4 text-slate-500 group-hover:text-[#C5A059] transition-colors" />
                   </div>
 
                   <p className="text-xs font-bold uppercase tracking-wider text-[#E5C158] mt-0.5">
@@ -614,8 +490,8 @@ export default function About() {
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-800/80 text-xs font-semibold text-amber-300/90 group-hover:underline flex items-center justify-between">
-                  <span>View Full Profile</span>
+                <div className="mt-4 pt-3 border-t border-slate-800/80 text-xs font-semibold text-amber-300/90 flex items-center justify-between">
+                  <span>Open Zoom Viewer & Profile</span>
                   <span>&rarr;</span>
                 </div>
               </div>
@@ -624,120 +500,169 @@ export default function About() {
         </div>
       </section>
 
-      {/* SLIDE-OVER SIDE DRAWER */}
-      {selectedMember && (
-        <div className="fixed inset-0 z-50 overflow-hidden bg-black/80 backdrop-blur-md animate-fadeIn">
+      {/* DIRECT COMBINED ZOOM & DETAIL PORTAL MODAL */}
+      {mounted && viewMember && createPortal(
+        <div
+          className="fixed inset-0 z-[999999] flex items-center justify-center bg-slate-950/90 p-3 sm:p-6 backdrop-blur-2xl overflow-y-auto"
+          onClick={() => setViewMember(null)}
+        >
           <div 
-            className="absolute inset-0" 
-            onClick={() => setSelectedMember(null)} 
-          />
-
-          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div className="w-screen max-w-md bg-[#0d1322] border-l border-[#C5A059]/50 flex flex-col shadow-2xl relative">
-              
-              {/* Header */}
-              <div className="p-5 bg-[#080c16] border-b border-slate-800 flex items-center justify-between shrink-0">
-                <div className="flex items-center gap-2">
-                  <UserCheck className="h-5 w-5 text-[#C5A059]" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#E5C158]">
-                    Staff Profile Details
-                  </span>
-                </div>
-                <button
-                  onClick={() => setSelectedMember(null)}
-                  className="rounded-full bg-slate-800 p-2 text-slate-300 hover:bg-[#C5A059] hover:text-black transition-colors"
-                >
-                  <X className="h-5 w-5" />
-                </button>
+            className="relative max-w-5xl w-full my-auto rounded-3xl border border-[#C5A059]/40 bg-[#0d1322]/95 p-5 sm:p-8 shadow-[0_0_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl ring-1 ring-white/10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header Controls */}
+            <div className="flex items-center justify-between border-b border-slate-800/80 pb-4 mb-4">
+              <div className="flex items-center gap-2">
+                <UserCheck className="h-5 w-5 text-[#C5A059]" />
+                <span className="text-xs font-bold uppercase tracking-widest text-[#E5C158]">
+                  Staff Profile & Interactive Viewer
+                </span>
               </div>
 
-              {/* Scrollable Body */}
-              <div className="flex-1 overflow-y-auto p-6 space-y-6">
-                
-                <div className="text-center space-y-3">
-                  <div className="relative h-44 w-44 mx-auto rounded-2xl overflow-hidden border-2 border-[#C5A059] bg-[#060910] shadow-2xl">
-                    {selectedMember.image && !imgError[selectedMember.id] ? (
-                      <Image
-                        src={selectedMember.image}
-                        alt={selectedMember.name}
-                        fill
-                        className="object-cover object-top"
-                        onError={() => handleImageError(selectedMember.id)}
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center text-4xl font-black text-[#E5C158]">
-                        {selectedMember.name.substring(0, 2).toUpperCase()}
-                      </div>
-                    )}
-                  </div>
+              <div className="flex items-center gap-2">
+                {/* Zoom Controls */}
+                <div className="flex items-center gap-1 rounded-xl border border-slate-700/80 bg-slate-900/90 p-1 backdrop-blur-md shadow-lg">
+                  <button
+                    onClick={handleZoomIn}
+                    title="Zoom In"
+                    className="rounded-lg p-1.5 text-slate-200 hover:text-amber-300 hover:bg-slate-800 transition-colors"
+                  >
+                    <ZoomIn className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={handleZoomOut}
+                    title="Zoom Out"
+                    className="rounded-lg p-1.5 text-slate-200 hover:text-amber-300 hover:bg-slate-800 transition-colors"
+                  >
+                    <ZoomOut className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={handleResetZoom}
+                    title="Reset Zoom"
+                    className="rounded-lg p-1.5 text-slate-200 hover:text-amber-300 hover:bg-slate-800 transition-colors"
+                  >
+                    <RotateCcw className="h-3.5 w-3.5" />
+                  </button>
+                  <span className="px-2 text-[11px] font-mono font-semibold text-amber-300 border-l border-slate-700/60">
+                    {Math.round(scale * 100)}%
+                  </span>
+                </div>
 
+                <button
+                  onClick={() => setViewMember(null)}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-slate-700/80 bg-slate-900/90 px-3 py-2 text-xs font-bold uppercase text-slate-200 hover:text-[#C5A059] hover:border-[#C5A059] transition-all backdrop-blur-md shadow-lg"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Split Content Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              
+              {/* Left Column: Interactive Zoom Canvas */}
+              <div className="lg:col-span-7 flex flex-col">
+                <div 
+                  onWheel={handleWheel}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseUp}
+                  className={`relative w-full h-[40vh] sm:h-[48vh] rounded-2xl bg-[#030509]/90 border border-slate-800 p-2 flex items-center justify-center overflow-hidden ${
+                    scale > 1 ? (isDragging ? "cursor-grabbing" : "cursor-grab") : "cursor-default"
+                  }`}
+                >
+                  {viewMember.image && !imgError[viewMember.id] ? (
+                    <img 
+                      src={viewMember.image} 
+                      alt={viewMember.name} 
+                      draggable={false}
+                      style={{ 
+                        transform: `translate3d(${position.x}px, ${position.y}px, 0px) scale(${scale})`,
+                        transition: isDragging ? "none" : "transform 0.15s cubic-bezier(0.2, 0, 0, 1)",
+                        willChange: "transform"
+                      }}
+                      className="max-h-full max-w-full object-contain rounded-lg transform-gpu select-none" 
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-slate-400 gap-2">
+                      <span className="text-5xl font-black text-[#E5C158]">
+                        {viewMember.name.substring(0, 2).toUpperCase()}
+                      </span>
+                      <span className="text-xs uppercase font-mono tracking-widest text-slate-500">No Image Preview Available</span>
+                    </div>
+                  )}
+                </div>
+                <p className="text-[11px] text-center text-slate-500 mt-2 font-mono">
+                  Scroll or drag to zoom and navigate image
+                </p>
+              </div>
+
+              {/* Right Column: Member Details */}
+              <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
+                <div className="space-y-4">
                   <div>
                     <span className="inline-block rounded-md bg-[#C5A059]/20 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#E5C158] border border-[#C5A059]/30">
-                      {selectedMember.role}
+                      {viewMember.role}
                     </span>
-                    <h2 className="text-2xl font-black text-white mt-2">
-                      {selectedMember.name}
+                    <h2 className="text-2xl sm:text-3xl font-black text-white mt-2">
+                      {viewMember.name}
                     </h2>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
-                    {selectedMember.experienceYears && (
-                      <div className="inline-flex items-center gap-1.5 rounded-lg bg-[#C5A059]/10 px-2.5 py-1 text-xs font-medium text-amber-300 border border-[#C5A059]/30">
-                        <ShieldCheck className="h-3.5 w-3.5 text-[#C5A059]" />
-                        <span>{selectedMember.experienceYears}+ Years Exp.</span>
+                  {viewMember.experienceYears && (
+                    <div className="inline-flex items-center gap-1.5 rounded-lg bg-[#C5A059]/10 px-3 py-1.5 text-xs font-medium text-amber-300 border border-[#C5A059]/30">
+                      <ShieldCheck className="h-4 w-4 text-[#C5A059]" />
+                      <span>{viewMember.experienceYears}+ Years Industry Experience</span>
+                    </div>
+                  )}
+
+                  {/* Direct Contact Links */}
+                  <div className="space-y-2 pt-1">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#E5C158]">Direct Contact</h4>
+                    
+                    <div className="flex items-center gap-3 rounded-xl bg-[#111827] p-3 border border-slate-800">
+                      <Mail className="h-4 w-4 text-[#C5A059] shrink-0" />
+                      <div className="min-w-0">
+                        <p className="text-[10px] font-bold uppercase text-slate-400">Email</p>
+                        <a href={`mailto:${viewMember.email}`} className="text-xs font-bold text-[#E5C158] hover:underline truncate block">
+                          {viewMember.email}
+                        </a>
                       </div>
-                    )}
-                  </div>
-                </div>
+                    </div>
 
-                {/* Contact */}
-                <div className="space-y-3 pt-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#E5C158]">Direct Contact</h4>
-                  
-                  <div className="flex items-center gap-3 rounded-xl bg-[#111827] p-3.5 border border-slate-800">
-                    <Mail className="h-5 w-5 text-[#C5A059] shrink-0" />
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-bold uppercase text-slate-400">Email Address</p>
-                      <a href={`mailto:${selectedMember.email}`} className="text-xs font-bold text-[#E5C158] hover:underline truncate block">
-                        {selectedMember.email}
-                      </a>
+                    <div className="flex items-center gap-3 rounded-xl bg-[#111827] p-3 border border-slate-800">
+                      <Phone className="h-4 w-4 text-[#C5A059] shrink-0" />
+                      <div className="min-w-0">
+                        <p className="text-[10px] font-bold uppercase text-slate-400">Phone</p>
+                        <a href={`tel:${viewMember.phone}`} className="text-xs font-bold text-slate-200 hover:text-[#E5C158] block">
+                          {viewMember.phone}
+                        </a>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 rounded-xl bg-[#111827] p-3.5 border border-slate-800">
-                    <Phone className="h-5 w-5 text-[#C5A059] shrink-0" />
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-bold uppercase text-slate-400">Phone Line</p>
-                      <a href={`tel:${selectedMember.phone}`} className="text-xs font-bold text-slate-200 hover:text-[#E5C158] block">
-                        {selectedMember.phone}
-                      </a>
-                    </div>
+                  {/* Overview Text */}
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#E5C158] mb-1.5">Overview & Role</h4>
+                    <p className="text-xs sm:text-sm leading-relaxed text-slate-300 bg-[#111827]/80 p-3.5 rounded-xl border border-slate-800">
+                      {viewMember.overview}
+                    </p>
                   </div>
                 </div>
 
-                {/* Overview */}
-                <div className="pt-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#E5C158] mb-2">Overview & Role</h4>
-                  <p className="text-xs sm:text-sm leading-relaxed text-slate-300 bg-[#111827]/80 p-4 rounded-xl border border-slate-800">
-                    {selectedMember.overview}
-                  </p>
-                </div>
-
-              </div>
-
-              {/* Footer */}
-              <div className="p-4 bg-[#080c16] border-t border-slate-800 shrink-0">
                 <button
-                  onClick={() => setSelectedMember(null)}
-                  className="w-full py-3 rounded-xl bg-[#C5A059] text-black font-bold uppercase tracking-wider text-xs hover:bg-amber-400 transition-colors"
+                  onClick={() => setViewMember(null)}
+                  className="w-full py-3 rounded-xl bg-[#C5A059] text-black font-bold uppercase tracking-wider text-xs hover:bg-amber-400 transition-colors mt-2"
                 >
-                  Close Profile
+                  Close Viewer
                 </button>
               </div>
 
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
     </div>

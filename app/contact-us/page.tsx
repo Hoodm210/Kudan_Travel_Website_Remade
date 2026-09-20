@@ -23,11 +23,10 @@ import {
   Briefcase,
   Globe,
   Users,
-  ExternalLink,
 } from "lucide-react";
 
 /* =========================================================
-    TYPES
+   TYPES
 ========================================================= */
 
 interface ItineraryItem {
@@ -84,7 +83,7 @@ interface FormDataState {
 }
 
 /* =========================================================
-    COUNTRIES
+   COUNTRIES
 ========================================================= */
 
 const COUNTRIES = [
@@ -133,7 +132,7 @@ const COUNTRIES = [
 ];
 
 /* =========================================================
-    DESTINATIONS
+   DESTINATIONS
 ========================================================= */
 
 const NEPAL_DESTINATIONS = [
@@ -170,7 +169,7 @@ const OUTBOUND_DESTINATIONS = [
 ];
 
 /* =========================================================
-    INITIAL STATE
+   INITIAL STATE
 ========================================================= */
 
 const INITIAL_FORM_STATE: FormDataState = {
@@ -208,7 +207,7 @@ const INITIAL_FORM_STATE: FormDataState = {
 };
 
 /* =========================================================
-    SERVICE DEFINITIONS
+   SERVICE DEFINITIONS
 ========================================================= */
 
 const SERVICES = [
@@ -269,7 +268,7 @@ const SERVICES = [
 ];
 
 /* =========================================================
-    COMPONENT
+   COMPONENT
 ========================================================= */
 
 export default function ContactUsPage() {
@@ -852,7 +851,7 @@ export default function ContactUsPage() {
               >
 
                 {/* =================================================
-                    SERVICE SELECTION
+                   SERVICE SELECTION
                 ================================================= */}
 
                 <section className="space-y-4">
@@ -949,7 +948,7 @@ export default function ContactUsPage() {
                 </section>
 
                 {/* =================================================
-                    PERSONAL INFORMATION
+                   PERSONAL INFORMATION
                 ================================================= */}
 
                 <section className="space-y-4">
@@ -1026,7 +1025,7 @@ export default function ContactUsPage() {
                 </section>
 
                 {/* =================================================
-                    INBOUND
+                   INBOUND
                 ================================================= */}
 
                 {isInbound && (
@@ -1105,7 +1104,7 @@ export default function ContactUsPage() {
                 )}
 
                 {/* =================================================
-                    OUTBOUND
+                   OUTBOUND
                 ================================================= */}
 
                 {isOutbound && (
@@ -1829,133 +1828,105 @@ export default function ContactUsPage() {
           </div>
 
           {/* =====================================================
-              SIDEBAR: OFFICE LOCATION & CONTACT DETAILS
+              SIDEBAR
           ===================================================== */}
 
-          <div className="lg:col-span-4 space-y-6">
+          <aside className="lg:col-span-4 rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-8 space-y-7 shadow-2xl">
 
-            {/* OFFICE LOCATION */}
-            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <h3 className="text-sm font-black uppercase tracking-wider text-[#D4AF37]">
-                    Office Location
-                  </h3>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    Headquartered in Kathmandu
-                  </p>
-                </div>
-              </div>
-              <p className="text-sm text-slate-300 leading-relaxed bg-slate-950/50 p-4 rounded-2xl border border-slate-800/80">
-                Uttar Dhoka, Metro Park Building, Lazimpat / Nagpokhari Marg, Kathmandu, Nepal.
+            <div>
+
+              <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+                Kudan Travel
+              </span>
+
+              <h2 className="text-2xl font-black text-white mt-2">
+                Travel Made Simple
+              </h2>
+
+              <p className="text-sm text-slate-400 mt-3 leading-relaxed">
+                Whether you are visiting Nepal,
+                travelling abroad, applying for a
+                visa or looking for transportation,
+                our team can assist with your
+                requirement.
               </p>
+
             </div>
 
-            {/* PHONES */}
-            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
-                  <Phone size={20} />
-                </div>
-                <div>
-                  <h3 className="text-sm font-black uppercase tracking-wider text-[#D4AF37]">
-                    Phones
-                  </h3>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    Direct phone lines & support
-                  </p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-2 text-xs font-medium text-slate-300 bg-slate-950/50 p-4 rounded-2xl border border-slate-800/80">
-                <a href="tel:+977014005191" className="hover:text-[#D4AF37] transition-colors">+977-01-4005191</a>
-                <a href="tel:+977014005192" className="hover:text-[#D4AF37] transition-colors">+977-01-4005192</a>
-                <a href="tel:+977014005193" className="hover:text-[#D4AF37] transition-colors">+977-01-4005193</a>
-                <a href="tel:+977014005194" className="hover:text-[#D4AF37] transition-colors">+977-01-4005194</a>
-                <a href="tel:+977014005195" className="hover:text-[#D4AF37] transition-colors col-span-2">+977-01-4005195</a>
-              </div>
+            <div className="space-y-5">
+
+              <ContactItem
+                icon={
+                  <MapPin size={18} />
+                }
+                title="Office"
+                content={
+                  <>
+                    Kudan Travel and Tours
+                    Pvt. Ltd.
+                    <br />
+                    Metro Park Building,
+                    Lazimpat
+                    <br />
+                    Kathmandu, Nepal
+                  </>
+                }
+              />
+
+              <ContactItem
+                icon={
+                  <Phone size={18} />
+                }
+                title="Phone / WhatsApp"
+                content="+977 1-4005191 / 92 / 93 / 94 / 95"
+              />
+
+              <ContactItem
+                icon={
+                  <Mail size={18} />
+                }
+                title="Email"
+                content={
+                  <>
+                    info@kudantravel.com
+                    <br />
+                    support@kudantravel.com
+                  </>
+                }
+              />
+
+              <ContactItem
+                icon={
+                  <Clock size={18} />
+                }
+                title="Operating Hours"
+                content={
+                  <>
+                    Sun – Fri: 9:00 AM – 6:00 PM
+                    <br />
+                    Saturday: Emergency Support
+                  </>
+                }
+              />
+
             </div>
 
-            {/* EMAIL CONTACTS */}
-            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
-                  <Mail size={20} />
-                </div>
-                <div>
-                  <h3 className="text-sm font-black uppercase tracking-wider text-[#D4AF37]">
-                    Email Contacts
-                  </h3>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    Departmental desks
-                  </p>
-                </div>
-              </div>
+            <div className="rounded-2xl border border-[#D4AF37]/20 bg-[#D4AF37]/5 p-5">
 
-              <div className="space-y-3 text-xs bg-slate-950/50 p-4 rounded-2xl border border-slate-800/80">
-                <div>
-                  <p className="font-bold uppercase tracking-wider text-[10px] text-[#D4AF37] mb-1">General & Executive</p>
-                  <div className="space-y-1 text-slate-300">
-                    <a href="mailto:aatma_sl@hotmail.com" className="block hover:text-[#D4AF37] truncate">aatma_sl@hotmail.com</a>
-                    <a href="mailto:md@kudantravel.com" className="block hover:text-[#D4AF37] truncate">md@kudantravel.com</a>
-                  </div>
-                </div>
+              <p className="text-xs uppercase tracking-widest font-black text-[#D4AF37]">
+                Services
+              </p>
 
-                <div className="border-t border-slate-800/60 pt-2">
-                  <p className="font-bold uppercase tracking-wider text-[10px] text-[#D4AF37] mb-1">Regional Desks</p>
-                  <div className="space-y-1 text-slate-300">
-                    <a href="mailto:asia@kudantravel.com" className="block hover:text-[#D4AF37] truncate">asia@kudantravel.com</a>
-                    <a href="mailto:japan@kudantravel.com" className="block hover:text-[#D4AF37] truncate">japan@kudantravel.com</a>
-                    <a href="mailto:krishna@kudantravel.com" className="block hover:text-[#D4AF37] truncate">krishna@kudantravel.com</a>
-                  </div>
-                </div>
+              <p className="text-sm text-slate-300 mt-2 leading-relaxed">
+                Inbound • Outbound • Visa •
+                Transportation • Trekking •
+                Hotels • Ticketing • Corporate
+                Travel
+              </p>
 
-                <div className="border-t border-slate-800/60 pt-2">
-                  <p className="font-bold uppercase tracking-wider text-[10px] text-[#D4AF37] mb-1">Reservations & Inquiries</p>
-                  <div className="space-y-1 text-slate-300">
-                    <a href="mailto:kamal@kudantravel.com" className="block hover:text-[#D4AF37] truncate">kamal@kudantravel.com</a>
-                    <a href="mailto:naisha@kudantravel.com" className="block hover:text-[#D4AF37] truncate">naisha@kudantravel.com</a>
-                    <a href="mailto:info@kudantravel.com" className="block hover:text-[#D4AF37] truncate">info@kudantravel.com</a>
-                  </div>
-                </div>
-
-                <div className="border-t border-slate-800/60 pt-2">
-                  <p className="font-bold uppercase tracking-wider text-[10px] text-[#D4AF37] mb-1">Accounts & Finance</p>
-                  <div className="space-y-1 text-slate-300">
-                    <a href="mailto:accounts@kudantravel.com" className="block hover:text-[#D4AF37] truncate">accounts@kudantravel.com</a>
-                    <a href="mailto:finance@kudantravel.com" className="block hover:text-[#D4AF37] truncate">finance@kudantravel.com</a>
-                    <a href="mailto:dipen@kudantravel.com" className="block hover:text-[#D4AF37] truncate">dipen@kudantravel.com</a>
-                  </div>
-                </div>
-              </div>
             </div>
 
-            {/* GOOGLE MAP EMBED & LINK */}
-            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl space-y-4">
-              <div className="rounded-2xl overflow-hidden border border-slate-800 h-48 relative bg-slate-950">
-                <iframe
-                  title="Kudan Travel Office Location Map"
-                  src="https://www.google.com/maps?ll=27.715344,85.317585&z=15&t=m&hl=en&gl=NP&output=embed"
-                  className="w-full h-full border-0 filter invert-[90%] hue-rotate-180 contrast-125"
-                  allowFullScreen={false}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-
-              <a
-                href="https://www.google.com/maps?ll=27.715344,85.317585&z=15&t=m&hl=en&gl=NP&mapclient=embed"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-2xl bg-[#D4AF37] text-slate-950 font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#c29f31] transition-colors shadow-lg"
-              >
-                Open in Google Maps <ExternalLink size={14} />
-              </a>
-            </div>
-
-          </div>
+          </aside>
 
         </div>
 
@@ -2387,6 +2358,38 @@ function DestinationSelector({
           </button>
 
         </div>
+
+      </div>
+
+    </div>
+  );
+}
+
+function ContactItem({
+  icon,
+  title,
+  content,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  content: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-start gap-3">
+
+      <div className="text-[#D4AF37] mt-1">
+        {icon}
+      </div>
+
+      <div>
+
+        <p className="font-bold text-white text-sm">
+          {title}
+        </p>
+
+        <p className="text-slate-400 text-xs mt-1 leading-relaxed">
+          {content}
+        </p>
 
       </div>
 

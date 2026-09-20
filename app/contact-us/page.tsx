@@ -1,342 +1,2395 @@
 "use client";
 
-import { useState } from "react";
-import SectionTitle from "@/components/SectionTitle";
-import InquiryForm from "@/components/InquiryForm";
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  CreditCard, 
-  QrCode, 
-  Sparkles, 
-  ExternalLink,
-  ShieldCheck,
-  LucideIcon,
+import React, { useState } from "react";
+import {
+  Send,
+  Check,
+  Plus,
+  Minus,
+  Calendar,
+  Clock,
+  Loader2,
+  MapPin,
+  Printer,
   X,
-  Smartphone
+  Phone,
+  Mail,
+  Building2,
+  Plane,
+  FileText,
+  Car,
+  Mountain,
+  Hotel,
+  Briefcase,
+  Globe,
+  Users,
+  ExternalLink,
 } from "lucide-react";
 
-interface InfoCardProps {
-  icon: LucideIcon;
-  title: string;
-  children: React.ReactNode;
+/* =========================================================
+    TYPES
+========================================================= */
+
+interface ItineraryItem {
+  day?: string;
+  date?: string;
+  title?: string;
+  destination?: string;
+  highlights?: string[];
+  details?: string;
+  meals?: string;
+  overnight?: string;
 }
 
-export default function Contact() {
-  const [activeQrModal, setActiveQrModal] = useState<"fonepay" | "esewa" | null>(null);
+interface GeneratedPlan {
+  travelerName: string;
+  destinations: string;
+  outline?: string;
+  itinerary: ItineraryItem[];
+  rawContent?: string | null;
+}
+
+interface FormDataState {
+  fullName: string;
+  email: string;
+  phone: string;
+  country: string;
+
+  serviceRequired: string;
+
+  arrivalDate: string;
+  departureDate: string;
+  arrivalTime: string;
+
+  travelStyle: string;
+  approximateBudget: string;
+
+  nationality: string;
+  visaType: string;
+  visaDestination: string;
+
+  transportationType: string;
+  pickupLocation: string;
+  dropoffLocation: string;
+
+  hotelCategory: string;
+  roomRequirement: string;
+
+  trekkingRoute: string;
+  trekkingDifficulty: string;
+
+  corporateType: string;
+
+  additionalInfo: string;
+}
+
+/* =========================================================
+    COUNTRIES
+========================================================= */
+
+const COUNTRIES = [
+  "Nepal",
+  "India",
+  "China",
+  "Thailand",
+  "Indonesia",
+  "Japan",
+  "South Korea",
+  "Malaysia",
+  "Singapore",
+  "Vietnam",
+  "Cambodia",
+  "Bhutan",
+  "Sri Lanka",
+  "Maldives",
+  "United Arab Emirates",
+  "Qatar",
+  "Saudi Arabia",
+  "Turkey",
+  "Georgia",
+  "Azerbaijan",
+  "Australia",
+  "Austria",
+  "Belgium",
+  "Canada",
+  "Denmark",
+  "Finland",
+  "France",
+  "Germany",
+  "Greece",
+  "Iceland",
+  "Ireland",
+  "Italy",
+  "Netherlands",
+  "Norway",
+  "Poland",
+  "Portugal",
+  "Spain",
+  "Sweden",
+  "Switzerland",
+  "United Kingdom",
+  "United States",
+  "Other",
+];
+
+/* =========================================================
+    DESTINATIONS
+========================================================= */
+
+const NEPAL_DESTINATIONS = [
+  "Kathmandu",
+  "Pokhara",
+  "Chitwan",
+  "Lumbini",
+  "Nagarkot",
+  "Muktinath / Mustang",
+  "Bandipur",
+  "Dhulikhel",
+  "Everest Region / Lukla",
+  "Annapurna Region",
+];
+
+const OUTBOUND_DESTINATIONS = [
+  "Thailand",
+  "Bali / Indonesia",
+  "Malaysia",
+  "Singapore",
+  "Dubai / UAE",
+  "Japan",
+  "South Korea",
+  "Vietnam",
+  "Cambodia",
+  "Bhutan",
+  "Maldives",
+  "Sri Lanka",
+  "Europe / Schengen",
+  "Australia",
+  "United Kingdom",
+  "United States",
+  "Other",
+];
+
+/* =========================================================
+    INITIAL STATE
+========================================================= */
+
+const INITIAL_FORM_STATE: FormDataState = {
+  fullName: "",
+  email: "",
+  phone: "",
+  country: "Nepal",
+
+  serviceRequired: "Inbound Tours",
+
+  arrivalDate: "",
+  departureDate: "",
+  arrivalTime: "",
+
+  travelStyle: "",
+  approximateBudget: "",
+
+  nationality: "Nepal",
+  visaType: "",
+  visaDestination: "",
+
+  transportationType: "",
+  pickupLocation: "",
+  dropoffLocation: "",
+
+  hotelCategory: "",
+  roomRequirement: "",
+
+  trekkingRoute: "",
+  trekkingDifficulty: "",
+
+  corporateType: "",
+
+  additionalInfo: "",
+};
+
+/* =========================================================
+    SERVICE DEFINITIONS
+========================================================= */
+
+const SERVICES = [
+  {
+    value: "Inbound Tours",
+    label: "Inbound Tours – Nepal",
+    description: "Nepal tours for international travelers",
+    icon: Globe,
+  },
+  {
+    value: "Outbound Tours",
+    label: "Outbound Tours",
+    description: "International holidays from Nepal",
+    icon: Plane,
+  },
+  {
+    value: "Visa Services",
+    label: "Visa Services",
+    description: "Tourist, business and other visa assistance",
+    icon: FileText,
+  },
+  {
+    value: "Transportation",
+    label: "Transportation",
+    description: "Cars, SUVs, buses and private transfers",
+    icon: Car,
+  },
+  {
+    value: "Trekking & Expedition",
+    label: "Trekking & Expedition",
+    description: "Trekking, hiking and expedition services",
+    icon: Mountain,
+  },
+  {
+    value: "Hotel & Accommodation",
+    label: "Hotel & Accommodation",
+    description: "Hotel reservations and accommodation",
+    icon: Hotel,
+  },
+  {
+    value: "Flight & Ticketing",
+    label: "Flight & Ticketing",
+    description: "Domestic and international air ticketing",
+    icon: Plane,
+  },
+  {
+    value: "Corporate / MICE",
+    label: "Corporate / MICE",
+    description: "Corporate travel, meetings and events",
+    icon: Briefcase,
+  },
+  {
+    value: "Custom / Other",
+    label: "Custom / Other Enquiry",
+    description: "Tell us what you need",
+    icon: Users,
+  },
+];
+
+/* =========================================================
+    COMPONENT
+========================================================= */
+
+export default function ContactUsPage() {
+  const [travelersCount, setTravelersCount] = useState<number>(2);
+
+  const [isGenerating, setIsGenerating] =
+    useState<boolean>(false);
+
+  const [submitted, setSubmitted] =
+    useState<boolean>(false);
+
+  const [generatedPlan, setGeneratedPlan] =
+    useState<GeneratedPlan | null>(null);
+
+  const [travelDestinations, setTravelDestinations] =
+    useState<string[]>(["Kathmandu"]);
+
+  const [selectedPreset, setSelectedPreset] =
+    useState<string>("");
+
+  const [customDestination, setCustomDestination] =
+    useState<string>("");
+
+  const [formData, setFormData] =
+    useState<FormDataState>(INITIAL_FORM_STATE);
+
+  /* =========================================================
+     FORM HANDLING
+  ========================================================= */
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement |
+      HTMLSelectElement |
+      HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleAddDestination = (
+    destName?: string
+  ) => {
+    const target = (
+      destName ||
+      customDestination ||
+      selectedPreset
+    ).trim();
+
+    if (
+      target &&
+      !travelDestinations.includes(target)
+    ) {
+      setTravelDestinations((prev) => [
+        ...prev,
+        target,
+      ]);
+
+      setCustomDestination("");
+      setSelectedPreset("");
+    }
+  };
+
+  const handleRemoveDestination = (
+    destination: string
+  ) => {
+    setTravelDestinations((prev) =>
+      prev.filter(
+        (item) => item !== destination
+      )
+    );
+  };
+
+  const handleIncrementTravelers = () => {
+    if (travelersCount < 50) {
+      setTravelersCount(
+        (prev) => prev + 1
+      );
+    }
+  };
+
+  const handleDecrementTravelers = () => {
+    if (travelersCount > 1) {
+      setTravelersCount(
+        (prev) => prev - 1
+      );
+    }
+  };
+
+  /* =========================================================
+     SERVICE LOGIC
+  ========================================================= */
+
+  const isInbound =
+    formData.serviceRequired ===
+    "Inbound Tours";
+
+  const isOutbound =
+    formData.serviceRequired ===
+    "Outbound Tours";
+
+  const isVisa =
+    formData.serviceRequired ===
+    "Visa Services";
+
+  const isTransportation =
+    formData.serviceRequired ===
+    "Transportation";
+
+  const isTrekking =
+    formData.serviceRequired ===
+    "Trekking & Expedition";
+
+  const isHotel =
+    formData.serviceRequired ===
+    "Hotel & Accommodation";
+
+  const isFlight =
+    formData.serviceRequired ===
+    "Flight & Ticketing";
+
+  const isCorporate =
+    formData.serviceRequired ===
+    "Corporate / MICE";
+
+  const showTravelDates =
+    isInbound ||
+    isOutbound ||
+    isTrekking ||
+    isHotel ||
+    isCorporate;
+
+  /* =========================================================
+     SUBMIT
+  ========================================================= */
+
+  const handleSubmit = async (
+    e: React.FormEvent
+  ) => {
+    e.preventDefault();
+
+    if (
+      (isInbound || isOutbound) &&
+      travelDestinations.length === 0
+    ) {
+      alert(
+        "Please select at least one destination."
+      );
+      return;
+    }
+
+    setIsGenerating(true);
+
+    try {
+      const response = await fetch(
+        "/api/generate-itinerary",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: JSON.stringify({
+            ...formData,
+
+            travelersCount,
+
+            travelDestinations,
+
+            // Keep API compatibility
+            estimatedArrivalTime:
+              formData.arrivalTime,
+
+            requestType:
+              formData.serviceRequired,
+          }),
+        }
+      );
+
+      const data =
+        await response.json();
+
+      if (
+        response.ok &&
+        data &&
+        (
+          data.success ||
+          data.itinerary
+        )
+      ) {
+        const itineraryList =
+          data.itinerary ||
+          [];
+
+        setGeneratedPlan({
+          travelerName:
+            data.travelerName ||
+            formData.fullName ||
+            "Valued Guest",
+
+          destinations:
+            data.destinations ||
+            travelDestinations.join(
+              ", "
+            ),
+
+          outline:
+            data.outline,
+
+          itinerary:
+            Array.isArray(
+              itineraryList
+            )
+              ? itineraryList
+              : [],
+
+          rawContent:
+            typeof itineraryList ===
+            "string"
+              ? itineraryList
+              : null,
+        });
+
+        setSubmitted(true);
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      } else {
+        alert(
+          data?.error ||
+            "Unable to process your enquiry. Please try again."
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Enquiry error:",
+        error
+      );
+
+      alert(
+        "Unable to connect to the server. Please try again."
+      );
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  /* =========================================================
+     RESET
+  ========================================================= */
+
+  const resetForm = () => {
+    setSubmitted(false);
+    setGeneratedPlan(null);
+    setFormData(
+      INITIAL_FORM_STATE
+    );
+    setTravelersCount(2);
+    setTravelDestinations([
+      "Kathmandu",
+    ]);
+  };
+
+  /* =========================================================
+     RENDER
+  ========================================================= */
 
   return (
-    <div className="bg-[#060910] text-slate-100 min-h-screen font-sans">
-      {/* ---------------------------------------------------- */}
-      {/* HERO SECTION - Adjusted padding & dynamic typography */}
-      {/* ---------------------------------------------------- */}
-      <section className="relative overflow-hidden border-b border-slate-800 bg-gradient-to-b from-[#0d1322] via-[#080c16] to-[#060910] py-12 sm:py-20 lg:py-24">
-        <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#C5A059] to-transparent" />
+    <main className="min-h-screen bg-slate-950 text-white py-12 px-4 sm:px-6 lg:px-8">
 
-        <div className="container-x relative z-10 px-4 sm:px-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#C5A059]/50 bg-[#111827] px-3.5 py-1 text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#E5C158] shadow-md">
-            <Sparkles className="h-3.5 w-3.5 text-amber-300 animate-pulse" />
-            <span>Let's Plan It</span>
-          </div>
+      <div className="max-w-7xl mx-auto space-y-10">
 
-          <h1 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-5xl lg:text-7xl">
-            Contact <span className="bg-gradient-to-r from-[#F5D880] via-[#C5A059] to-[#A07D32] bg-clip-text text-transparent">Kudan</span>
+        {/* =====================================================
+            HEADER
+        ===================================================== */}
+
+        <div className="text-center max-w-3xl mx-auto">
+
+          <span className="text-xs font-extrabold uppercase tracking-[0.3em] text-[#D4AF37]">
+            KUDAN TRAVEL & TOURS
+          </span>
+
+          <h1 className="text-4xl sm:text-5xl font-black text-white mt-3">
+            Plan Your Journey
           </h1>
 
-          <p className="mt-3 max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed text-slate-300">
-            Need help planning your trip or booking a tour? Our team is ready to assist you. A destination, rough dates, and group size are enough to start.
+          <p className="text-slate-400 mt-4 text-sm sm:text-base leading-relaxed">
+            Tell us what you need and our travel
+            consultant will prepare a personalized
+            response for your journey.
           </p>
-        </div>
-      </section>
 
-      {/* ---------------------------------------------------- */}
-      {/* MAIN CONTENT: DETAILS + FORM                        */}
-      {/* ---------------------------------------------------- */}
-      <section className="container-x px-4 sm:px-6 py-10 sm:py-16">
-        <div className="grid gap-8 lg:gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          
-          {/* LEFT SIDEBAR: Contact Details & Live Map */}
-          <aside className="space-y-4 sm:space-y-5">
-            
-            {/* Office Location */}
-            <InfoCard icon={MapPin} title="Office Location">
-              <p className="text-xs font-semibold text-slate-200 leading-relaxed">
+        </div>
+
+        {/* =====================================================
+            MAIN CONTENT
+        ===================================================== */}
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+          {/* ===================================================
+              FORM / RESULT
+          =================================================== */}
+
+          <div className="lg:col-span-8 rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-10 shadow-2xl">
+
+            {submitted &&
+            generatedPlan ? (
+
+              /* =================================================
+                 GENERATED RESULT
+              ================================================= */
+
+              <div className="space-y-7">
+
+                <div className="rounded-2xl border border-emerald-500/40 bg-emerald-950/30 p-4 flex items-center justify-center gap-3 text-emerald-400">
+
+                  <Check size={20} />
+
+                  <span className="text-sm font-bold">
+                    Your enquiry has been processed successfully.
+                  </span>
+
+                </div>
+
+                <div className="rounded-2xl border border-[#D4AF37]/30 bg-slate-950 p-6 sm:p-8 shadow-xl space-y-7">
+
+                  <div className="border-b border-slate-800 pb-5">
+
+                    <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+                      Kudan Travel
+                    </span>
+
+                    <h2 className="text-2xl sm:text-3xl font-black mt-2">
+                      {generatedPlan.travelerName}
+                    </h2>
+
+                    <div className="text-xs text-slate-400 mt-3 flex flex-wrap gap-4">
+
+                      <span className="flex items-center gap-1.5">
+                        <MapPin
+                          size={14}
+                          className="text-[#D4AF37]"
+                        />
+                        {generatedPlan.destinations}
+                      </span>
+
+                      {formData.arrivalDate &&
+                        formData.departureDate && (
+                          <span className="flex items-center gap-1.5">
+                            <Calendar
+                              size={14}
+                              className="text-[#D4AF37]"
+                            />
+                            {
+                              formData.arrivalDate
+                            }{" "}
+                            to{" "}
+                            {
+                              formData.departureDate
+                            }
+                          </span>
+                        )}
+
+                    </div>
+
+                  </div>
+
+                  {/* OUTLINE */}
+
+                  {generatedPlan.outline && (
+                    <div className="rounded-xl bg-slate-900 border border-slate-800 p-4">
+
+                      <h3 className="text-xs uppercase tracking-widest font-black text-[#D4AF37] mb-2">
+                        Trip Overview
+                      </h3>
+
+                      <p className="text-sm text-slate-300 leading-relaxed">
+                        {
+                          generatedPlan.outline
+                        }
+                      </p>
+
+                    </div>
+                  )}
+
+                  {/* ITINERARY */}
+
+                  {generatedPlan.itinerary.length >
+                  0 ? (
+
+                    <div className="space-y-7 border-l-2 border-[#D4AF37]/40 pl-5 sm:pl-7">
+
+                      {generatedPlan.itinerary.map(
+                        (
+                          item,
+                          index
+                        ) => (
+
+                          <div
+                            key={index}
+                            className="relative space-y-3"
+                          >
+
+                            <div className="absolute -left-[27px] sm:-left-[35px] top-1.5 h-3 w-3 rounded-full border-2 border-[#D4AF37] bg-slate-950" />
+
+                            <div>
+
+                              <span className="text-xs font-black uppercase tracking-wider text-[#D4AF37]">
+                                {
+                                  item.day ||
+                                  `Day ${
+                                    index +
+                                    1
+                                  }`
+                                }
+                              </span>
+
+                              <h3 className="text-lg sm:text-xl font-bold text-white mt-1">
+                                {
+                                  item.title ||
+                                  "Travel Day"
+                                }
+                              </h3>
+
+                              {item.date && (
+                                <p className="text-xs text-slate-500 mt-1">
+                                  {
+                                    item.date
+                                  }
+                                </p>
+                              )}
+
+                            </div>
+
+                            {item.destination && (
+                              <p className="text-xs text-slate-400">
+
+                                <strong className="text-slate-300">
+                                  Location:
+                                </strong>{" "}
+
+                                {
+                                  item.destination
+                                }
+
+                              </p>
+                            )}
+
+                            {item.highlights &&
+                              item.highlights.length >
+                                0 && (
+
+                                <div className="space-y-1">
+
+                                  {item.highlights.map(
+                                    (
+                                      highlight,
+                                      hIndex
+                                    ) => (
+                                      <p
+                                        key={
+                                          hIndex
+                                        }
+                                        className="text-sm text-slate-300"
+                                      >
+                                        •{" "}
+                                        {
+                                          highlight
+                                        }
+                                      </p>
+                                    )
+                                  )}
+
+                                </div>
+                              )}
+
+                            {item.details && (
+                              <p className="text-sm text-slate-300 leading-relaxed">
+                                {
+                                  item.details
+                                }
+                              </p>
+                            )}
+
+                            {item.meals && (
+                              <p className="text-xs text-slate-400">
+
+                                <strong className="text-slate-300">
+                                  Meals:
+                                </strong>{" "}
+
+                                {
+                                  item.meals
+                                }
+
+                              </p>
+                            )}
+
+                            {item.overnight && (
+                              <p className="text-xs text-slate-400">
+
+                                <strong className="text-slate-300">
+                                  Overnight:
+                                </strong>{" "}
+
+                                {
+                                  item.overnight
+                                }
+
+                              </p>
+                            )}
+
+                          </div>
+
+                        )
+                      )}
+
+                    </div>
+
+                  ) : (
+
+                    <div className="rounded-xl bg-slate-900 p-5 text-sm text-slate-300">
+                      Your enquiry has been received. Our
+                      travel consultant will review the
+                      requirements and contact you shortly.
+                    </div>
+
+                  )}
+
+                  {/* ACTIONS */}
+
+                  <div className="pt-5 border-t border-slate-800 flex flex-wrap gap-4 justify-between">
+
+                    <button
+                      type="button"
+                      onClick={resetForm}
+                      className="text-xs text-slate-400 hover:text-white underline"
+                    >
+                      Submit another enquiry
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        window.print()
+                      }
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold hover:border-[#D4AF37]"
+                    >
+                      <Printer
+                        size={14}
+                      />
+                      Print / Save PDF
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            ) : (
+
+              /* =================================================
+                 FORM
+              ================================================= */
+
+              <form
+                onSubmit={
+                  handleSubmit
+                }
+                className="space-y-8"
+              >
+
+                {/* =================================================
+                    SERVICE SELECTION
+                ================================================= */}
+
+                <section className="space-y-4">
+
+                  <div>
+                    <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+                      Step 1
+                    </span>
+
+                    <h2 className="text-xl font-bold mt-1">
+                      What can we help you with?
+                    </h2>
+
+                    <p className="text-xs text-slate-500 mt-1">
+                      Select the service you are interested in.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+                    {SERVICES.map(
+                      (service) => {
+
+                        const Icon =
+                          service.icon;
+
+                        const active =
+                          formData.serviceRequired ===
+                          service.value;
+
+                        return (
+                          <button
+                            key={
+                              service.value
+                            }
+                            type="button"
+                            onClick={() =>
+                              setFormData(
+                                (
+                                  prev
+                                ) => ({
+                                  ...prev,
+                                  serviceRequired:
+                                    service.value,
+                                })
+                              )
+                            }
+                            className={`text-left rounded-2xl border p-4 transition-all ${
+                              active
+                                ? "border-[#D4AF37] bg-[#D4AF37]/10"
+                                : "border-slate-800 bg-slate-950 hover:border-slate-600"
+                            }`}
+                          >
+
+                            <div className="flex gap-3">
+
+                              <div
+                                className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 ${
+                                  active
+                                    ? "bg-[#D4AF37] text-slate-950"
+                                    : "bg-slate-800 text-slate-400"
+                                }`}
+                              >
+                                <Icon
+                                  size={18}
+                                />
+                              </div>
+
+                              <div>
+
+                                <p className="text-sm font-bold">
+                                  {
+                                    service.label
+                                  }
+                                </p>
+
+                                <p className="text-xs text-slate-500 mt-1">
+                                  {
+                                    service.description
+                                  }
+                                </p>
+
+                              </div>
+
+                            </div>
+
+                          </button>
+                        );
+                      }
+                    )}
+
+                  </div>
+
+                </section>
+
+                {/* =================================================
+                    PERSONAL INFORMATION
+                ================================================= */}
+
+                <section className="space-y-4">
+
+                  <div>
+                    <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+                      Step 2
+                    </span>
+
+                    <h2 className="text-xl font-bold mt-1">
+                      Your Information
+                    </h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                    <InputField
+                      label="Full Name"
+                      name="fullName"
+                      value={
+                        formData.fullName
+                      }
+                      onChange={
+                        handleChange
+                      }
+                      placeholder="Your full name"
+                      required
+                    />
+
+                    <InputField
+                      label="Email Address"
+                      name="email"
+                      type="email"
+                      value={
+                        formData.email
+                      }
+                      onChange={
+                        handleChange
+                      }
+                      placeholder="you@example.com"
+                      required
+                    />
+
+                    <InputField
+                      label="WhatsApp / Phone"
+                      name="phone"
+                      type="tel"
+                      value={
+                        formData.phone
+                      }
+                      onChange={
+                        handleChange
+                      }
+                      placeholder="+977 98XXXXXXXX"
+                      required
+                    />
+
+                    <SelectField
+                      label="Country of Residence"
+                      name="country"
+                      value={
+                        formData.country
+                      }
+                      onChange={
+                        handleChange
+                      }
+                      options={
+                        COUNTRIES
+                      }
+                    />
+
+                  </div>
+
+                </section>
+
+                {/* =================================================
+                    INBOUND
+                ================================================= */}
+
+                {isInbound && (
+
+                  <section className="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+
+                    <SectionTitle
+                      number="3"
+                      title="Nepal Inbound Tour"
+                      description="Tell us about your Nepal holiday."
+                    />
+
+                    <DestinationSelector
+                      destinations={
+                        travelDestinations
+                      }
+                      setDestinations={
+                        setTravelDestinations
+                      }
+                      selectedPreset={
+                        selectedPreset
+                      }
+                      setSelectedPreset={
+                        setSelectedPreset
+                      }
+                      customDestination={
+                        customDestination
+                      }
+                      setCustomDestination={
+                        setCustomDestination
+                      }
+                      handleAddDestination={
+                        handleAddDestination
+                      }
+                      handleRemoveDestination={
+                        handleRemoveDestination
+                      }
+                      options={
+                        NEPAL_DESTINATIONS
+                      }
+                    />
+
+                    <DateFields
+                      formData={
+                        formData
+                      }
+                      handleChange={
+                        handleChange
+                      }
+                      showArrivalTime
+                    />
+
+                    <TravelPreferences
+                      formData={
+                        formData
+                      }
+                      handleChange={
+                        handleChange
+                      }
+                    />
+
+                    <TravelerCounter
+                      travelersCount={
+                        travelersCount
+                      }
+                      increment={
+                        handleIncrementTravelers
+                      }
+                      decrement={
+                        handleDecrementTravelers
+                      }
+                    />
+
+                  </section>
+
+                )}
+
+                {/* =================================================
+                    OUTBOUND
+                ================================================= */}
+
+                {isOutbound && (
+
+                  <section className="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+
+                    <SectionTitle
+                      number="3"
+                      title="Outbound Holiday"
+                      description="Tell us where you would like to travel."
+                    />
+
+                    <DestinationSelector
+                      destinations={
+                        travelDestinations
+                      }
+                      setDestinations={
+                        setTravelDestinations
+                      }
+                      selectedPreset={
+                        selectedPreset
+                      }
+                      setSelectedPreset={
+                        setSelectedPreset
+                      }
+                      customDestination={
+                        customDestination
+                      }
+                      setCustomDestination={
+                        setCustomDestination
+                      }
+                      handleAddDestination={
+                        handleAddDestination
+                      }
+                      handleRemoveDestination={
+                        handleRemoveDestination
+                      }
+                      options={
+                        OUTBOUND_DESTINATIONS
+                      }
+                    />
+
+                    <DateFields
+                      formData={
+                        formData
+                      }
+                      handleChange={
+                        handleChange
+                      }
+                      showArrivalTime
+                    />
+
+                    <TravelPreferences
+                      formData={
+                        formData
+                      }
+                      handleChange={
+                        handleChange
+                      }
+                    />
+
+                    <TravelerCounter
+                      travelersCount={
+                        travelersCount
+                      }
+                      increment={
+                        handleIncrementTravelers
+                      }
+                      decrement={
+                        handleDecrementTravelers
+                      }
+                    />
+
+                  </section>
+
+                )}
+
+                {/* =================================================
+                   VISA
+                ================================================= */}
+
+                {isVisa && (
+
+                  <section className="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+
+                    <SectionTitle
+                      number="3"
+                      title="Visa Assistance"
+                      description="Provide the basic information so our visa team can understand your requirement."
+                    />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                      <SelectField
+                        label="Applicant Nationality"
+                        name="nationality"
+                        value={
+                          formData.nationality
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        options={
+                          COUNTRIES
+                        }
+                      />
+
+                      <InputField
+                        label="Visa Destination"
+                        name="visaDestination"
+                        value={
+                          formData.visaDestination
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        placeholder="e.g. Japan, Finland, Australia"
+                        required
+                      />
+
+                      <SelectField
+                        label="Visa Type"
+                        name="visaType"
+                        value={
+                          formData.visaType
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        options={[
+                          "Tourist Visa",
+                          "Business Visa",
+                          "Student Visa",
+                          "Work Visa",
+                          "Family / Visit Visa",
+                          "Transit Visa",
+                          "Other",
+                        ]}
+                      />
+
+                      <InputField
+                        label="Expected Travel Date"
+                        name="arrivalDate"
+                        type="date"
+                        value={
+                          formData.arrivalDate
+                        }
+                        onChange={
+                          handleChange
+                        }
+                      />
+
+                    </div>
+
+                    <TravelerCounter
+                      travelersCount={
+                        travelersCount
+                      }
+                      increment={
+                        handleIncrementTravelers
+                      }
+                      decrement={
+                        handleDecrementTravelers
+                      }
+                    />
+
+                  </section>
+
+                )}
+
+                {/* =================================================
+                   TRANSPORTATION
+                ================================================= */}
+
+                {isTransportation && (
+
+                  <section className="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+
+                    <SectionTitle
+                      number="3"
+                      title="Transportation Requirement"
+                      description="Tell us about your vehicle or transfer requirement."
+                    />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                      <SelectField
+                        label="Transportation Type"
+                        name="transportationType"
+                        value={
+                          formData.transportationType
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        options={[
+                          "Airport Transfer",
+                          "Private Car",
+                          "SUV / Scorpio",
+                          "Hiace",
+                          "Coaster",
+                          "Bus",
+                          "Luxury Vehicle",
+                          "Multiple Vehicles",
+                          "Other",
+                        ]}
+                      />
+
+                      <InputField
+                        label="Pickup Location"
+                        name="pickupLocation"
+                        value={
+                          formData.pickupLocation
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        placeholder="Airport / Hotel / City"
+                      />
+
+                      <InputField
+                        label="Drop-off Location"
+                        name="dropoffLocation"
+                        value={
+                          formData.dropoffLocation
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        placeholder="Destination"
+                      />
+
+                      <InputField
+                        label="Travel / Service Date"
+                        name="arrivalDate"
+                        type="date"
+                        value={
+                          formData.arrivalDate
+                        }
+                        onChange={
+                          handleChange
+                        }
+                      />
+
+                    </div>
+
+                    <TravelerCounter
+                      travelersCount={
+                        travelersCount
+                      }
+                      increment={
+                        handleIncrementTravelers
+                      }
+                      decrement={
+                        handleDecrementTravelers
+                      }
+                    />
+
+                  </section>
+
+                )}
+
+                {/* =================================================
+                   TREKKING
+                ================================================= */}
+
+                {isTrekking && (
+
+                  <section className="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+
+                    <SectionTitle
+                      number="3"
+                      title="Trekking & Expedition"
+                      description="Tell us about your trekking requirement."
+                    />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                      <InputField
+                        label="Preferred Trek / Region"
+                        name="trekkingRoute"
+                        value={
+                          formData.trekkingRoute
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        placeholder="Everest, Annapurna, Mustang..."
+                      />
+
+                      <SelectField
+                        label="Difficulty"
+                        name="trekkingDifficulty"
+                        value={
+                          formData.trekkingDifficulty
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        options={[
+                          "Easy",
+                          "Moderate",
+                          "Challenging",
+                          "Expedition",
+                          "Not Sure",
+                        ]}
+                      />
+
+                    </div>
+
+                    <DateFields
+                      formData={
+                        formData
+                      }
+                      handleChange={
+                        handleChange
+                      }
+                    />
+
+                    <TravelerCounter
+                      travelersCount={
+                        travelersCount
+                      }
+                      increment={
+                        handleIncrementTravelers
+                      }
+                      decrement={
+                        handleDecrementTravelers
+                      }
+                    />
+
+                  </section>
+
+                )}
+
+                {/* =================================================
+                   HOTEL
+                ================================================= */}
+
+                {isHotel && (
+
+                  <section className="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+
+                    <SectionTitle
+                      number="3"
+                      title="Hotel & Accommodation"
+                      description="Tell us about your accommodation requirement."
+                    />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                      <InputField
+                        label="Destination / City"
+                        name="visaDestination"
+                        value={
+                          formData.visaDestination
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        placeholder="Kathmandu, Pokhara, Bangkok..."
+                      />
+
+                      <SelectField
+                        label="Hotel Category"
+                        name="hotelCategory"
+                        value={
+                          formData.hotelCategory
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        options={[
+                          "3 Star",
+                          "4 Star",
+                          "5 Star",
+                          "Luxury",
+                          "Boutique",
+                          "Resort",
+                          "Not Sure",
+                        ]}
+                      />
+
+                      <InputField
+                        label="Check-in"
+                        name="arrivalDate"
+                        type="date"
+                        value={
+                          formData.arrivalDate
+                        }
+                        onChange={
+                          handleChange
+                        }
+                      />
+
+                      <InputField
+                        label="Check-out"
+                        name="departureDate"
+                        type="date"
+                        value={
+                          formData.departureDate
+                        }
+                        onChange={
+                          handleChange
+                        }
+                      />
+
+                      <InputField
+                        label="Room Requirement"
+                        name="roomRequirement"
+                        value={
+                          formData.roomRequirement
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        placeholder="2 DBL + 1 TWIN"
+                      />
+
+                    </div>
+
+                  </section>
+
+                )}
+
+                {/* =================================================
+                   FLIGHT
+                ================================================= */}
+
+                {isFlight && (
+
+                  <section className="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+
+                    <SectionTitle
+                      number="3"
+                      title="Flight & Ticketing"
+                      description="Tell us about your flight requirement."
+                    />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                      <InputField
+                        label="Departure City / Airport"
+                        name="pickupLocation"
+                        value={
+                          formData.pickupLocation
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        placeholder="Kathmandu / KTM"
+                      />
+
+                      <InputField
+                        label="Destination / Airport"
+                        name="dropoffLocation"
+                        value={
+                          formData.dropoffLocation
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        placeholder="Tokyo / NRT"
+                      />
+
+                      <InputField
+                        label="Departure Date"
+                        name="arrivalDate"
+                        type="date"
+                        value={
+                          formData.arrivalDate
+                        }
+                        onChange={
+                          handleChange
+                        }
+                      />
+
+                      <InputField
+                        label="Return Date"
+                        name="departureDate"
+                        type="date"
+                        value={
+                          formData.departureDate
+                        }
+                        onChange={
+                          handleChange
+                        }
+                      />
+
+                    </div>
+
+                    <TravelerCounter
+                      travelersCount={
+                        travelersCount
+                      }
+                      increment={
+                        handleIncrementTravelers
+                      }
+                      decrement={
+                        handleDecrementTravelers
+                      }
+                    />
+
+                  </section>
+
+                )}
+
+                {/* =================================================
+                   CORPORATE
+                ================================================= */}
+
+                {isCorporate && (
+
+                  <section className="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+
+                    <SectionTitle
+                      number="3"
+                      title="Corporate / MICE"
+                      description="Tell us about your corporate travel requirement."
+                    />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                      <SelectField
+                        label="Requirement"
+                        name="corporateType"
+                        value={
+                          formData.corporateType
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        options={[
+                          "Corporate Tour",
+                          "Conference",
+                          "Meeting",
+                          "Incentive Tour",
+                          "Team Building",
+                          "Event / Gala Dinner",
+                          "Corporate Transportation",
+                          "Other",
+                        ]}
+                      />
+
+                      <InputField
+                        label="Destination"
+                        name="visaDestination"
+                        value={
+                          formData.visaDestination
+                        }
+                        onChange={
+                          handleChange
+                        }
+                        placeholder="Destination"
+                      />
+
+                    </div>
+
+                    <DateFields
+                      formData={
+                        formData
+                      }
+                      handleChange={
+                        handleChange
+                      }
+                    />
+
+                    <TravelerCounter
+                      travelersCount={
+                        travelersCount
+                      }
+                      increment={
+                        handleIncrementTravelers
+                      }
+                      decrement={
+                        handleDecrementTravelers
+                      }
+                    />
+
+                  </section>
+
+                )}
+
+                {/* =================================================
+                   CUSTOM
+                ================================================= */}
+
+                {!isInbound &&
+                  !isOutbound &&
+                  !isVisa &&
+                  !isTransportation &&
+                  !isTrekking &&
+                  !isHotel &&
+                  !isFlight &&
+                  !isCorporate && (
+
+                    <section className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+
+                      <SectionTitle
+                        number="3"
+                        title="Your Requirement"
+                        description="Tell us what you are looking for."
+                      />
+
+                      <TravelerCounter
+                        travelersCount={
+                          travelersCount
+                        }
+                        increment={
+                          handleIncrementTravelers
+                        }
+                        decrement={
+                          handleDecrementTravelers
+                        }
+                      />
+
+                    </section>
+
+                  )}
+
+                {/* =================================================
+                   ADDITIONAL INFORMATION
+                ================================================= */}
+
+                <section className="space-y-3">
+
+                  <label className="text-xs font-bold text-slate-300">
+                    Additional Information
+                  </label>
+
+                  <textarea
+                    name="additionalInfo"
+                    rows={5}
+                    value={
+                      formData.additionalInfo
+                    }
+                    onChange={
+                      handleChange
+                    }
+                    placeholder={
+                      isVisa
+                        ? "Tell us about previous visas, travel history, preferred appointment date, family members applying together, or any other visa requirement."
+                        : isTransportation
+                        ? "Tell us about vehicle preferences, luggage, route, number of vehicles, driver requirements, or any special arrangements."
+                        : "Tell us anything else about your trip or service requirement."
+                    }
+                    className="w-full rounded-xl bg-slate-950 border border-slate-800 p-4 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none resize-y"
+                  />
+
+                </section>
+
+                {/* =================================================
+                   BUDGET
+                ================================================= */}
+
+                {(isInbound ||
+                  isOutbound ||
+                  isTrekking ||
+                  isHotel ||
+                  isCorporate) && (
+
+                  <SelectField
+                    label="Approximate Budget"
+                    name="approximateBudget"
+                    value={
+                      formData.approximateBudget
+                    }
+                    onChange={
+                      handleChange
+                    }
+                    options={[
+                      "Standard",
+                      "Deluxe",
+                      "Luxury / Premium",
+                      "Not Sure",
+                    ]}
+                  />
+
+                )}
+
+                {/* =================================================
+                   SUBMIT
+                ================================================= */}
+
+                <button
+                  type="submit"
+                  disabled={
+                    isGenerating
+                  }
+                  className="w-full rounded-xl bg-gradient-to-r from-[#D4AF37] via-amber-400 to-[#B8860B] py-4 text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg hover:scale-[1.01] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                >
+
+                  {isGenerating ? (
+                    <>
+                      <Loader2
+                        size={17}
+                        className="animate-spin"
+                      />
+
+                      <span>
+                        Preparing Your Enquiry...
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Send
+                        size={16}
+                      />
+
+                      <span>
+                        Submit Enquiry
+                      </span>
+                    </>
+                  )}
+
+                </button>
+
+              </form>
+            )}
+
+          </div>
+
+          {/* =====================================================
+              SIDEBAR: OFFICE LOCATION & CONTACT DETAILS
+          ===================================================== */}
+
+          <div className="lg:col-span-4 space-y-6">
+
+            {/* OFFICE LOCATION */}
+            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-black uppercase tracking-wider text-[#D4AF37]">
+                    Office Location
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Headquartered in Kathmandu
+                  </p>
+                </div>
+              </div>
+              <p className="text-sm text-slate-300 leading-relaxed bg-slate-950/50 p-4 rounded-2xl border border-slate-800/80">
                 Uttar Dhoka, Metro Park Building, Lazimpat / Nagpokhari Marg, Kathmandu, Nepal.
               </p>
-            </InfoCard>
+            </div>
 
-            {/* Phone Lines */}
-            <InfoCard icon={Phone} title="Phones">
-              <div className="mt-1.5 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-slate-200">
-                <a href="tel:+977014005191" className="hover:text-amber-300 transition-colors">+977-01-4005191</a>
-                <a href="tel:+977014005192" className="hover:text-amber-300 transition-colors">+977-01-4005192</a>
-                <a href="tel:+977014005193" className="hover:text-amber-300 transition-colors">+977-01-4005193</a>
-                <a href="tel:+977014005194" className="hover:text-amber-300 transition-colors">+977-01-4005194</a>
-                <a href="tel:+977014005195" className="hover:text-amber-300 transition-colors">+977-01-4005195</a>
-              </div>
-            </InfoCard>
-
-            {/* Email Departments */}
-            <InfoCard icon={Mail} title="Email Contacts">
-              <div className="mt-2 space-y-3 text-xs">
-                <div>
-                  <span className="block font-bold uppercase tracking-wider text-[#E5C158] text-[10px]">General & Executive</span>
-                  <div className="mt-1 flex flex-wrap gap-2 text-slate-200">
-                    <a href="mailto:info@kudantravel.com" className="hover:text-amber-300 break-all">aatma_sl@hotmail.com</a>
-                    <span className="text-slate-600">•</span>
-                    <a href="mailto:md@kudantravel.com" className="hover:text-amber-300 break-all">md@kudantravel.com</a>
-                  </div>
+            {/* PHONES */}
+            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
+                  <Phone size={20} />
                 </div>
-
                 <div>
-                  <span className="block font-bold uppercase tracking-wider text-[#E5C158] text-[10px]">Regional Desks</span>
-                  <div className="mt-1 flex flex-wrap gap-2 text-slate-200">
-                    <a href="mailto:asia@kudantravel.com" className="hover:text-amber-300 break-all">asia@kudantravel.com</a>
-                    <span className="text-slate-600">•</span>
-                    <a href="mailto:japan@kudantravel.com" className="hover:text-amber-300 break-all">japan@kudantravel.com</a>
-                    <span className="text-slate-600">•</span>
-                    <a href="mailto:krishna@kudantravel.com" className="hover:text-amber-300 break-all">krishna@kudantravel.com</a>
-                  </div>
-                </div>
-
-                <div>
-                  <span className="block font-bold uppercase tracking-wider text-[#E5C158] text-[10px]">Reservations & Inquiries</span>
-                  <div className="mt-1 flex flex-wrap gap-2 text-slate-200">
-                    <a href="mailto:kamal@kudantravel.com" className="hover:text-amber-300 break-all">kamal@kudantravel.com</a>
-                    <span className="text-slate-600">•</span>
-                    <a href="mailto:naisha@kudantravel.com" className="hover:text-amber-300 break-all">naisha@kudantravel.com</a>
-                    <span className="text-slate-600">•</span>
-                    <a href="mailto:info@kudantravel.com" className="hover:text-amber-300 break-all">info@kudantravel.com</a>
-                  </div>
-                </div>
-
-                <div>
-                  <span className="block font-bold uppercase tracking-wider text-[#E5C158] text-[10px]">Accounts & Finance</span>
-                  <div className="mt-1 flex flex-wrap gap-2 text-slate-200">
-                    <a href="mailto:accounts@kudantravel.com" className="hover:text-amber-300 break-all">accounts@kudantravel.com</a>
-                    <span className="text-slate-600">•</span>
-                    <a href="mailto:finance@kudantravel.com" className="hover:text-amber-300 break-all">finance@kudantravel.com</a>
-                    <span className="text-slate-600">•</span>
-                    <a href="mailto:dipen@kudantravel.com" className="hover:text-amber-300 break-all">dipen@kudantravel.com</a>
-                  </div>
+                  <h3 className="text-sm font-black uppercase tracking-wider text-[#D4AF37]">
+                    Phones
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Direct phone lines & support
+                  </p>
                 </div>
               </div>
-            </InfoCard>
+              <div className="grid grid-cols-2 gap-2 text-xs font-medium text-slate-300 bg-slate-950/50 p-4 rounded-2xl border border-slate-800/80">
+                <a href="tel:+977014005191" className="hover:text-[#D4AF37] transition-colors">+977-01-4005191</a>
+                <a href="tel:+977014005192" className="hover:text-[#D4AF37] transition-colors">+977-01-4005192</a>
+                <a href="tel:+977014005193" className="hover:text-[#D4AF37] transition-colors">+977-01-4005193</a>
+                <a href="tel:+977014005194" className="hover:text-[#D4AF37] transition-colors">+977-01-4005194</a>
+                <a href="tel:+977014005195" className="hover:text-[#D4AF37] transition-colors col-span-2">+977-01-4005195</a>
+              </div>
+            </div>
 
-            {/* FULL-COLOR GOOGLE MAP EMBED */}
-            <div className="overflow-hidden rounded-2xl border border-slate-700/80 bg-[#111827] p-2 shadow-xl">
-              <div className="relative h-48 sm:h-64 w-full overflow-hidden rounded-xl bg-slate-900 border border-slate-800">
+            {/* EMAIL CONTACTS */}
+            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-black uppercase tracking-wider text-[#D4AF37]">
+                    Email Contacts
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Departmental desks
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3 text-xs bg-slate-950/50 p-4 rounded-2xl border border-slate-800/80">
+                <div>
+                  <p className="font-bold uppercase tracking-wider text-[10px] text-[#D4AF37] mb-1">General & Executive</p>
+                  <div className="space-y-1 text-slate-300">
+                    <a href="mailto:aatma_sl@hotmail.com" className="block hover:text-[#D4AF37] truncate">aatma_sl@hotmail.com</a>
+                    <a href="mailto:md@kudantravel.com" className="block hover:text-[#D4AF37] truncate">md@kudantravel.com</a>
+                  </div>
+                </div>
+
+                <div className="border-t border-slate-800/60 pt-2">
+                  <p className="font-bold uppercase tracking-wider text-[10px] text-[#D4AF37] mb-1">Regional Desks</p>
+                  <div className="space-y-1 text-slate-300">
+                    <a href="mailto:asia@kudantravel.com" className="block hover:text-[#D4AF37] truncate">asia@kudantravel.com</a>
+                    <a href="mailto:japan@kudantravel.com" className="block hover:text-[#D4AF37] truncate">japan@kudantravel.com</a>
+                    <a href="mailto:krishna@kudantravel.com" className="block hover:text-[#D4AF37] truncate">krishna@kudantravel.com</a>
+                  </div>
+                </div>
+
+                <div className="border-t border-slate-800/60 pt-2">
+                  <p className="font-bold uppercase tracking-wider text-[10px] text-[#D4AF37] mb-1">Reservations & Inquiries</p>
+                  <div className="space-y-1 text-slate-300">
+                    <a href="mailto:kamal@kudantravel.com" className="block hover:text-[#D4AF37] truncate">kamal@kudantravel.com</a>
+                    <a href="mailto:naisha@kudantravel.com" className="block hover:text-[#D4AF37] truncate">naisha@kudantravel.com</a>
+                    <a href="mailto:info@kudantravel.com" className="block hover:text-[#D4AF37] truncate">info@kudantravel.com</a>
+                  </div>
+                </div>
+
+                <div className="border-t border-slate-800/60 pt-2">
+                  <p className="font-bold uppercase tracking-wider text-[10px] text-[#D4AF37] mb-1">Accounts & Finance</p>
+                  <div className="space-y-1 text-slate-300">
+                    <a href="mailto:accounts@kudantravel.com" className="block hover:text-[#D4AF37] truncate">accounts@kudantravel.com</a>
+                    <a href="mailto:finance@kudantravel.com" className="block hover:text-[#D4AF37] truncate">finance@kudantravel.com</a>
+                    <a href="mailto:dipen@kudantravel.com" className="block hover:text-[#D4AF37] truncate">dipen@kudantravel.com</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* GOOGLE MAP EMBED & LINK */}
+            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-xl space-y-4">
+              <div className="rounded-2xl overflow-hidden border border-slate-800 h-48 relative bg-slate-950">
                 <iframe
-                  title="Kudan Travel Office Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.062402128913!2d85.31758537624911!3d27.715344324460593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb191d84a7e781%3A0xb1fb6310df666ffb!2sMetro%20Park%20Building%2C%20Nagpokhari%20Marg%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen={true}
+                  title="Kudan Travel Office Location Map"
+                  src="https://www.google.com/maps?ll=27.715344,85.317585&z=15&t=m&hl=en&gl=NP&output=embed"
+                  className="w-full h-full border-0 filter invert-[90%] hue-rotate-180 contrast-125"
+                  allowFullScreen={false}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="h-full w-full"
                 />
               </div>
 
-              {/* Direct Link Button below map */}
-              <div className="p-2.5 sm:p-3 text-center">
-                <a
-                  href="https://maps.app.goo.gl/izX9MkeMYv57WBs6A"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open Kudan Travel location in Google Maps (opens in new tab)"
-                  className="inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-xl bg-[#C5A059] px-4 py-2.5 text-xs font-black uppercase tracking-wider text-slate-950 hover:bg-amber-300 transition-colors shadow-md"
-                >
-                  <span>Open in Google Maps</span>
-                  <ExternalLink className="h-3.5 w-3.5" />
-                </a>
-              </div>
-            </div>
-
-          </aside>
-
-          {/* RIGHT SIDE: INQUIRY FORM */}
-          <div className="rounded-2xl border border-slate-700/80 bg-[#111827] p-5 sm:p-8 lg:p-9 shadow-xl">
-            <SectionTitle
-              eyebrow="Quick Inquiry"
-              title="Build My Itinerary"
-              copy="Your details stay with our travel team and will be connected directly to our reservation desk."
-            />
-            <div className="mt-6 sm:mt-8">
-              <InquiryForm />
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ---------------------------------------------------- */}
-      {/* PAYMENT OPTIONS                                     */}
-      {/* ---------------------------------------------------- */}
-      <section className="border-t border-slate-800 bg-[#080c16] py-12 sm:py-20">
-        <div className="container-x px-4 sm:px-6">
-          <SectionTitle
-            eyebrow="Payments"
-            title="Secure Payment Options"
-            copy="Official payment handles for instant tour reservations and deposits."
-          />
-
-          <div className="mt-8 sm:mt-10 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            
-            {/* FONEPAY / QR CARD */}
-            <div className="rounded-2xl border border-slate-700/80 bg-[#111827] p-5 sm:p-7 shadow-xl hover:border-[#C5A059] transition-all flex flex-col justify-between">
-              <div>
-                <div className="inline-flex rounded-xl border border-[#C5A059] bg-[#060910] p-3 text-[#E5C158]">
-                  <QrCode className="h-6 w-6" />
-                </div>
-                <h3 className="mt-4 sm:mt-5 text-lg sm:text-xl font-black text-white">Fonepay / Dynamic QR</h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-300">
-                  Instant Nepalese bank transfer via direct QR scan. Accepts all mobile banking apps.
-                </p>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-slate-800">
-                <button
-                  type="button"
-                  onClick={() => setActiveQrModal("fonepay")}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#C5A059]/20 border border-[#C5A059]/40 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#E5C158] hover:bg-[#C5A059] hover:text-slate-950 transition-all"
-                >
-                  <QrCode className="h-4 w-4" />
-                  <span>View Official QR Code</span>
-                </button>
-              </div>
-            </div>
-
-            {/* ESEWA WALLET CARD */}
-            <div className="rounded-2xl border border-slate-700/80 bg-[#111827] p-5 sm:p-7 shadow-xl hover:border-[#C5A059] transition-all flex flex-col justify-between">
-              <div>
-                <div className="inline-flex rounded-xl border border-[#C5A059] bg-[#060910] p-3 text-[#E5C158]">
-                  <Smartphone className="h-6 w-6" />
-                </div>
-                <h3 className="mt-4 sm:mt-5 text-lg sm:text-xl font-black text-white">eSewa Wallet</h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-300">
-                  Direct digital wallet transfers to official Kudan Travel account.
-                </p>
-                <div className="mt-4 rounded-xl bg-[#060910] border border-slate-800 p-3">
-                  <span className="block text-[10px] font-bold uppercase tracking-widest text-[#E5C158]">Registered eSewa ID</span>
-                  <span className="mt-0.5 block text-base sm:text-lg font-black tracking-wider text-white">9851067097</span>
-                  <span className="text-[10px] sm:text-[11px] font-medium text-slate-400">Account: Kudan Travel & Tours</span>
-                </div>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-slate-800">
-                <button
-                  type="button"
-                  onClick={() => setActiveQrModal("esewa")}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-slate-800 border border-slate-700 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-300 hover:border-[#C5A059] hover:text-white transition-all"
-                >
-                  <QrCode className="h-4 w-4" />
-                  <span>Scan QR Code</span>
-                </button>
-              </div>
-            </div>
-
-            {/* VISA / MASTERCARD CARD */}
-            <div className="rounded-2xl border border-slate-700/80 bg-[#111827] p-5 sm:p-7 shadow-xl hover:border-[#C5A059] transition-all flex flex-col justify-between sm:col-span-2 lg:col-span-1">
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="inline-flex rounded-xl border border-[#C5A059] bg-[#060910] p-3 text-[#E5C158]">
-                    <CreditCard className="h-6 w-6" />
-                  </div>
-                  <span className="rounded-full bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-[#E5C158]">
-                    Integration Pending
-                  </span>
-                </div>
-                <h3 className="mt-4 sm:mt-5 text-lg sm:text-xl font-black text-white">Visa / Mastercard</h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-300">
-                  Secure international credit/debit card gateway. Direct online processing integration is currently under development.
-                </p>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-slate-800">
-                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
-                  <ShieldCheck className="h-4 w-4 text-[#C5A059] shrink-0" />
-                  <span>Bank invoice links issued via email upon request</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------------------------------------------- */}
-      {/* INTERACTIVE QR CODE MODAL                            */}
-      {/* ---------------------------------------------------- */}
-      {activeQrModal && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm"
-          onClick={() => setActiveQrModal(null)}
-        >
-          <div 
-            className="relative w-full max-w-xs sm:max-w-sm rounded-3xl border border-[#C5A059]/40 bg-[#111827] p-5 sm:p-6 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setActiveQrModal(null)}
-              aria-label="Close modal"
-              className="absolute right-4 top-4 rounded-full border border-slate-700 bg-slate-900 p-2 text-slate-400 hover:text-white"
-            >
-              <X className="h-4 w-4" />
-            </button>
-
-            <div className="text-center">
-              <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#E5C158]">
-                {activeQrModal === "fonepay" ? "Fonepay Merchant QR" : "eSewa Direct Payment"}
-              </span>
-              <h3 className="mt-1 text-lg sm:text-xl font-black text-white">Kudan Travel & Tours</h3>
-              <p className="mt-1 text-xs text-slate-400">Scan using your mobile banking or eSewa app</p>
-
-              <div className="mt-5 sm:mt-6 flex justify-center rounded-2xl border border-slate-700 bg-white p-3 sm:p-4 shadow-inner">
-                <img
-                  src="/everest.jpeg"
-                  alt="Kudan Travel Payment QR Code"
-                  className="h-48 w-48 sm:h-64 sm:w-64 object-contain"
-                />
-              </div>
-
-              {activeQrModal === "esewa" && (
-                <div className="mt-4 rounded-xl bg-[#060910] border border-slate-800 p-2.5 sm:p-3 text-center">
-                  <span className="text-xs text-slate-400">eSewa Mobile Number</span>
-                  <p className="text-base font-black text-[#E5C158]">9851067097</p>
-                </div>
-              )}
-
-              <button
-                type="button"
-                onClick={() => setActiveQrModal(null)}
-                className="mt-5 sm:mt-6 w-full rounded-xl bg-[#C5A059] py-2.5 sm:py-3 text-xs font-black uppercase tracking-wider text-slate-950 hover:bg-amber-300 transition-colors"
+              <a
+                href="https://www.google.com/maps?ll=27.715344,85.317585&z=15&t=m&hl=en&gl=NP&mapclient=embed"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 px-4 rounded-2xl bg-[#D4AF37] text-slate-950 font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#c29f31] transition-colors shadow-lg"
               >
-                Close Window
-              </button>
+                Open in Google Maps <ExternalLink size={14} />
+              </a>
             </div>
+
           </div>
+
         </div>
-      )}
+
+      </div>
+
+    </main>
+  );
+}
+
+/* =========================================================
+   REUSABLE COMPONENTS
+========================================================= */
+
+function InputField({
+  label,
+  name,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+  required = false,
+}: {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
+  placeholder?: string;
+  type?: string;
+  required?: boolean;
+}) {
+  return (
+    <div className="space-y-2">
+
+      <label className="text-xs font-bold text-slate-300">
+        {label}
+      </label>
+
+      <input
+        type={type}
+        name={name}
+        required={required}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+      />
+
     </div>
   );
 }
 
-function InfoCard({ icon: Icon, title, children }: InfoCardProps) {
+function SelectField({
+  label,
+  name,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  name: string;
+  value: string;
+  onChange: (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => void;
+  options: string[];
+}) {
   return (
-    <div className="rounded-2xl border border-slate-700/80 bg-[#111827] p-4 sm:p-5 shadow-xl hover:border-[#C5A059] transition-all">
-      <div className="flex gap-3.5 sm:gap-4">
-        <div className="rounded-xl border border-[#C5A059] bg-[#060910] p-2.5 sm:p-3 text-[#E5C158] shrink-0 h-fit">
-          <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <h3 className="text-sm sm:text-base font-bold text-white">{title}</h3>
-          <div className="mt-1">{children}</div>
-        </div>
+    <div className="space-y-2">
+
+      <label className="text-xs font-bold text-slate-300">
+        {label}
+      </label>
+
+      <select
+        name={name}
+        value={value}
+        onChange={onChange}
+        className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none"
+      >
+
+        <option value="">
+          Select
+        </option>
+
+        {options.map(
+          (option) => (
+            <option
+              key={option}
+              value={option}
+            >
+              {option}
+            </option>
+          )
+        )}
+
+      </select>
+
+    </div>
+  );
+}
+
+function SectionTitle({
+  number,
+  title,
+  description,
+}: {
+  number: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div>
+
+      <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+        Step {number}
+      </span>
+
+      <h2 className="text-lg font-bold text-white mt-1">
+        {title}
+      </h2>
+
+      <p className="text-xs text-slate-500 mt-1">
+        {description}
+      </p>
+
+    </div>
+  );
+}
+
+function TravelerCounter({
+  travelersCount,
+  increment,
+  decrement,
+}: {
+  travelersCount: number;
+  increment: () => void;
+  decrement: () => void;
+}) {
+  return (
+    <div className="space-y-2">
+
+      <label className="text-xs font-bold text-slate-300">
+        Number of Travelers
+      </label>
+
+      <div className="flex items-center justify-between rounded-xl bg-slate-950 border border-slate-800 p-2">
+
+        <button
+          type="button"
+          onClick={decrement}
+          disabled={
+            travelersCount <= 1
+          }
+          className="h-9 w-9 rounded-lg bg-slate-800 flex items-center justify-center disabled:opacity-40"
+        >
+          <Minus size={14} />
+        </button>
+
+        <span className="font-bold text-sm">
+          {travelersCount}{" "}
+          {travelersCount === 1
+            ? "Traveler"
+            : "Travelers"}
+        </span>
+
+        <button
+          type="button"
+          onClick={increment}
+          disabled={
+            travelersCount >= 50
+          }
+          className="h-9 w-9 rounded-lg bg-slate-800 flex items-center justify-center disabled:opacity-40"
+        >
+          <Plus size={14} />
+        </button>
+
       </div>
+
+    </div>
+  );
+}
+
+function DateFields({
+  formData,
+  handleChange,
+  showArrivalTime = false,
+}: {
+  formData: FormDataState;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
+  showArrivalTime?: boolean;
+}) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+      <InputField
+        label="Start / Arrival Date"
+        name="arrivalDate"
+        type="date"
+        value={
+          formData.arrivalDate
+        }
+        onChange={
+          handleChange
+        }
+      />
+
+      <InputField
+        label="End / Departure Date"
+        name="departureDate"
+        type="date"
+        value={
+          formData.departureDate
+        }
+        onChange={
+          handleChange
+        }
+      />
+
+      {showArrivalTime && (
+        <InputField
+          label="Arrival Time"
+          name="arrivalTime"
+          type="time"
+          value={
+            formData.arrivalTime
+          }
+          onChange={
+            handleChange
+          }
+        />
+      )}
+
+    </div>
+  );
+}
+
+function TravelPreferences({
+  formData,
+  handleChange,
+}: {
+  formData: FormDataState;
+  handleChange: (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => void;
+}) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+      <SelectField
+        label="Travel Style"
+        name="travelStyle"
+        value={
+          formData.travelStyle
+        }
+        onChange={
+          handleChange
+        }
+        options={[
+          "Private & Leisure",
+          "Family Holiday",
+          "Honeymoon",
+          "Adventure & Off-road",
+          "Luxury",
+          "Budget",
+          "Corporate / Business",
+        ]}
+      />
+
+      <SelectField
+        label="Approximate Budget"
+        name="approximateBudget"
+        value={
+          formData.approximateBudget
+        }
+        onChange={
+          handleChange
+        }
+        options={[
+          "Standard",
+          "Deluxe",
+          "Luxury / Premium",
+          "Not Sure",
+        ]}
+      />
+
+    </div>
+  );
+}
+
+function DestinationSelector({
+  destinations,
+  setDestinations,
+  selectedPreset,
+  setSelectedPreset,
+  customDestination,
+  setCustomDestination,
+  handleAddDestination,
+  handleRemoveDestination,
+  options,
+}: {
+  destinations: string[];
+  setDestinations: React.Dispatch<
+    React.SetStateAction<string[]>
+  >;
+  selectedPreset: string;
+  setSelectedPreset: React.Dispatch<
+    React.SetStateAction<string>
+  >;
+  customDestination: string;
+  setCustomDestination: React.Dispatch<
+    React.SetStateAction<string>
+  >;
+  handleAddDestination: (
+    dest?: string
+  ) => void;
+  handleRemoveDestination: (
+    dest: string
+  ) => void;
+  options: string[];
+}) {
+  return (
+    <div className="space-y-3">
+
+      <label className="text-xs font-bold text-slate-300">
+        Destinations
+      </label>
+
+      <div className="flex flex-wrap gap-2">
+
+        {destinations.map(
+          (destination) => (
+            <span
+              key={destination}
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-xs font-bold text-[#D4AF37]"
+            >
+
+              <MapPin size={12} />
+
+              {destination}
+
+              <button
+                type="button"
+                onClick={() =>
+                  handleRemoveDestination(
+                    destination
+                  )
+                }
+              >
+                <X size={13} />
+              </button>
+
+            </span>
+          )
+        )}
+
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
+
+        <select
+          value={selectedPreset}
+          onChange={(e) => {
+            setSelectedPreset(
+              e.target.value
+            );
+
+            if (e.target.value) {
+              handleAddDestination(
+                e.target.value
+              );
+            }
+          }}
+          className="sm:col-span-6 rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-xs text-white"
+        >
+
+          <option value="">
+            Select destination
+          </option>
+
+          {options.map(
+            (destination) => (
+              <option
+                key={destination}
+                value={destination}
+              >
+                {destination}
+              </option>
+            )
+          )}
+
+        </select>
+
+        <div className="sm:col-span-6 flex gap-2">
+
+          <input
+            type="text"
+            value={
+              customDestination
+            }
+            onChange={(e) =>
+              setCustomDestination(
+                e.target.value
+              )
+            }
+            onKeyDown={(e) => {
+              if (
+                e.key === "Enter"
+              ) {
+                e.preventDefault();
+                handleAddDestination();
+              }
+            }}
+            placeholder="Or type destination..."
+            className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-xs text-white placeholder-slate-500"
+          />
+
+          <button
+            type="button"
+            onClick={() =>
+              handleAddDestination()
+            }
+            className="px-4 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold shrink-0"
+          >
+            <Plus size={14} />
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

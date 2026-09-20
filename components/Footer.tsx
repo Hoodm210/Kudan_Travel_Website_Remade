@@ -64,12 +64,14 @@ export default function Footer() {
             {/* Social Icons */}
             <div className="flex gap-3 pt-2">
               {[
-                { icon: Facebook, href: "#", label: "Facebook" },
+                { icon: Facebook, href: "https://www.facebook.com/KudanTravel", label: "Facebook" },
                 { icon: Instagram, href: "#", label: "Instagram" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                   aria-label={label}
                   className="rounded-xl border border-slate-700 bg-slate-800 p-2.5 text-slate-300 shadow-sm transition-all duration-300 hover:border-[#D4AF37] hover:bg-slate-700 hover:text-[#D4AF37] active:scale-95"
                 >

@@ -13,33 +13,67 @@ interface TourDetails {
 }
 
 const TOURS_DATA: Record<string, TourDetails> = {
-  thailand: {
-    title: "Thailand Escape",
-    locations: "Bangkok • Phuket • Pattaya",
+  // Matches homepage slug "thailand-express" or short "thailand"
+  "thailand-express": {
+    title: "Essential Thailand (Bangkok & Pattaya)",
+    locations: "Bangkok • Pattaya • Coral Island",
     duration: "4N / 5D",
-    price: "NPR 55,000",
+    price: "NPR 65,000",
     image: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80",
-    description: "Experience the vibrant city life of Bangkok alongside the tranquil beaches of Phuket and thrilling activities in Pattaya.",
-    highlights: ["Island Hopping in Phuket", "Bangkok Temple & City Tour", "Coral Island Speedboat Trip", "Private Airport Transfers"],
+    description: "Experience the vibrant city life of Bangkok alongside the tranquil beaches of Pattaya and thrilling island activities.",
+    highlights: ["Coral Island Speedboat Trip", "Bangkok Temple & City Tour", "Alcazar Show Admission", "Private Airport Transfers"],
   },
-  dubai: {
-    title: "Dubai & UAE Adventure",
-    locations: "Dubai • Desert Safari",
+  thailand: {
+    title: "Essential Thailand (Bangkok & Pattaya)",
+    locations: "Bangkok • Pattaya • Coral Island",
+    duration: "4N / 5D",
+    price: "NPR 65,000",
+    image: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80",
+    description: "Experience the vibrant city life of Bangkok alongside the tranquil beaches of Pattaya and thrilling island activities.",
+    highlights: ["Coral Island Speedboat Trip", "Bangkok Temple & City Tour", "Alcazar Show Admission", "Private Airport Transfers"],
+  },
+
+  // Matches homepage slug "dubai-desert-safari" or short "dubai"
+  "dubai-desert-safari": {
+    title: "Dubai Glitz & Desert Safari",
+    locations: "Dubai • Abu Dhabi • Desert Camp",
     duration: "5N / 6D",
-    price: "NPR 95,000",
+    price: "NPR 110,000",
     image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
     description: "Witness ultra-modern luxury, breathtaking skyscrapers, and authentic Arabian desert adventures in the heart of UAE.",
     highlights: ["Burj Khalifa Observation Deck", "4x4 Desert Safari with BBQ Dinner", "Dhow Cruise Dinner at Marina", "Dubai Mall & Fountain Show"],
   },
-  bali: {
-    title: "Bali Discovery",
-    locations: "Ubud • Nusa Penida",
-    duration: "4N / 5D",
-    price: "NPR 75,000",
+  dubai: {
+    title: "Dubai Glitz & Desert Safari",
+    locations: "Dubai • Abu Dhabi • Desert Camp",
+    duration: "5N / 6D",
+    price: "NPR 110,000",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
+    description: "Witness ultra-modern luxury, breathtaking skyscrapers, and authentic Arabian desert adventures in the heart of UAE.",
+    highlights: ["Burj Khalifa Observation Deck", "4x4 Desert Safari with BBQ Dinner", "Dhow Cruise Dinner at Marina", "Dubai Mall & Fountain Show"],
+  },
+
+  // Matches homepage slug "bali-tropical-escape" or short "bali"
+  "bali-tropical-escape": {
+    title: "Bali Island & Culture Getaway",
+    locations: "Ubud • Kuta • Nusa Penida",
+    duration: "5N / 6D",
+    price: "NPR 85,000",
     image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
     description: "Immerse yourself in Bali's rich culture, scenic rice terraces, sacred temples, and paradise islands.",
     highlights: ["Nusa Penida Island Day Tour", "Ubud Monkey Forest & Rice Terrace", "Tegallalang Rice Terrace Swing", "Beachfront Resort Accommodation"],
   },
+  bali: {
+    title: "Bali Island & Culture Getaway",
+    locations: "Ubud • Kuta • Nusa Penida",
+    duration: "5N / 6D",
+    price: "NPR 85,000",
+    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
+    description: "Immerse yourself in Bali's rich culture, scenic rice terraces, sacred temples, and paradise islands.",
+    highlights: ["Nusa Penida Island Day Tour", "Ubud Monkey Forest & Rice Terrace", "Tegallalang Rice Terrace Swing", "Beachfront Resort Accommodation"],
+  },
+
+  // Singapore & Malaysia
   singapore: {
     title: "Singapore & Malaysia",
     locations: "Singapore • Genting",
@@ -68,7 +102,7 @@ export default async function TourDetailPage({
       <div className="container-x max-w-5xl">
         {/* Back Link */}
         <Link
-          href="/outbound-tours"
+          href="/outbound"
           className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-[#D4AF37] transition-colors mb-8"
         >
           <ArrowLeft size={16} />
@@ -126,7 +160,7 @@ export default async function TourDetailPage({
             </div>
 
             <Link
-              href="/contact-us"
+              href="/contact"
               className="mt-8 block w-full text-center rounded-full bg-gradient-to-r from-[#D4AF37] via-amber-400 to-[#B8860B] py-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg hover:scale-[1.02] transition-transform"
             >
               Book This Package

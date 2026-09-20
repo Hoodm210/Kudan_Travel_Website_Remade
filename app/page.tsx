@@ -29,7 +29,7 @@ export interface Tour {
   reviewsCount: number;
   image: string;
   badge?: string;
-  path?: string; // Optional custom route path override
+  path?: string;
 }
 
 const INBOUND_TOURS: Tour[] = [
@@ -42,7 +42,8 @@ const INBOUND_TOURS: Tour[] = [
     price: "NPR 58,000",
     rating: 4.9,
     reviewsCount: 124,
-    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=90",
+    image:
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=90",
     badge: "Best Seller",
   },
   {
@@ -54,7 +55,8 @@ const INBOUND_TOURS: Tour[] = [
     price: "NPR 115,000",
     rating: 5.0,
     reviewsCount: 98,
-    image: "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=90",
+    image:
+      "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=90",
     badge: "Trekking",
   },
   {
@@ -66,7 +68,8 @@ const INBOUND_TOURS: Tour[] = [
     price: "NPR 185,000",
     rating: 4.8,
     reviewsCount: 65,
-    image: "https://images.unsplash.com/photo-1585869110973-7280be312084?auto=format&fit=crop&w=1200&q=90",
+    image:
+      "https://images.unsplash.com/photo-1585869110973-7280be312084?auto=format&fit=crop&w=1200&q=90",
     badge: "Special",
   },
 ];
@@ -81,7 +84,8 @@ const OUTBOUND_TOURS: Tour[] = [
     price: "NPR 65,000",
     rating: 4.7,
     reviewsCount: 210,
-    image: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=90",
+    image:
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=90",
     badge: "Best Seller",
   },
   {
@@ -93,7 +97,8 @@ const OUTBOUND_TOURS: Tour[] = [
     price: "NPR 110,000",
     rating: 4.9,
     reviewsCount: 180,
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=90",
+    image:
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=90",
     badge: "Trending",
   },
   {
@@ -105,7 +110,8 @@ const OUTBOUND_TOURS: Tour[] = [
     price: "NPR 85,000",
     rating: 4.9,
     reviewsCount: 142,
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=90",
+    image:
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=90",
     badge: "Island",
   },
 ];
@@ -147,25 +153,23 @@ export default function CorporateLandingSection() {
   const [activeTab, setActiveTab] = useState<"inbound" | "outbound">("inbound");
   const currentTours = activeTab === "inbound" ? INBOUND_TOURS : OUTBOUND_TOURS;
 
-  // Helper function to resolve dynamic routes cleanly
+  // Resolves routes accurately based on your exact file directory structure
   const getTourHref = (tour: Tour) => {
     if (tour.path) return tour.path;
-    return activeTab === "inbound" 
-      ? `/inbound/${tour.slug}` 
-      : `/outbound/${tour.slug}`;
+    const isOutbound = OUTBOUND_TOURS.some((t) => t.id === tour.id);
+    return isOutbound ? `/outbound-tours/${tour.slug}` : `/inbound/${tour.slug}`;
   };
 
   const getCategoryOverviewHref = () => {
-    return activeTab === "inbound" ? "/inbound" : "/outbound";
+    return activeTab === "inbound" ? "/inbound" : "/outbound-tours";
   };
 
   return (
     <div className="bg-[#070A11] text-slate-100 font-sans selection:bg-[#D4AF37] selection:text-slate-950">
-      
-      {/* 1. COMPANY OVERVIEW & BRAND HERO SECTION */}
+      {/* 1. HERO SECTION */}
       <section className="relative border-b border-slate-800/80 py-24 lg:py-36 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 transform scale-100 opacity-85 filter contrast-105 brightness-110"
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-85 filter contrast-105 brightness-110"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=2560&q=95')`,
           }}
@@ -176,7 +180,6 @@ export default function CorporateLandingSection() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 rounded-full bg-slate-950/60 backdrop-blur-md px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-[#D4AF37] border border-[#D4AF37]/40 mb-6 shadow-2xl">
                 <Building2 size={16} />
@@ -239,7 +242,6 @@ export default function CorporateLandingSection() {
                 </div>
               </div>
             </div>
-
           </div>
 
           <div className="mt-16 rounded-2xl border border-[#D4AF37]/40 bg-gradient-to-r from-slate-950/60 via-slate-900/60 to-slate-950/60 p-6 backdrop-blur-md shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
@@ -261,7 +263,7 @@ export default function CorporateLandingSection() {
             </div>
 
             <Link
-              href="/contact"
+              href="/contact-us"
               className="px-5 py-2.5 rounded-xl bg-[#D4AF37] text-slate-950 hover:bg-[#c3a030] font-bold text-xs transition-all shadow-lg hover:scale-105 shrink-0 flex items-center gap-2"
             >
               <Briefcase size={15} />
@@ -294,8 +296,8 @@ export default function CorporateLandingSection() {
                     alt="NATTA Logo"
                     className="max-h-50 max-w-[200px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                     onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      e.currentTarget.style.display = "none";
+                      e.currentTarget.nextElementSibling?.classList.remove("hidden");
                     }}
                   />
                   <div className="hidden flex-col items-center">
@@ -321,8 +323,8 @@ export default function CorporateLandingSection() {
                     alt="TAAN Logo"
                     className="max-h-50 max-w-[200px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                     onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      e.currentTarget.style.display = "none";
+                      e.currentTarget.nextElementSibling?.classList.remove("hidden");
                     }}
                   />
                   <div className="hidden flex-col items-center">
@@ -348,8 +350,8 @@ export default function CorporateLandingSection() {
                     alt="Nepal Tourism Board Logo"
                     className="max-h-100 max-w-[100px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                     onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      e.currentTarget.style.display = "none";
+                      e.currentTarget.nextElementSibling?.classList.remove("hidden");
                     }}
                   />
                   <div className="hidden flex-col items-center">
@@ -361,17 +363,14 @@ export default function CorporateLandingSection() {
                   <span className="text-[11px] text-slate-300">Government of Nepal Tourism Board</span>
                 </div>
               </a>
-
             </div>
           </div>
-
         </div>
       </section>
 
       {/* 2. FEATURED PACKAGES SHOWCASE */}
       <section className="relative py-20 border-b border-slate-800/80 bg-slate-950">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
-          
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border-b border-slate-800/80 pb-5">
             <div>
               <span className="text-xs font-extrabold uppercase tracking-widest text-[#D4AF37]">
@@ -476,13 +475,12 @@ export default function CorporateLandingSection() {
               <ArrowRight size={14} />
             </Link>
           </div>
-
         </div>
       </section>
 
       {/* 3. REVIEWS & TESTIMONIALS */}
       <section className="relative py-24 bg-slate-950 overflow-hidden border-b border-slate-800/80">
-        <div 
+        <div
           className="absolute inset-0 opacity-40 bg-cover bg-center pointer-events-none filter brightness-110 contrast-110"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2560&q=95')`,
@@ -491,7 +489,6 @@ export default function CorporateLandingSection() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#070A11] via-[#070A11]/20 to-[#070A11]" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
-          
           <div className="text-center max-w-xl mx-auto mb-12">
             <div className="inline-flex items-center gap-1 text-amber-400 mb-2">
               {[...Array(5)].map((_, i) => (
@@ -536,10 +533,8 @@ export default function CorporateLandingSection() {
               </div>
             ))}
           </div>
-
         </div>
       </section>
-
     </div>
   );
 }

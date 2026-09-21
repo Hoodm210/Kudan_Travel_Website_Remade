@@ -1878,22 +1878,69 @@ export default function ContactUsPage() {
                   <Phone size={18} />
                 }
                 title="Phone / WhatsApp"
-                content="+977 1-4005191 / 92 / 93 / 94 / 95"
+                content="+977 9851196584 /9851101214
+                Phone : 01-4005191 / 92 / 93 / 94 / 95"
               />
 
               <ContactItem
                 icon={
                   <Mail size={18} />
                 }
-                title="Email"
+                title="Managing Director"
+                content={
+                  <>
+                    md@kudantravel.com
+                    <br />
+                    aatma_sl@hotmail.com
+                  </>
+                }
+              />
+
+              <ContactItem
+                icon={
+                  <Mail size={18} />
+                }
+                title="Reservations / Enquiries"
                 content={
                   <>
                     info@kudantravel.com
                     <br />
-                    support@kudantravel.com
+                    kamal@kudantravel.com
+                    <br />
+                    naisha@kudantravel.com
                   </>
                 }
               />
+                <ContactItem
+                icon={
+                  <Mail size={18} />
+                }
+                 title="Accounts / Finance"
+                content={
+                  <>
+                    finance@kudantravel.com
+                    <br />
+                    dipen@kudantravel.com
+                    <br />
+                    rasul@kudantravel.com
+                  </>
+                }
+              />
+              <ContactItem
+  icon={
+    <Mail size={18} />
+  }
+  title="General Enquiries"
+  content={
+    <>
+      krishna@kudantravel.com
+      <div className="flex items-center gap-2 mt-1">
+        <Phone size={15} />
+        <span>+977 9851196584</span>
+      </div>
+    </>
+  }
+/>
 
               <ContactItem
                 icon={

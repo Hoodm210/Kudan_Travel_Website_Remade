@@ -37,7 +37,7 @@ export async function POST(request: Request) {
 
     // Send Email via Resend
     const data = await resend.emails.send({
-      from: "Kudan B2B Portal <krishna@kudantravel.com">", // Replace with your verified domain email
+      from: "Kudan B2B Portal <krishna@kudantravel.com>", // Replace with your verified domain email
       to: ["krishna@kudantravel.com"], // Replace with your team inbox
       subject: `New B2B Partner Application: ${companyName}`,
       html: `

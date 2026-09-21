@@ -193,7 +193,7 @@ export default function Footer() {
           <div className="container-x flex flex-col gap-3 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
             <span>© 2026 Kudan Travel & Tours Pvt. Ltd. All rights reserved.</span>
             <div className="flex flex-wrap gap-4 font-medium text-slate-400">
-              <Link href="/contact" className="hover:text-[#D4AF37] transition-colors">Contact Us</Link>
+              <Link href="/contact-us" className="hover:text-[#D4AF37] transition-colors">Contact Us</Link>
               <span>•</span>
               <span className="text-slate-300">NATTA Member</span>
               <span>•</span>

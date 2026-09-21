@@ -263,7 +263,7 @@ export default function CorporateLandingSection() {
             </div>
 
             <Link
-              href="/contact-us"
+              href="/b2b-partner"
               className="px-5 py-2.5 rounded-xl bg-[#D4AF37] text-slate-950 hover:bg-[#c3a030] font-bold text-xs transition-all shadow-lg hover:scale-105 shrink-0 flex items-center gap-2"
             >
               <Briefcase size={15} />

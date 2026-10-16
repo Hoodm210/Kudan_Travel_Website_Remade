@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import Image from "next/image";
+import Link from "next/link";
 import { 
   Users, 
   X, 
@@ -316,50 +316,47 @@ export default function About() {
   };
 
   return (
-    <div className="bg-[#060910] text-slate-100 min-h-screen font-sans relative overflow-x-hidden">
+    <div className="bg-[#F7F5F0] text-[#172A3A] font-serif selection:bg-[#A44A3F] selection:text-white min-h-screen relative overflow-x-hidden py-12 lg:py-20">
       
-      {/* HERO SECTION WITH LANDSCAPE BACKGROUND */}
-      <section className="relative min-h-[640px] overflow-hidden border-b border-slate-800 py-28 flex items-center">
-        {/* Landscape Overlay Background */}
-        <div className="absolute inset-0 z-0">
-          <Image
+      {/* HERO SECTION WITH BORDERLESS BANNER */}
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl mb-16">
+        <div className="relative h-72 sm:h-96 w-full overflow-hidden bg-stone-200 shadow-md">
+          <img
             src="/landscape-hero.jpg" 
             alt="Scenic Mountain Landscape"
-            fill
-            priority
-            className="object-cover object-center opacity-35 filter brightness-90 contrast-110"
+            className="h-full w-full object-cover"
+            onError={(e) => {
+              e.currentTarget.src = "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80";
+            }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#060910] via-[#060910]/70 to-[#0d1322]/85" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+          <div className="absolute bottom-6 left-6 right-6 font-sans">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-[#A44A3F] bg-white px-3 py-1 shadow-xs">
+              <Mountain size={12} />
+              EXTRAORDINARY JOURNEYS ACROSS SOUTH ASIA
+            </span>
+            <h1 className="mt-3 text-2xl sm:text-5xl font-serif font-bold text-white leading-tight">
+              Explore Beyond. <br className="hidden sm:inline" /> Guided by Experts.
+            </h1>
+          </div>
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#C5A059]/50 bg-[#111827]/90 backdrop-blur-md px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#E5C158] shadow-md">
-            <Mountain className="h-4 w-4 text-amber-300" />
-            <span>Extraordinary Journeys Across South Asia</span>
-          </div>
-
-          <h1 className="mt-6 max-w-4xl text-4xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Explore Beyond. <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-[#F5D880] via-[#C5A059] to-[#A07D32] bg-clip-text text-transparent">
-              Guided by Experts.
-            </span>
-          </h1>
-
-          <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-slate-200 bg-[#060910]/80 backdrop-blur-md p-5 rounded-xl border border-slate-800/80 shadow-2xl">
-            Kudan Travel & Tours Pvt. Ltd. delivers breathtaking alpine expeditions, cultural heritage tours, and seamless logistics across Nepal and beyond.
+        <div className="mt-8 bg-white p-6 sm:p-8 shadow-sm font-sans">
+          <p className="text-stone-600 leading-relaxed text-sm sm:text-base font-normal">
+            Kudan Travel & Tours Pvt. Ltd. delivers breathtaking alpine expeditions, cultural heritage tours, and seamless ground logistics across Nepal and beyond.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4 text-xs font-bold uppercase tracking-wider text-[#E5C158]">
-            <div className="flex items-center gap-2 bg-[#111827]/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-slate-800">
-              <MapPin className="h-4 w-4 text-[#C5A059]" />
+          <div className="mt-6 flex flex-wrap gap-3 text-xs font-bold uppercase tracking-wider text-[#A44A3F]">
+            <div className="flex items-center gap-2 bg-[#EFECE6] px-3.5 py-2">
+              <MapPin size={14} className="text-[#A44A3F]" />
               <span>Himalayan Expeditions</span>
             </div>
-            <div className="flex items-center gap-2 bg-[#111827]/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-slate-800">
-              <Globe className="h-4 w-4 text-[#C5A059]" />
+            <div className="flex items-center gap-2 bg-[#EFECE6] px-3.5 py-2">
+              <Globe size={14} className="text-[#A44A3F]" />
               <span>International Group Tours</span>
             </div>
-            <div className="flex items-center gap-2 bg-[#111827]/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-slate-800">
-              <Users className="h-4 w-4 text-[#C5A059]" />
+            <div className="flex items-center gap-2 bg-[#EFECE6] px-3.5 py-2">
+              <Users size={14} className="text-[#A44A3F]" />
               <span>Dedicated Local Specialists</span>
             </div>
           </div>
@@ -367,11 +364,12 @@ export default function About() {
       </section>
 
       {/* CORE PILLARS SECTION */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-20">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#E5C158]">Our Values</span>
-          <h2 className="mt-2 text-3xl font-black text-white sm:text-4xl">What Drives Kudan Travel</h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-400">Click any card below to explore our operational pillars.</p>
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl mb-16">
+        <div className="border-b border-stone-200/90 pb-4 mb-8">
+          <span className="text-[10px] font-sans font-extrabold uppercase tracking-widest text-[#A44A3F]">
+            OUR VALUES
+          </span>
+          <h2 className="text-2xl font-serif font-bold text-[#172A3A]">What Drives Kudan Travel</h2>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
@@ -390,36 +388,36 @@ export default function About() {
                     setActivePillar(isSelected ? null : pillar);
                   }
                 }}
-                className={`group cursor-pointer rounded-2xl border p-8 shadow-2xl transition-all duration-300 flex flex-col justify-between backdrop-blur-md ${
+                className={`group cursor-pointer bg-white p-6 transition-all duration-300 flex flex-col justify-between shadow-sm font-sans ${
                   isSelected 
-                    ? "border-[#C5A059] bg-[#151e33]/90 ring-1 ring-[#C5A059]" 
-                    : "border-slate-700/80 bg-[#111827]/80 hover:border-[#C5A059]/80 hover:bg-[#151e33]/90"
+                    ? "ring-2 ring-[#A44A3F]" 
+                    : "hover:shadow-md"
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between">
-                    <div className="inline-flex rounded-xl border border-[#C5A059] bg-[#060910] p-3 text-amber-300 group-hover:scale-110 transition-transform">
-                      <Compass className="h-7 w-7 text-[#E5C158]" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="inline-flex bg-[#EFECE6] p-2.5 text-[#A44A3F]">
+                      <Compass className="h-6 w-6 text-[#A44A3F]" />
                     </div>
-                    <span className="text-xs font-semibold text-[#E5C158] opacity-80 group-hover:opacity-100 flex items-center gap-1">
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#A44A3F] flex items-center gap-1">
                       {isSelected ? "Collapse" : "Explore"} &rarr;
                     </span>
                   </div>
                   
-                  <h3 className="mt-5 text-2xl font-black text-white group-hover:text-[#E5C158] transition-colors">{pillar.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{pillar.shortDesc}</p>
+                  <h3 className="text-xl font-serif font-bold text-[#172A3A] group-hover:text-[#A44A3F] transition-colors">{pillar.title}</h3>
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-stone-600">{pillar.shortDesc}</p>
                 </div>
 
                 {isSelected && (
-                  <div className="mt-6 pt-6 border-t border-slate-700/80 animate-fadeIn space-y-4">
-                    <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic bg-[#060910]/70 p-3 rounded-lg border border-slate-800">
+                  <div className="mt-6 pt-6 border-t border-stone-100 space-y-4">
+                    <p className="text-xs sm:text-sm text-stone-700 leading-relaxed italic bg-[#EFECE6] p-3">
                       &quot;{pillar.fullDesc}&quot;
                     </p>
                     <div className="space-y-2">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-[#E5C158]">Key Highlights</h4>
+                      <h4 className="text-[10px] font-extrabold uppercase tracking-widest text-[#A44A3F]">Key Highlights</h4>
                       {pillar.keyPoints.map((point, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-xs text-slate-300">
-                          <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <div key={idx} className="flex items-start gap-2 text-xs text-stone-700 font-medium">
+                          <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" />
                           <span>{point}</span>
                         </div>
                       ))}
@@ -433,16 +431,19 @@ export default function About() {
       </section>
 
       {/* TEAM SECTION */}
-      <section className="border-t border-slate-800 bg-[#080c16]/90 backdrop-blur-sm py-20 relative z-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#E5C158]">OUR TEAM</span>
-            <h2 className="mt-2 text-3xl font-black text-white sm:text-4xl">Meet the Team Behind the Journey</h2>
-            <p className="mt-2 text-xs sm:text-sm text-slate-400">Click any card to open the interactive photo viewer & full profile.</p>
-          </div>
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        <div className="border-b border-stone-200/90 pb-4 mb-8">
+          <span className="text-[10px] font-sans font-extrabold uppercase tracking-widest text-[#A44A3F]">
+            OUR TEAM
+          </span>
+          <h2 className="text-2xl font-serif font-bold text-[#172A3A]">Meet the Team Behind the Journey</h2>
+        </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {teamMembers.map((member) => (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 font-sans">
+          {teamMembers.map((member) => {
+            const [cardImgSrc, setCardImgSrc] = useState(member.image || "");
+
+            return (
               <div
                 key={member.id}
                 role="button"
@@ -454,105 +455,107 @@ export default function About() {
                     setViewMember(member);
                   }
                 }}
-                className="group cursor-pointer flex flex-col justify-between rounded-2xl border border-slate-700/80 bg-[#111827]/80 p-6 shadow-xl hover:border-[#C5A059] hover:bg-[#151e33] transition-all transform hover:-translate-y-2 hover:shadow-2xl backdrop-blur-md relative"
+                className="group cursor-pointer flex flex-col justify-between bg-white p-5 shadow-sm hover:shadow-md transition-all relative"
               >
                 <div>
-                  <div className="relative h-48 w-full overflow-hidden rounded-xl border-2 border-slate-800 bg-[#060910] shadow-2xl group-hover:border-[#C5A059] transition-all">
+                  {/* BORDERLESS FLUSH IMAGE CONTAINER */}
+                  <div className="relative h-48 w-full overflow-hidden bg-stone-100">
                     {member.image && !imgError[member.id] ? (
-                      <Image
-                        src={member.image}
+                      <img
+                        src={cardImgSrc}
                         alt={member.name}
-                        fill
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                        onError={() => handleImageError(member.id)}
+                        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        onError={() => {
+                          handleImageError(member.id);
+                          setCardImgSrc("https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80");
+                        }}
                       />
                     ) : (
-                      <div className="flex h-full w-full items-center justify-center text-3xl font-black text-[#E5C158]">
+                      <div className="flex h-full w-full items-center justify-center text-2xl font-extrabold text-[#172A3A]">
                         {member.name.substring(0, 2).toUpperCase()}
                       </div>
                     )}
 
-                    <div className="absolute top-3 right-3 flex items-center gap-1.5">
-                      <div className="rounded-full bg-[#060910]/80 backdrop-blur-md p-2 text-xs text-[#E5C158] border border-[#C5A059]/40 shadow-lg group-hover:bg-[#C5A059] group-hover:text-black transition-colors">
-                        <Eye className="h-3.5 w-3.5" />
+                    <div className="absolute top-2 right-2 flex items-center gap-1.5">
+                      <div className="bg-white/90 p-1.5 text-xs text-[#A44A3F] shadow-xs group-hover:bg-[#172A3A] group-hover:text-white transition-colors">
+                        <Eye size={13} />
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-5 flex items-center justify-between">
-                    <h3 className="text-lg font-black text-white group-hover:text-amber-300 transition-colors">
+                  <div className="mt-4">
+                    <h3 className="text-base font-serif font-bold text-[#172A3A] group-hover:text-[#A44A3F] transition-colors">
                       {member.name}
                     </h3>
+                    <p className="text-[11px] font-extrabold uppercase tracking-widest text-[#A44A3F] mt-0.5">
+                      {member.role}
+                    </p>
                   </div>
-
-                  <p className="text-xs font-bold uppercase tracking-wider text-[#E5C158] mt-0.5">
-                    {member.role}
-                  </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-800/80 text-xs font-semibold text-amber-300/90 flex items-center justify-between">
-                  <span>Open Zoom Viewer & Profile</span>
+                <div className="mt-4 pt-3 border-t border-stone-100 text-[11px] font-bold text-[#172A3A] flex items-center justify-between">
+                  <span>View Profile & Contact</span>
                   <span>&rarr;</span>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </section>
 
-      {/* DIRECT COMBINED ZOOM & DETAIL PORTAL MODAL */}
+      {/* INTERACTIVE TEAM MEMBER ZOOM & PROFILE MODAL */}
       {mounted && viewMember && createPortal(
         <div
-          className="fixed inset-0 z-[999999] flex items-center justify-center bg-slate-950/90 p-3 sm:p-6 backdrop-blur-2xl overflow-y-auto"
+          className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/80 p-3 sm:p-6 backdrop-blur-sm overflow-y-auto font-sans"
           onClick={() => setViewMember(null)}
         >
           <div 
-            className="relative max-w-5xl w-full my-auto rounded-3xl border border-[#C5A059]/40 bg-[#0d1322]/95 p-5 sm:p-8 shadow-[0_0_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl ring-1 ring-white/10"
+            className="relative max-w-4xl w-full my-auto bg-white p-6 sm:p-8 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header Controls */}
-            <div className="flex items-center justify-between border-b border-slate-800/80 pb-4 mb-4">
+            <div className="flex items-center justify-between border-b border-stone-200 pb-4 mb-6">
               <div className="flex items-center gap-2">
-                <UserCheck className="h-5 w-5 text-[#C5A059]" />
-                <span className="text-xs font-bold uppercase tracking-widest text-[#E5C158]">
-                  Staff Profile & Interactive Viewer
+                <UserCheck className="h-5 w-5 text-[#A44A3F]" />
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#172A3A]">
+                  Staff Profile & Photo Viewer
                 </span>
               </div>
 
               <div className="flex items-center gap-2">
                 {/* Zoom Controls */}
-                <div className="flex items-center gap-1 rounded-xl border border-slate-700/80 bg-slate-900/90 p-1 backdrop-blur-md shadow-lg">
+                <div className="flex items-center gap-1 bg-[#EFECE6] p-1">
                   <button
                     onClick={handleZoomIn}
                     title="Zoom In"
-                    className="rounded-lg p-1.5 text-slate-200 hover:text-amber-300 hover:bg-slate-800 transition-colors"
+                    className="p-1 text-[#172A3A] hover:text-[#A44A3F] transition-colors"
                   >
-                    <ZoomIn className="h-4 w-4" />
+                    <ZoomIn size={15} />
                   </button>
                   <button
                     onClick={handleZoomOut}
                     title="Zoom Out"
-                    className="rounded-lg p-1.5 text-slate-200 hover:text-amber-300 hover:bg-slate-800 transition-colors"
+                    className="p-1 text-[#172A3A] hover:text-[#A44A3F] transition-colors"
                   >
-                    <ZoomOut className="h-4 w-4" />
+                    <ZoomOut size={15} />
                   </button>
                   <button
                     onClick={handleResetZoom}
                     title="Reset Zoom"
-                    className="rounded-lg p-1.5 text-slate-200 hover:text-amber-300 hover:bg-slate-800 transition-colors"
+                    className="p-1 text-[#172A3A] hover:text-[#A44A3F] transition-colors"
                   >
-                    <RotateCcw className="h-3.5 w-3.5" />
+                    <RotateCcw size={14} />
                   </button>
-                  <span className="px-2 text-[11px] font-mono font-semibold text-amber-300 border-l border-slate-700/60">
+                  <span className="px-2 text-[10px] font-mono font-bold text-[#172A3A] border-l border-stone-300">
                     {Math.round(scale * 100)}%
                   </span>
                 </div>
 
                 <button
                   onClick={() => setViewMember(null)}
-                  className="inline-flex items-center gap-1.5 rounded-xl border border-slate-700/80 bg-slate-900/90 px-3 py-2 text-xs font-bold uppercase text-slate-200 hover:text-[#C5A059] hover:border-[#C5A059] transition-all backdrop-blur-md shadow-lg"
+                  className="inline-flex items-center p-1.5 bg-white text-[#172A3A] hover:bg-[#A44A3F] hover:text-white transition-colors shadow-xs"
                 >
-                  <X className="h-4 w-4" />
+                  <X size={16} />
                 </button>
               </div>
             </div>
@@ -560,7 +563,7 @@ export default function About() {
             {/* Split Content Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
               
-              {/* Left Column: Interactive Zoom Canvas */}
+              {/* Left Column: BORDERLESS Interactive Zoom Canvas */}
               <div className="lg:col-span-7 flex flex-col">
                 <div 
                   onWheel={handleWheel}
@@ -568,7 +571,7 @@ export default function About() {
                   onMouseMove={handleMouseMove}
                   onMouseUp={handleMouseUp}
                   onMouseLeave={handleMouseUp}
-                  className={`relative w-full h-[40vh] sm:h-[48vh] rounded-2xl bg-[#030509]/90 border border-slate-800 p-2 flex items-center justify-center overflow-hidden ${
+                  className={`relative w-full h-[38vh] sm:h-[45vh] bg-stone-100 p-2 flex items-center justify-center overflow-hidden ${
                     scale > 1 ? (isDragging ? "cursor-grabbing" : "cursor-grab") : "cursor-default"
                   }`}
                 >
@@ -582,19 +585,19 @@ export default function About() {
                         transition: isDragging ? "none" : "transform 0.15s cubic-bezier(0.2, 0, 0, 1)",
                         willChange: "transform"
                       }}
-                      className="max-h-full max-w-full object-contain rounded-lg transform-gpu select-none" 
+                      className="max-h-full max-w-full object-contain select-none" 
                     />
                   ) : (
-                    <div className="flex flex-col items-center justify-center text-slate-400 gap-2">
-                      <span className="text-5xl font-black text-[#E5C158]">
+                    <div className="flex flex-col items-center justify-center text-stone-400 gap-2">
+                      <span className="text-4xl font-black text-[#172A3A]">
                         {viewMember.name.substring(0, 2).toUpperCase()}
                       </span>
-                      <span className="text-xs uppercase font-mono tracking-widest text-slate-500">No Image Preview Available</span>
+                      <span className="text-xs uppercase font-mono tracking-widest text-stone-400">No Image Preview</span>
                     </div>
                   )}
                 </div>
-                <p className="text-[11px] text-center text-slate-500 mt-2 font-mono">
-                  Scroll or drag to zoom and navigate image
+                <p className="text-[10px] text-center text-stone-500 mt-2 font-mono">
+                  Scroll or drag to zoom photo
                 </p>
               </div>
 
@@ -602,40 +605,40 @@ export default function About() {
               <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
                 <div className="space-y-4">
                   <div>
-                    <span className="inline-block rounded-md bg-[#C5A059]/20 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#E5C158] border border-[#C5A059]/30">
+                    <span className="inline-block bg-[#EFECE6] px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-widest text-[#A44A3F]">
                       {viewMember.role}
                     </span>
-                    <h2 className="text-2xl sm:text-3xl font-black text-white mt-2">
+                    <h2 className="text-2xl font-serif font-bold text-[#172A3A] mt-2">
                       {viewMember.name}
                     </h2>
                   </div>
 
                   {viewMember.experienceYears && (
-                    <div className="inline-flex items-center gap-1.5 rounded-lg bg-[#C5A059]/10 px-3 py-1.5 text-xs font-medium text-amber-300 border border-[#C5A059]/30">
-                      <ShieldCheck className="h-4 w-4 text-[#C5A059]" />
+                    <div className="inline-flex items-center gap-1.5 bg-stone-50 px-2.5 py-1 text-xs font-bold text-stone-700">
+                      <ShieldCheck size={14} className="text-[#A44A3F]" />
                       <span>{viewMember.experienceYears}+ Years Industry Experience</span>
                     </div>
                   )}
 
                   {/* Direct Contact Links */}
                   <div className="space-y-2 pt-1">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#E5C158]">Direct Contact</h4>
+                    <h4 className="text-[10px] font-extrabold uppercase tracking-widest text-[#A44A3F]">Direct Contact</h4>
                     
-                    <div className="flex items-center gap-3 rounded-xl bg-[#111827] p-3 border border-slate-800">
-                      <Mail className="h-4 w-4 text-[#C5A059] shrink-0" />
+                    <div className="flex items-center gap-3 bg-[#EFECE6] p-2.5">
+                      <Mail size={14} className="text-[#A44A3F] shrink-0" />
                       <div className="min-w-0">
-                        <p className="text-[10px] font-bold uppercase text-slate-400">Email</p>
-                        <a href={`mailto:${viewMember.email}`} className="text-xs font-bold text-[#E5C158] hover:underline truncate block">
+                        <p className="text-[9px] font-extrabold uppercase text-stone-500">Email</p>
+                        <a href={`mailto:${viewMember.email}`} className="text-xs font-bold text-[#172A3A] hover:text-[#A44A3F] truncate block">
                           {viewMember.email}
                         </a>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 rounded-xl bg-[#111827] p-3 border border-slate-800">
-                      <Phone className="h-4 w-4 text-[#C5A059] shrink-0" />
+                    <div className="flex items-center gap-3 bg-[#EFECE6] p-2.5">
+                      <Phone size={14} className="text-[#A44A3F] shrink-0" />
                       <div className="min-w-0">
-                        <p className="text-[10px] font-bold uppercase text-slate-400">Phone</p>
-                        <a href={`tel:${viewMember.phone}`} className="text-xs font-bold text-slate-200 hover:text-[#E5C158] block">
+                        <p className="text-[9px] font-extrabold uppercase text-stone-500">Phone</p>
+                        <a href={`tel:${viewMember.phone}`} className="text-xs font-bold text-[#172A3A] hover:text-[#A44A3F] block">
                           {viewMember.phone}
                         </a>
                       </div>
@@ -644,8 +647,8 @@ export default function About() {
 
                   {/* Overview Text */}
                   <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#E5C158] mb-1.5">Overview & Role</h4>
-                    <p className="text-xs sm:text-sm leading-relaxed text-slate-300 bg-[#111827]/80 p-3.5 rounded-xl border border-slate-800">
+                    <h4 className="text-[10px] font-extrabold uppercase tracking-widest text-[#A44A3F] mb-1">Overview & Role</h4>
+                    <p className="text-xs text-stone-600 leading-relaxed bg-stone-50 p-3">
                       {viewMember.overview}
                     </p>
                   </div>
@@ -653,7 +656,7 @@ export default function About() {
 
                 <button
                   onClick={() => setViewMember(null)}
-                  className="w-full py-3 rounded-xl bg-[#C5A059] text-black font-bold uppercase tracking-wider text-xs hover:bg-amber-400 transition-colors mt-2"
+                  className="w-full py-2.5 bg-[#172A3A] hover:bg-[#A44A3F] text-white font-extrabold uppercase tracking-widest text-xs transition-colors"
                 >
                   Close Viewer
                 </button>

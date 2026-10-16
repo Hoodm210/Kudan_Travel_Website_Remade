@@ -3,20 +3,22 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-  ShieldCheck,
-  Building2,
-  Compass,
-  Globe2,
-  MapPin,
-  Calendar,
-  Star,
   ArrowRight,
-  Quote,
+  CalendarDays,
   CheckCircle2,
+  ChevronRight,
   ExternalLink,
+  Globe2,
   Handshake,
-  Briefcase,
+  MapPin,
+  Mountain,
+  ShieldCheck,
+  Star,
 } from "lucide-react";
+
+/* =========================================================
+   TYPES
+========================================================= */
 
 export interface Tour {
   id: string;
@@ -32,6 +34,10 @@ export interface Tour {
   path?: string;
 }
 
+/* =========================================================
+   INBOUND TOURS
+========================================================= */
+
 const INBOUND_TOURS: Tour[] = [
   {
     id: "ktm-bandipur-pokhara-nagarkot",
@@ -43,8 +49,8 @@ const INBOUND_TOURS: Tour[] = [
     rating: 4.9,
     reviewsCount: 124,
     image:
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=90",
-    badge: "Best Seller",
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+    badge: "Signature Journey",
   },
   {
     id: "ebc-trek",
@@ -56,8 +62,8 @@ const INBOUND_TOURS: Tour[] = [
     rating: 5.0,
     reviewsCount: 98,
     image:
-      "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=90",
-    badge: "Trekking",
+      "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=85",
+    badge: "Himalayan Adventure",
   },
   {
     id: "10-days-nepal-bhutan-tour",
@@ -69,24 +75,28 @@ const INBOUND_TOURS: Tour[] = [
     rating: 4.8,
     reviewsCount: 65,
     image:
-      "https://images.unsplash.com/photo-1585869110973-7280be312084?auto=format&fit=crop&w=1200&q=90",
-    badge: "Special",
+      "https://images.unsplash.com/photo-1585869110973-7280be312084?auto=format&fit=crop&w=1200&q=85",
+    badge: "Cultural Discovery",
   },
 ];
+
+/* =========================================================
+   OUTBOUND TOURS
+========================================================= */
 
 const OUTBOUND_TOURS: Tour[] = [
   {
     id: "thailand-express",
     slug: "thailand-express",
-    title: "Essential Thailand (Bangkok & Pattaya)",
+    title: "Essential Thailand: Bangkok & Pattaya",
     locations: "Bangkok • Pattaya • Coral Island",
     duration: "4N / 5D",
     price: "NPR 65,000",
     rating: 4.7,
     reviewsCount: 210,
     image:
-      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=90",
-    badge: "Best Seller",
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+    badge: "Popular Escape",
   },
   {
     id: "dubai-desert-safari",
@@ -98,8 +108,8 @@ const OUTBOUND_TOURS: Tour[] = [
     rating: 4.9,
     reviewsCount: 180,
     image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=90",
-    badge: "Trending",
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85",
+    badge: "Luxury Escape",
   },
   {
     id: "bali-tropical-escape",
@@ -111,10 +121,16 @@ const OUTBOUND_TOURS: Tour[] = [
     rating: 4.9,
     reviewsCount: 142,
     image:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=90",
-    badge: "Island",
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+    badge: "Island Retreat",
   },
 ];
+
+/* =========================================================
+   TESTIMONIALS
+   Verify customer permission and review authenticity
+   before publishing these publicly.
+========================================================= */
 
 const REVIEWS = [
   {
@@ -123,7 +139,7 @@ const REVIEWS = [
     country: "United Kingdom",
     role: "International Group Leader",
     comment:
-      "The entire journey was impeccably organized. From airport pickups to our trekking logistics, every detail was handled with highest professional standard.",
+      "The entire journey was impeccably organized. From airport pickups to our trekking logistics, every detail was handled with professional care.",
     rating: 5,
     package: "Ghorepani Poon Hill Trek",
   },
@@ -133,7 +149,7 @@ const REVIEWS = [
     country: "Nepal",
     role: "Corporate Travel Director",
     comment:
-      "Outstanding corporate service. Their outbound booking management for Thailand and Dubai spared our organization all administrative hassle.",
+      "Outstanding corporate service. Their outbound booking management for Thailand and Dubai made travel arrangements much easier for our organization.",
     rating: 5,
     package: "Essential Thailand Package",
   },
@@ -141,400 +157,707 @@ const REVIEWS = [
     id: 3,
     name: "Michael & Elena Vance",
     country: "Australia",
-    role: "Himalayan Expedition Guests",
+    role: "Himalayan Expedition Travellers",
     comment:
-      "Warm hospitality, highly skilled guides, and transparent pricing. You can immediately notice their institutional experience.",
+      "Warm hospitality, knowledgeable guides, and thoughtful travel coordination made our Himalayan adventure memorable.",
     rating: 5,
     package: "Everest Base Camp Trek",
   },
 ];
 
-export default function CorporateLandingSection() {
-  const [activeTab, setActiveTab] = useState<"inbound" | "outbound">("inbound");
-  const currentTours = activeTab === "inbound" ? INBOUND_TOURS : OUTBOUND_TOURS;
+/* =========================================================
+   INDUSTRY LINKS
+========================================================= */
 
-  // Resolves routes accurately based on your exact file directory structure
+const ACCREDITATIONS = [
+  {
+    href: "https://natta.org.np/",
+    src: "/natta.png",
+    title: "NATTA",
+    desc: "Nepal Association of Tour & Travel Agents",
+  },
+  {
+    href: "https://www.taan.org.np/",
+    src: "/taan.png",
+    title: "TAAN",
+    desc: "Trekking Agencies' Association of Nepal",
+  },
+  {
+    href: "https://ntb.gov.np/",
+    src: "/ntb.png",
+    title: "Nepal Tourism Board",
+    desc: "Official Nepal tourism resource",
+  },
+];
+
+/* =========================================================
+   MAIN LANDING PAGE COMPONENT
+========================================================= */
+
+export default function LuxuryLandingSection() {
+  const [activeTab, setActiveTab] = useState<"inbound" | "outbound">(
+    "inbound"
+  );
+
+  const currentTours =
+    activeTab === "inbound" ? INBOUND_TOURS : OUTBOUND_TOURS;
+
   const getTourHref = (tour: Tour) => {
     if (tour.path) return tour.path;
-    const isOutbound = OUTBOUND_TOURS.some((t) => t.id === tour.id);
-    return isOutbound ? `/outbound-tours/${tour.slug}` : `/inbound/${tour.slug}`;
+
+    const isOutbound = OUTBOUND_TOURS.some(
+      (item) => item.id === tour.id
+    );
+
+    return isOutbound
+      ? `/outbound-tours/${tour.slug}`
+      : `/inbound/${tour.slug}`;
   };
 
-  const getCategoryOverviewHref = () => {
-    return activeTab === "inbound" ? "/inbound" : "/outbound-tours";
-  };
+  const categoryHref =
+    activeTab === "inbound" ? "/inbound" : "/outbound-tours";
+
+  /* =======================================================
+     RENDER
+  ======================================================= */
 
   return (
-    <div className="bg-[#070A11] text-slate-100 font-sans selection:bg-[#D4AF37] selection:text-slate-950">
-      {/* 1. HERO SECTION */}
-      <section className="relative border-b border-slate-800/80 py-24 lg:py-36 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-85 filter contrast-105 brightness-110"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=2560&q=95')`,
-          }}
+    <main className="overflow-hidden bg-[#F8F6F0] font-sans text-[#172A3A]">
+
+      {/* ===================================================
+          1. HERO — NEPAL HERITAGE & HIMALAYAN LANDSCAPES
+      =================================================== */}
+
+      <section className="relative isolate flex min-h-[600px] items-center overflow-hidden bg-[#102B3A] sm:min-h-[660px] lg:min-h-[730px]">
+
+        <img
+          src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2200&q=90"
+          alt="Mountain landscape representing the beauty of Nepal"
+          fetchPriority="high"
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#070A11]/45 via-[#070A11]/25 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070A11]/50 via-transparent to-[#070A11]/20" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071923]/95 via-[#0B202C]/75 to-[#102B3A]/15" />
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full bg-slate-950/60 backdrop-blur-md px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-[#D4AF37] border border-[#D4AF37]/40 mb-6 shadow-2xl">
-                <Building2 size={16} />
-                <span>Premier B2B Partner & Top Travel Operator</span>
-              </div>
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#071923]/75 via-transparent to-black/10" />
 
-              <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-lg">
-                Nepal's Premier <span className="text-[#D4AF37]">B2B & Inbound</span> Tour Operator.
-              </h1>
+        <div className="mx-auto flex w-full max-w-[1320px] items-center px-5 py-20 sm:px-8 lg:px-14">
 
-              <p className="mt-5 text-sm sm:text-base text-slate-100 leading-relaxed max-w-2xl drop-shadow-md font-medium">
-                We are a top-tier DMC and leading seller for inbound Himalayan expeditions and international outbound tours in Nepal. Partnering with global travel agencies and corporate leaders, we provide ground handling, wholesale group rates, and customized itineraries.
-              </p>
+          <div className="max-w-3xl text-white">
 
-              <div className="mt-8 grid grid-cols-3 gap-4 border-t border-slate-700/50 pt-6 backdrop-blur-sm rounded-xl px-2 bg-slate-950/30">
-                <div>
-                  <span className="block text-3xl font-black text-white drop-shadow">14+</span>
-                  <span className="text-xs text-slate-200 font-semibold">Years Experience</span>
-                </div>
-                <div>
-                  <span className="block text-3xl font-black text-white drop-shadow">500+</span>
-                  <span className="text-xs text-slate-200 font-semibold">B2B Agency Partners</span>
-                </div>
-                <div>
-                  <span className="block text-3xl font-black text-white drop-shadow">100%</span>
-                  <span className="text-xs text-slate-200 font-semibold">Licensed Operations</span>
-                </div>
-              </div>
+            <div className="mb-7 inline-flex items-center gap-3 border-l-2 border-[#D4B477] pl-4">
+              <Mountain
+                size={19}
+                className="text-[#E3C58F]"
+              />
+
+              <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#F0D9AC] sm:text-xs">
+                Discover Nepal with Kudan
+              </span>
             </div>
 
-            <div className="lg:col-span-5 bg-slate-950/60 rounded-3xl border border-slate-700/60 p-6 sm:p-8 backdrop-blur-md shadow-2xl">
-              <h3 className="text-base font-bold text-white mb-4 flex items-center gap-2">
-                <ShieldCheck className="text-[#D4AF37]" size={20} />
-                <span>Why Travel Partners & Clients Choose Us</span>
-              </h3>
+            <h1 className="max-w-3xl font-serif text-5xl font-medium leading-[1.08] tracking-tight sm:text-6xl lg:text-[76px]">
+              More than a
+              <br />
+              destination.
+              <br />
 
-              <div className="space-y-4 text-xs text-slate-200">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-[#D4AF37] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-white block font-semibold text-sm">Best-Selling Itineraries</strong>
-                    Proven, top-rated Nepal trekking and international outbound packages for maximum traveler satisfaction.
-                  </div>
-                </div>
+              <span className="italic text-[#E3C58F]">
+                A feeling that stays.
+              </span>
+            </h1>
 
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-[#D4AF37] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-white block font-semibold text-sm">B2B Ground Handling & Contracting</strong>
-                    Exclusive wholesale agent rates, transparent cost structures, and white-label ground support.
-                  </div>
-                </div>
+            <p className="mt-7 max-w-xl text-sm leading-7 text-white/80 sm:text-base sm:leading-8">
+              Discover the soul of Nepal through Himalayan adventures,
+              ancient heritage, extraordinary hospitality, and journeys
+              thoughtfully arranged by people who know the destination.
+            </p>
 
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-[#D4AF37] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-white block font-semibold text-sm">24/7 Dedicated Operations</strong>
-                    Personalized advisory, seamless visa processing, and end-to-end ground coordination.
-                  </div>
-                </div>
-              </div>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+
+              <Link
+                href="/inbound"
+                className="inline-flex min-h-12 items-center justify-center gap-3 bg-[#D4B477] px-7 py-4 text-xs font-bold uppercase tracking-[0.13em] text-[#152A35] transition hover:bg-[#E7CC99]"
+              >
+                Explore Nepal
+                <ArrowRight size={16} />
+              </Link>
+
+              <Link
+                href="/contact-us"
+                className="inline-flex min-h-12 items-center justify-center gap-3 border border-white/50 bg-white/5 px-7 py-4 text-xs font-bold uppercase tracking-[0.13em] text-white backdrop-blur-sm transition hover:bg-white hover:text-[#172A3A]"
+              >
+                Plan Your Journey
+                <ChevronRight size={16} />
+              </Link>
+
             </div>
+
+            <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-4 border-t border-white/20 pt-6 text-xs text-white/80 sm:mt-14">
+
+              <span className="flex items-center gap-2">
+                <Mountain size={16} className="text-[#E3C58F]" />
+                Himalayan Experiences
+              </span>
+
+              <span className="flex items-center gap-2">
+                <Globe2 size={16} className="text-[#E3C58F]" />
+                Worldwide Travel
+              </span>
+
+              <span className="flex items-center gap-2">
+                <Handshake size={16} className="text-[#E3C58F]" />
+                B2B Travel Solutions
+              </span>
+
+            </div>
+
           </div>
+        </div>
 
-          <div className="mt-16 rounded-2xl border border-[#D4AF37]/40 bg-gradient-to-r from-slate-950/60 via-slate-900/60 to-slate-950/60 p-6 backdrop-blur-md shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] shrink-0">
-                <Handshake size={24} />
-              </div>
+        <div className="pointer-events-none absolute bottom-0 right-0 hidden h-24 w-24 border-l border-t border-white/20 lg:block" />
+
+      </section>
+
+      {/* ===================================================
+          2. INTRODUCTION STRIP
+      =================================================== */}
+
+      <section className="border-b border-[#E6DFD2] bg-[#FCFAF6]">
+
+        <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-6 px-5 py-8 sm:grid-cols-3 sm:px-8 lg:px-14">
+
+          {[
+            {
+              number: "01",
+              title: "Made for discovery",
+              desc: "Culture, nature, adventure and authentic local experiences.",
+            },
+            {
+              number: "02",
+              title: "Thoughtfully arranged",
+              desc: "Travel planning with attention to the details that matter.",
+            },
+            {
+              number: "03",
+              title: "Built on partnership",
+              desc: "Ground handling and travel support for international partners.",
+            },
+          ].map((item) => (
+            <div
+              key={item.number}
+              className="flex gap-4 sm:px-3"
+            >
+              <span className="font-serif text-2xl italic text-[#A44A3F]">
+                {item.number}
+              </span>
+
               <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#D4AF37]">
-                  Travel Trade & Travel Agencies
-                </span>
-                <h3 className="text-lg font-bold text-white mt-0.5">
-                  Looking for a Reliable B2B Inbound Partner in Nepal?
-                </h3>
-                <p className="text-xs text-slate-200 mt-1">
-                  We offer competitive agent tariffs, white-label ground execution, and fast response times for international agencies and group leaders.
+                <h2 className="text-sm font-semibold text-[#172A3A]">
+                  {item.title}
+                </h2>
+
+                <p className="mt-1 max-w-xs text-xs leading-5 text-[#74766F]">
+                  {item.desc}
                 </p>
               </div>
+            </div>
+          ))}
+
+        </div>
+      </section>
+
+      {/* ===================================================
+          3. FEATURED TOUR PACKAGES
+      =================================================== */}
+
+      <section
+        id="featured-tours"
+        className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 sm:py-24 lg:px-14 lg:py-28"
+      >
+
+        <div className="mb-10 flex flex-col gap-7 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
+
+          <div className="max-w-2xl">
+
+            <div className="mb-4 flex items-center gap-3">
+              <span className="h-px w-9 bg-[#A44A3F]" />
+
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#A44A3F]">
+                Journeys Worth Taking
+              </span>
+            </div>
+
+            <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-[#172A3A] sm:text-5xl">
+              Find your next
+              <span className="italic text-[#A44A3F]">
+                {" "}great escape.
+              </span>
+            </h2>
+
+            <p className="mt-4 max-w-xl text-sm leading-7 text-[#74766F]">
+              From the timeless beauty of Nepal to memorable international
+              holidays, explore travel experiences designed around the
+              places you want to discover.
+            </p>
+
+          </div>
+
+          <div
+            className="inline-flex w-full max-w-full self-start border border-[#DED7CA] bg-white p-1 sm:w-auto lg:self-end"
+            role="group"
+            aria-label="Choose tour category"
+          >
+
+            <button
+              type="button"
+              aria-pressed={activeTab === "inbound"}
+              onClick={() => setActiveTab("inbound")}
+              className={`flex-1 px-4 py-3 text-[10px] font-bold uppercase tracking-wider transition sm:flex-none sm:px-6 ${
+                activeTab === "inbound"
+                  ? "bg-[#173747] text-white"
+                  : "text-[#6C716F] hover:bg-[#F5F1E9]"
+              }`}
+            >
+              Nepal Tours
+            </button>
+
+            <button
+              type="button"
+              aria-pressed={activeTab === "outbound"}
+              onClick={() => setActiveTab("outbound")}
+              className={`flex-1 px-4 py-3 text-[10px] font-bold uppercase tracking-wider transition sm:flex-none sm:px-6 ${
+                activeTab === "outbound"
+                  ? "bg-[#173747] text-white"
+                  : "text-[#6C716F] hover:bg-[#F5F1E9]"
+              }`}
+            >
+              International
+            </button>
+
+          </div>
+
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+
+          {currentTours.map((tour) => (
+            <Link
+              key={tour.id}
+              href={getTourHref(tour)}
+              className="group flex min-w-0 flex-col overflow-hidden border border-[#E6DFD2] bg-white transition duration-300 hover:-translate-y-1 hover:border-[#D4B477] hover:shadow-[0_18px_50px_rgba(23,42,58,0.10)]"
+            >
+
+              <div className="relative aspect-[5/4] overflow-hidden bg-[#E8E3D8]">
+
+                <img
+                  src={tour.image}
+                  alt={tour.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
+
+                <span className="absolute left-4 top-4 bg-[#FCFAF6] px-3 py-2 text-[9px] font-bold uppercase tracking-[0.14em] text-[#173747]">
+                  {tour.badge || "Featured Journey"}
+                </span>
+
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 text-xs text-white">
+                  <CalendarDays
+                    size={14}
+                    className="text-[#E3C58F]"
+                  />
+                  <span>{tour.duration}</span>
+                </div>
+
+                <span className="absolute bottom-4 right-4 flex items-center gap-1.5 text-xs text-white">
+                  <Star
+                    size={13}
+                    className="fill-[#E3C58F] text-[#E3C58F]"
+                  />
+
+                  {tour.rating}
+
+                  <span className="text-white/75">
+                    ({tour.reviewsCount})
+                  </span>
+                </span>
+
+                <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/50 bg-black/20 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100">
+                  <ArrowRight size={16} />
+                </span>
+
+              </div>
+
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
+
+                <div className="mb-3 flex items-start gap-2 text-[10px] font-semibold uppercase leading-5 tracking-[0.09em] text-[#A44A3F]">
+                  <MapPin
+                    size={14}
+                    className="mt-0.5 shrink-0"
+                  />
+
+                  <span>{tour.locations}</span>
+                </div>
+
+                <h3 className="min-h-[3.5rem] font-serif text-xl leading-snug text-[#172A3A] transition group-hover:text-[#A44A3F]">
+                  {tour.title}
+                </h3>
+
+                <div className="mt-auto flex items-end justify-between gap-3 border-t border-[#EEE9E0] pt-5 mt-6">
+
+                  <div>
+                    <span className="block text-[9px] font-semibold uppercase tracking-[0.16em] text-[#898A82]">
+                      Starting From
+                    </span>
+
+                    <span className="mt-1 block text-lg font-semibold text-[#173747]">
+                      {tour.price}
+                    </span>
+                  </div>
+
+                  <span className="inline-flex items-center gap-2 pb-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#A44A3F]">
+                    Discover
+
+                    <ArrowRight
+                      size={15}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
+                  </span>
+
+                </div>
+
+              </div>
+
+            </Link>
+          ))}
+
+        </div>
+
+        <div className="mt-10 flex justify-center">
+
+          <Link
+            href={categoryHref}
+            className="inline-flex items-center justify-center gap-3 border border-[#173747] px-7 py-4 text-[10px] font-bold uppercase tracking-[0.16em] text-[#173747] transition hover:bg-[#173747] hover:text-white"
+          >
+            View All{" "}
+            {activeTab === "inbound"
+              ? "Nepal Tours"
+              : "International Tours"}
+
+            <ArrowRight size={15} />
+          </Link>
+
+        </div>
+
+      </section>
+
+      {/* ===================================================
+          4. B2B PARTNERSHIP
+      =================================================== */}
+
+      <section className="relative overflow-hidden bg-[#153443] text-white">
+
+        <div className="pointer-events-none absolute -right-20 -top-24 h-80 w-80 rounded-full border border-white/[0.08]" />
+
+        <div className="pointer-events-none absolute -right-8 -top-12 h-56 w-56 rounded-full border border-white/[0.08]" />
+
+        <div className="mx-auto grid max-w-[1320px] gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-16 lg:px-14 lg:py-24">
+
+          <div className="relative">
+
+            <div className="mb-5 flex items-center gap-3">
+              <Handshake
+                size={20}
+                className="text-[#E3C58F]"
+              />
+
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#E3C58F]">
+                For the Travel Trade
+              </span>
+            </div>
+
+            <h2 className="max-w-2xl font-serif text-4xl leading-tight sm:text-5xl">
+              Your trusted partner
+
+              <span className="italic text-[#E3C58F]">
+                {" "}on the ground.
+              </span>
+            </h2>
+
+            <p className="mt-6 max-w-xl text-sm leading-7 text-white/75">
+              Partner with Kudan Travel & Tours for Nepal ground handling,
+              tailor-made itineraries, tour operations, transport coordination,
+              and travel support for your clients.
+            </p>
+
+            <div className="mt-7 grid gap-4 sm:grid-cols-2">
+
+              {[
+                "Tailor-made itineraries",
+                "Ground handling in Nepal",
+                "Tour and transport coordination",
+                "Dedicated trade support",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-start gap-2.5 text-sm text-white/90"
+                >
+                  <CheckCircle2
+                    size={17}
+                    className="mt-0.5 shrink-0 text-[#E3C58F]"
+                  />
+
+                  {item}
+                </div>
+              ))}
+
             </div>
 
             <Link
               href="/b2b-partner"
-              className="px-5 py-2.5 rounded-xl bg-[#D4AF37] text-slate-950 hover:bg-[#c3a030] font-bold text-xs transition-all shadow-lg hover:scale-105 shrink-0 flex items-center gap-2"
+              className="mt-9 inline-flex items-center gap-3 bg-[#D4B477] px-7 py-4 text-[10px] font-bold uppercase tracking-[0.15em] text-[#172A3A] transition hover:bg-[#E7CC99]"
             >
-              <Briefcase size={15} />
-              <span>Partner With Us (B2B Rates)</span>
+              Explore B2B Partnership
+              <ArrowRight size={16} />
             </Link>
+
           </div>
 
-          {/* ACCREDITATIONS */}
-          <div className="mt-16 pt-12 border-t border-slate-700/50">
-            <div className="text-center mb-8">
-              <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
-                Official Accreditations
-              </span>
-              <h3 className="text-lg sm:text-xl font-bold text-white mt-1 drop-shadow">
-                Recognized & Certified by Leading Tourism Bodies
-              </h3>
+          <div className="relative border border-white/15 bg-white/[0.04] p-7 sm:p-9">
+
+            <div className="mb-6 flex h-12 w-12 items-center justify-center border border-[#D4B477]/40 bg-[#D4B477]/10 text-[#E3C58F]">
+              <ShieldCheck size={25} />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-              <a
-                href="https://natta.org.np/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative rounded-2xl border border-slate-700/60 bg-slate-950/60 backdrop-blur-md hover:border-[#D4AF37]/80 transition-all p-6 flex flex-col items-center justify-center text-center group shadow-xl hover:bg-slate-900/80 cursor-pointer"
-              >
-                <ExternalLink size={14} className="absolute top-4 right-4 text-slate-400 group-hover:text-[#D4AF37] transition-colors" />
-                <div className="h-24 w-full flex items-center justify-center p-2">
-                  <img
-                    src="/natta.png"
-                    alt="NATTA Logo"
-                    className="max-h-50 max-w-[200px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                      e.currentTarget.nextElementSibling?.classList.remove("hidden");
-                    }}
-                  />
-                  <div className="hidden flex-col items-center">
-                    <span className="text-2xl font-black text-white tracking-widest">NATTA</span>
-                  </div>
-                </div>
-                <div className="mt-3 pt-3 border-t border-slate-800/80 w-full">
-                  <strong className="text-xs font-bold text-slate-200 block group-hover:text-[#D4AF37] transition-colors">NATTA Member</strong>
-                  <span className="text-[11px] text-slate-300">Nepal Association of Tour & Travel Agents</span>
-                </div>
-              </a>
-
-              <a
-                href="https://www.taan.org.np/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative rounded-2xl border border-slate-700/60 bg-slate-950/60 backdrop-blur-md hover:border-[#D4AF37]/80 transition-all p-6 flex flex-col items-center justify-center text-center group shadow-xl hover:bg-slate-900/80 cursor-pointer"
-              >
-                <ExternalLink size={14} className="absolute top-4 right-4 text-slate-400 group-hover:text-[#D4AF37] transition-colors" />
-                <div className="h-24 w-full flex items-center justify-center p-2">
-                  <img
-                    src="/taan.png"
-                    alt="TAAN Logo"
-                    className="max-h-50 max-w-[200px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                      e.currentTarget.nextElementSibling?.classList.remove("hidden");
-                    }}
-                  />
-                  <div className="hidden flex-col items-center">
-                    <span className="text-2xl font-black text-white tracking-widest">TAAN</span>
-                  </div>
-                </div>
-                <div className="mt-3 pt-3 border-t border-slate-800/80 w-full">
-                  <strong className="text-xs font-bold text-slate-200 block group-hover:text-[#D4AF37] transition-colors">TAAN Executive Member</strong>
-                  <span className="text-[11px] text-slate-300">Trekking Agencies' Association of Nepal</span>
-                </div>
-              </a>
-
-              <a
-                href="https://ntb.gov.np/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative rounded-2xl border border-slate-700/60 bg-slate-950/60 backdrop-blur-md hover:border-[#D4AF37]/80 transition-all p-6 flex flex-col items-center justify-center text-center group shadow-xl hover:bg-slate-900/80 cursor-pointer"
-              >
-                <ExternalLink size={14} className="absolute top-4 right-4 text-slate-400 group-hover:text-[#D4AF37] transition-colors" />
-                <div className="h-30 w-full flex items-center justify-center p-2">
-                  <img
-                    src="/ntb.png"
-                    alt="Nepal Tourism Board Logo"
-                    className="max-h-100 max-w-[100px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                      e.currentTarget.nextElementSibling?.classList.remove("hidden");
-                    }}
-                  />
-                  <div className="hidden flex-col items-center">
-                    <span className="text-2xl font-black text-white tracking-widest">NTB</span>
-                  </div>
-                </div>
-                <div className="mt-3 pt-3 border-t border-slate-800/80 w-full">
-                  <strong className="text-xs font-bold text-slate-200 block group-hover:text-[#D4AF37] transition-colors">NTB Licensed Operator</strong>
-                  <span className="text-[11px] text-slate-300">Government of Nepal Tourism Board</span>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. FEATURED PACKAGES SHOWCASE */}
-      <section className="relative py-20 border-b border-slate-800/80 bg-slate-950">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border-b border-slate-800/80 pb-5">
-            <div>
-              <span className="text-xs font-extrabold uppercase tracking-widest text-[#D4AF37]">
-                Best Seller & Trending Packages
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-white mt-1">
-                Featured Tour Packages
-              </h2>
-            </div>
-
-            <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-900 border border-slate-800 shrink-0">
-              <button
-                onClick={() => setActiveTab("inbound")}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-                  activeTab === "inbound"
-                    ? "bg-[#D4AF37] text-slate-950 shadow"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                <Compass size={14} />
-                <span>Inbound Nepal</span>
-              </button>
-              <button
-                onClick={() => setActiveTab("outbound")}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all ${
-                  activeTab === "outbound"
-                    ? "bg-[#D4AF37] text-slate-950 shadow"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                <Globe2 size={14} />
-                <span>Outbound International</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-3.5">
-            {currentTours.map((tour) => (
-              <Link
-                key={tour.id}
-                href={getTourHref(tour)}
-                className="group flex flex-col md:flex-row items-stretch rounded-2xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-sm p-3 hover:border-[#D4AF37]/50 transition-all duration-200 hover:bg-slate-900/90 shadow-md gap-4"
-              >
-                <div className="relative h-40 md:h-24 md:w-40 shrink-0 rounded-xl overflow-hidden">
-                  <img
-                    src={tour.image}
-                    alt={tour.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {tour.badge && (
-                    <span className="absolute top-2 left-2 rounded-md bg-slate-950/80 backdrop-blur-md px-2 py-0.5 text-[10px] font-bold text-[#D4AF37] border border-slate-700/50">
-                      {tour.badge}
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex-1 flex flex-col justify-center min-w-0">
-                  <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-400 mb-1">
-                    <span className="flex items-center gap-1 text-[#D4AF37] font-bold">
-                      <MapPin size={12} />
-                      <span className="truncate">{tour.locations}</span>
-                    </span>
-                    <span>•</span>
-                    <span className="flex items-center gap-1 shrink-0">
-                      <Calendar size={12} />
-                      {tour.duration}
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-bold text-white group-hover:text-[#D4AF37] transition-colors truncate">
-                    {tour.title}
-                  </h3>
-                </div>
-
-                <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center border-t md:border-t-0 md:border-l border-slate-800/80 pt-3 md:pt-0 md:pl-6 shrink-0 gap-2">
-                  <div className="flex items-center gap-1 text-xs font-bold text-amber-400">
-                    <Star size={12} className="fill-amber-400 text-amber-400" />
-                    <span>{tour.rating}</span>
-                    <span className="text-[10px] text-slate-500 font-normal">({tour.reviewsCount})</span>
-                  </div>
-
-                  <div className="flex items-center md:flex-col md:items-end gap-2 md:gap-0">
-                    <span className="text-[10px] text-slate-500 uppercase font-bold hidden md:block">Starting From</span>
-                    <span className="text-base font-black text-[#D4AF37]">{tour.price}</span>
-                  </div>
-
-                  <div className="text-xs font-bold text-slate-300 group-hover:text-white flex items-center gap-1 transition-colors">
-                    <span>View Itinerary</span>
-                    <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform text-[#D4AF37]" />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <Link
-              href={getCategoryOverviewHref()}
-              className="inline-flex items-center gap-2 text-xs font-bold text-[#D4AF37] hover:underline"
-            >
-              <span>Explore All {activeTab === "inbound" ? "Inbound Nepal" : "Outbound"} Packages</span>
-              <ArrowRight size={14} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. REVIEWS & TESTIMONIALS */}
-      <section className="relative py-24 bg-slate-950 overflow-hidden border-b border-slate-800/80">
-        <div
-          className="absolute inset-0 opacity-40 bg-cover bg-center pointer-events-none filter brightness-110 contrast-110"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2560&q=95')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070A11] via-[#070A11]/20 to-[#070A11]" />
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-1 text-amber-400 mb-2">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={14} className="fill-amber-400" />
-              ))}
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-white drop-shadow">
-              Trusted by Travel Agents & Guests
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-300 mt-2 font-medium">
-              Read authentic feedback from individual travelers, families, and international agency partners.
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#E3C58F]">
+              Our Approach
             </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {REVIEWS.map((rev) => (
-              <div
-                key={rev.id}
-                className="rounded-2xl border border-slate-700/60 bg-slate-950/65 backdrop-blur-md p-6 flex flex-col justify-between relative shadow-2xl"
+            <h3 className="mt-3 font-serif text-2xl leading-snug">
+              Every journey deserves thoughtful coordination.
+            </h3>
+
+            <p className="mt-4 text-sm leading-7 text-white/65">
+              We bring destination knowledge, operational planning, and
+              partner coordination together to help create smoother
+              experiences for travellers and travel businesses.
+            </p>
+
+            <div className="mt-7 border-t border-white/15 pt-5">
+
+              <Link
+                href="/contact-us"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-[#E3C58F] transition hover:text-white"
               >
-                <Quote size={28} className="text-[#D4AF37]/30 absolute top-4 right-4" />
+                Discuss Your Requirements
+                <ArrowRight size={15} />
+              </Link>
 
-                <div>
-                  <div className="flex items-center gap-1 text-amber-400 mb-3">
-                    {[...Array(rev.rating)].map((_, i) => (
-                      <Star key={i} size={12} className="fill-amber-400" />
-                    ))}
-                  </div>
+            </div>
 
-                  <p className="text-xs text-slate-200 leading-relaxed italic font-medium">
-                    "{rev.comment}"
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-slate-800">
-                  <strong className="block text-sm font-bold text-white">{rev.name}</strong>
-                  <span className="text-[11px] text-slate-400 block">{rev.role} • {rev.country}</span>
-                  <span className="mt-2 inline-block rounded-md bg-slate-800/80 px-2 py-0.5 text-[10px] font-medium text-[#D4AF37] border border-slate-700/50">
-                    Booked: {rev.package}
-                  </span>
-                </div>
-              </div>
-            ))}
           </div>
+
         </div>
+
       </section>
-    </div>
+
+      {/* ===================================================
+          5. MEMBERSHIPS & INDUSTRY LINKS
+      =================================================== */}
+
+      <section className="border-b border-[#E6DFD2] bg-[#FCFAF6]">
+
+        <div className="mx-auto max-w-[1320px] px-5 py-16 sm:px-8 lg:px-14 lg:py-20">
+
+          <div className="mx-auto mb-10 max-w-xl text-center">
+
+            <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#A44A3F]">
+              Industry Connections
+            </span>
+
+            <h2 className="mt-3 font-serif text-3xl text-[#172A3A] sm:text-4xl">
+              Connected to Nepal's Tourism Industry
+            </h2>
+
+            <p className="mt-3 text-sm leading-6 text-[#74766F]">
+              Explore organizations and tourism resources relevant to
+              Nepal's travel sector.
+            </p>
+
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+
+            {ACCREDITATIONS.map((item) => (
+              <a
+                key={item.title}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex min-w-0 items-center gap-4 border border-[#E6DFD2] bg-white p-5 transition hover:border-[#D4B477] hover:shadow-sm sm:flex-col sm:items-center sm:p-7 sm:text-center"
+              >
+
+                <div className="flex h-16 w-20 shrink-0 items-center justify-center">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    loading="lazy"
+                    className="max-h-14 max-w-full object-contain"
+                    onError={(event) => {
+                      event.currentTarget.style.display = "none";
+                    }}
+                  />
+                </div>
+
+                <div className="min-w-0 flex-1 sm:flex-none">
+
+                  <h3 className="text-sm font-semibold text-[#173747]">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-1 text-xs leading-5 text-[#74766F]">
+                    {item.desc}
+                  </p>
+
+                </div>
+
+                <ExternalLink
+                  size={15}
+                  className="shrink-0 text-[#A44A3F] transition group-hover:translate-x-0.5 sm:mt-1"
+                />
+
+              </a>
+            ))}
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* ===================================================
+          6. TESTIMONIALS
+      =================================================== */}
+
+      <section className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 sm:py-24 lg:px-14">
+
+        <div className="mb-10 max-w-2xl">
+
+          <div className="mb-4 flex items-center gap-3">
+            <span className="h-px w-9 bg-[#A44A3F]" />
+
+            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#A44A3F]">
+              Traveller Experiences
+            </span>
+          </div>
+
+          <h2 className="font-serif text-4xl leading-tight text-[#172A3A] sm:text-5xl">
+            The journey is better
+
+            <br className="hidden sm:block" />
+
+            <span className="italic text-[#A44A3F]">
+              {" "}when it feels personal.
+            </span>
+          </h2>
+
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+
+          {REVIEWS.map((review) => (
+            <article
+              key={review.id}
+              className="flex min-w-0 flex-col border border-[#E6DFD2] bg-white p-6 sm:p-7"
+            >
+
+              <div
+                className="flex items-center gap-1 text-[#B48A45]"
+                aria-label={`${review.rating} out of 5 stars`}
+              >
+                {Array.from({ length: review.rating }).map((_, index) => (
+                  <Star
+                    key={index}
+                    size={13}
+                    className="fill-current"
+                  />
+                ))}
+              </div>
+
+              <blockquote className="mt-6 flex-1 font-serif text-lg leading-7 text-[#344650]">
+                “{review.comment}”
+              </blockquote>
+
+              <div className="mt-7 border-t border-[#EEE9E0] pt-5">
+
+                <h3 className="text-sm font-semibold text-[#173747]">
+                  {review.name}
+                </h3>
+
+                <p className="mt-1 text-xs leading-5 text-[#74766F]">
+                  {review.role} · {review.country}
+                </p>
+
+                <p className="mt-4 text-[10px] font-semibold uppercase leading-5 tracking-[0.08em] text-[#A44A3F]">
+                  {review.package}
+                </p>
+
+              </div>
+
+            </article>
+          ))}
+
+        </div>
+
+      </section>
+
+      {/* ===================================================
+          7. FINAL CALL TO ACTION
+      =================================================== */}
+
+      <section className="px-5 pb-16 sm:px-8 sm:pb-20 lg:px-14">
+
+        <div className="relative mx-auto max-w-[1320px] overflow-hidden bg-[#EDE5D5] px-6 py-12 sm:px-12 sm:py-14 lg:px-16">
+
+          <div className="pointer-events-none absolute -right-10 -top-16 h-64 w-64 rounded-full border border-[#173747]/10" />
+
+          <div className="pointer-events-none absolute -right-2 -top-8 h-48 w-48 rounded-full border border-[#173747]/10" />
+
+          <div className="relative flex flex-col gap-7 md:flex-row md:items-center md:justify-between">
+
+            <div className="max-w-2xl">
+
+              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#A44A3F]">
+                Your Next Chapter Begins Here
+              </span>
+
+              <h2 className="mt-3 font-serif text-3xl leading-tight text-[#172A3A] sm:text-4xl">
+                Let's make your next journey memorable.
+              </h2>
+
+              <p className="mt-3 text-sm leading-6 text-[#626B68]">
+                Tell us where you want to go. We'll help you plan the way.
+              </p>
+
+            </div>
+
+            <Link
+              href="/contact-us"
+              className="inline-flex shrink-0 items-center justify-center gap-3 self-start bg-[#173747] px-7 py-4 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition hover:bg-[#A44A3F] md:self-center"
+            >
+              Start Planning
+              <ArrowRight size={16} />
+            </Link>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
   );
 }

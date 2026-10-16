@@ -1,5 +1,7 @@
 "use client";
 
+declare module "lucide-react";
+
 import React, { useState } from "react";
 import {
   Send,

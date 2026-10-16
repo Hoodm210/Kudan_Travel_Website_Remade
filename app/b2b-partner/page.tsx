@@ -143,14 +143,14 @@ export default function B2BPartnerPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <main className="bg-[#F7F5F0] text-[#172A3A] font-serif selection:bg-[#A44A3F] selection:text-white min-h-screen relative overflow-x-hidden py-12 lg:py-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Back Button */}
         <div>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-[#D4AF37] transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-sans font-extrabold uppercase tracking-widest text-stone-500 hover:text-[#A44A3F] transition-colors"
           >
             <ArrowLeft size={14} />
             <span>Back to Home</span>
@@ -158,45 +158,45 @@ export default function B2BPartnerPage() {
         </div>
 
         {/* Header */}
-        <div className="text-center space-y-3">
-          <span className="text-xs font-black uppercase tracking-[0.3em] text-[#D4AF37]">
+        <div className="text-center space-y-3 font-sans">
+          <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#A44A3F]">
             Kudan Travel & Tours B2B Portal
           </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-white">
+          <h1 className="text-3xl sm:text-4xl font-serif font-bold text-[#172A3A]">
             Partner With Us (B2B Rates)
           </h1>
-          <p className="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+          <p className="text-stone-600 text-sm sm:text-base max-w-2xl mx-auto font-normal">
             Join our global network of travel partners to access exclusive B2B tariffs, curated itineraries, and dedicated operational support.
           </p>
         </div>
 
         {/* Form or Success View */}
-        <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-10 shadow-2xl">
+        <div className="rounded-none border border-stone-200/90 bg-white p-6 sm:p-10 shadow-sm font-sans">
           {submitted ? (
             <div className="text-center space-y-6 py-10">
-              <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mx-auto">
+              <div className="inline-flex h-16 w-16 items-center justify-center bg-emerald-50 border border-emerald-200 text-emerald-600 mx-auto">
                 <CheckCircle2 size={32} />
               </div>
               <div className="space-y-2 max-w-lg mx-auto">
-                <h2 className="text-2xl font-black text-white">Application Received</h2>
-                <p className="text-slate-300 text-sm leading-relaxed">
-                  We have received your business details and documents. Our management team will review your application and contact you within <strong className="text-white">24 hours</strong>.
+                <h2 className="text-2xl font-serif font-bold text-[#172A3A]">Application Received</h2>
+                <p className="text-stone-600 text-sm leading-relaxed font-normal">
+                  We have received your business details and documents. Our management team will review your application and contact you within <strong className="text-[#172A3A]">24 hours</strong>.
                 </p>
               </div>
 
               {/* Emergency WhatsApp Card */}
-              <div className="rounded-2xl border border-amber-500/30 bg-amber-950/20 p-5 max-w-md mx-auto space-y-3">
-                <p className="text-xs uppercase tracking-widest font-black text-[#D4AF37]">
+              <div className="border border-stone-300 bg-[#EFECE6] p-5 max-w-md mx-auto space-y-3">
+                <p className="text-[10px] uppercase tracking-widest font-extrabold text-[#A44A3F]">
                   Need Immediate Assistance?
                 </p>
-                <p className="text-xs text-slate-300">
+                <p className="text-xs text-stone-600 font-normal">
                   In case of an urgent inquiry or emergency, reach out to our desk directly via WhatsApp:
                 </p>
                 <a
                   href="https://wa.me/9779843502155"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-green-600 hover:bg-green-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg"
+                  className="inline-flex items-center justify-center gap-2 w-full py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-xs"
                 >
                   <MessageCircle size={16} />
                   <span>Chat on WhatsApp (+977 9843502155)</span>
@@ -211,27 +211,27 @@ export default function B2BPartnerPage() {
                     setFormData(INITIAL_FORM);
                     setSelectedFiles([]);
                   }}
-                  className="text-xs text-slate-400 hover:text-white underline"
+                  className="text-xs text-stone-500 hover:text-[#A44A3F] underline"
                 >
                   Submit another application
                 </button>
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-8 font-sans">
               
               {/* SECTION 1: BUSINESS DETAILS */}
               <div className="space-y-4">
-                <div className="border-b border-slate-800 pb-2">
-                  <h2 className="text-base font-black uppercase tracking-wider text-[#D4AF37] flex items-center gap-2">
-                    <Building2 size={18} />
+                <div className="border-b border-stone-200 pb-2">
+                  <h2 className="text-xs font-extrabold uppercase tracking-widest text-[#A44A3F] flex items-center gap-2">
+                    <Building2 size={16} />
                     <span>1. Business Information</span>
                   </h2>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Company Legal Name *</label>
+                    <label className="text-xs font-bold text-stone-700">Company Legal Name *</label>
                     <input
                       type="text"
                       name="companyName"
@@ -239,12 +239,12 @@ export default function B2BPartnerPage() {
                       value={formData.companyName}
                       onChange={handleChange}
                       placeholder="e.g. Himalayan Horizon Travels Pvt. Ltd."
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Business Registration / PAN Number *</label>
+                    <label className="text-xs font-bold text-stone-700">Business Registration / PAN Number *</label>
                     <input
                       type="text"
                       name="registrationNumber"
@@ -252,17 +252,17 @@ export default function B2BPartnerPage() {
                       value={formData.registrationNumber}
                       onChange={handleChange}
                       placeholder="Registration or Tax ID"
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Business Type</label>
+                    <label className="text-xs font-bold text-stone-700">Business Type</label>
                     <select
                       name="businessType"
                       value={formData.businessType}
                       onChange={handleChange}
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] focus:border-[#A44A3F] focus:outline-none"
                     >
                       <option value="Travel Agency">Travel Agency</option>
                       <option value="Tour Operator">Tour Operator</option>
@@ -273,7 +273,7 @@ export default function B2BPartnerPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Official Company Email *</label>
+                    <label className="text-xs font-bold text-stone-700">Official Company Email *</label>
                     <input
                       type="email"
                       name="officialEmail"
@@ -281,12 +281,12 @@ export default function B2BPartnerPage() {
                       value={formData.officialEmail}
                       onChange={handleChange}
                       placeholder="partners@company.com"
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Official Phone Number *</label>
+                    <label className="text-xs font-bold text-stone-700">Official Phone Number *</label>
                     <input
                       type="tel"
                       name="officialPhone"
@@ -294,24 +294,24 @@ export default function B2BPartnerPage() {
                       value={formData.officialPhone}
                       onChange={handleChange}
                       placeholder="+977 ... or international code"
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Company Website</label>
+                    <label className="text-xs font-bold text-stone-700">Company Website</label>
                     <input
                       type="text"
                       name="website"
                       value={formData.website}
                       onChange={handleChange}
                       placeholder="https://www.company.com"
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Country *</label>
+                    <label className="text-xs font-bold text-stone-700">Country *</label>
                     <input
                       type="text"
                       name="country"
@@ -319,12 +319,12 @@ export default function B2BPartnerPage() {
                       value={formData.country}
                       onChange={handleChange}
                       placeholder="Country"
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">City / Office Address *</label>
+                    <label className="text-xs font-bold text-stone-700">City / Office Address *</label>
                     <input
                       type="text"
                       name="address"
@@ -332,7 +332,7 @@ export default function B2BPartnerPage() {
                       value={formData.address}
                       onChange={handleChange}
                       placeholder="Street address and city"
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
                 </div>
@@ -340,16 +340,16 @@ export default function B2BPartnerPage() {
 
               {/* SECTION 2: OWNER / REPRESENTATIVE DETAILS */}
               <div className="space-y-4 pt-4">
-                <div className="border-b border-slate-800 pb-2">
-                  <h2 className="text-base font-black uppercase tracking-wider text-[#D4AF37] flex items-center gap-2">
-                    <User size={18} />
+                <div className="border-b border-stone-200 pb-2">
+                  <h2 className="text-xs font-extrabold uppercase tracking-widest text-[#A44A3F] flex items-center gap-2">
+                    <User size={16} />
                     <span>2. Owner / Authorized Representative Details</span>
                   </h2>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Representative Full Name *</label>
+                    <label className="text-xs font-bold text-stone-700">Representative Full Name *</label>
                     <input
                       type="text"
                       name="representativeName"
@@ -357,12 +357,12 @@ export default function B2BPartnerPage() {
                       value={formData.representativeName}
                       onChange={handleChange}
                       placeholder="Full Name"
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Designation / Title *</label>
+                    <label className="text-xs font-bold text-stone-700">Designation / Title *</label>
                     <input
                       type="text"
                       name="representativeTitle"
@@ -370,12 +370,12 @@ export default function B2BPartnerPage() {
                       value={formData.representativeTitle}
                       onChange={handleChange}
                       placeholder="e.g. Managing Director / CEO / Head of Operations"
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Direct Email *</label>
+                    <label className="text-xs font-bold text-stone-700">Direct Email *</label>
                     <input
                       type="email"
                       name="representativeEmail"
@@ -383,12 +383,12 @@ export default function B2BPartnerPage() {
                       value={formData.representativeEmail}
                       onChange={handleChange}
                       placeholder="personal.email@company.com"
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-300">Direct Phone / WhatsApp *</label>
+                    <label className="text-xs font-bold text-stone-700">Direct Phone / WhatsApp *</label>
                     <input
                       type="tel"
                       name="representativePhone"
@@ -396,7 +396,7 @@ export default function B2BPartnerPage() {
                       value={formData.representativePhone}
                       onChange={handleChange}
                       placeholder="+977 98XXXXXXXX"
-                      className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+                      className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none"
                     />
                   </div>
                 </div>
@@ -404,22 +404,22 @@ export default function B2BPartnerPage() {
 
               {/* SECTION 3: DOCUMENT UPLOADS (PDF ONLY, MAX 3MB) */}
               <div className="space-y-4 pt-4">
-                <div className="border-b border-slate-800 pb-2">
-                  <h2 className="text-base font-black uppercase tracking-wider text-[#D4AF37] flex items-center gap-2">
-                    <FileUp size={18} />
+                <div className="border-b border-stone-200 pb-2">
+                  <h2 className="text-xs font-extrabold uppercase tracking-widest text-[#A44A3F] flex items-center gap-2">
+                    <FileUp size={16} />
                     <span>3. Business Verification Documents</span>
                   </h2>
-                  <p className="text-xs text-slate-400 mt-1">
-                    Upload official registration or tax certificate. <strong className="text-amber-400">PDF format only, maximum 3 MB per file.</strong>
+                  <p className="text-xs text-stone-500 mt-1 font-normal">
+                    Upload official registration or tax certificate. <strong className="text-[#A44A3F]">PDF format only, maximum 3 MB per file.</strong>
                   </p>
                 </div>
 
-                <div className="rounded-2xl border-2 border-dashed border-slate-800 bg-slate-950 p-6 text-center space-y-3">
-                  <div className="mx-auto h-12 w-12 rounded-xl bg-slate-900 flex items-center justify-center text-[#D4AF37]">
+                <div className="border-2 border-dashed border-stone-300 bg-[#EFECE6] p-6 text-center space-y-3">
+                  <div className="mx-auto h-12 w-12 bg-white border border-stone-300 flex items-center justify-center text-[#A44A3F]">
                     <FileText size={22} />
                   </div>
                   <div>
-                    <label className="relative cursor-pointer rounded-xl bg-slate-800 px-4 py-2.5 text-xs font-bold text-white hover:bg-slate-700 transition-all inline-block">
+                    <label className="relative cursor-pointer bg-white border border-stone-300 px-4 py-2.5 text-xs font-extrabold text-[#172A3A] hover:bg-stone-50 transition-all inline-block shadow-xs">
                       <span>Browse PDF Files</span>
                       <input
                         type="file"
@@ -429,12 +429,12 @@ export default function B2BPartnerPage() {
                         className="sr-only"
                       />
                     </label>
-                    <p className="text-xs text-slate-500 mt-2">Maximum file size: 3 MB (.pdf)</p>
+                    <p className="text-xs text-stone-500 mt-2 font-normal">Maximum file size: 3 MB (.pdf)</p>
                   </div>
                 </div>
 
                 {fileError && (
-                  <div className="flex items-center gap-2 text-rose-400 text-xs bg-rose-950/30 border border-rose-500/30 p-3 rounded-xl">
+                  <div className="flex items-center gap-2 text-rose-700 text-xs bg-rose-50 border border-rose-200 p-3">
                     <AlertCircle size={15} />
                     <span>{fileError}</span>
                   </div>
@@ -443,22 +443,22 @@ export default function B2BPartnerPage() {
                 {/* Selected Files Display List */}
                 {selectedFiles.length > 0 && (
                   <div className="space-y-2">
-                    <p className="text-xs font-bold text-slate-300">Selected Documents ({selectedFiles.length}):</p>
+                    <p className="text-xs font-bold text-stone-700">Selected Documents ({selectedFiles.length}):</p>
                     <div className="space-y-2">
                       {selectedFiles.map((file, index) => (
                         <div
                           key={index}
-                          className="flex items-center justify-between rounded-xl bg-slate-950 border border-slate-800 px-4 py-2.5 text-xs"
+                          className="flex items-center justify-between bg-[#EFECE6] border border-stone-300 px-4 py-2.5 text-xs"
                         >
-                          <div className="flex items-center gap-2 truncate text-slate-300">
-                            <FileText size={14} className="text-[#D4AF37]" />
+                          <div className="flex items-center gap-2 truncate text-stone-700 font-normal">
+                            <FileText size={14} className="text-[#A44A3F]" />
                             <span className="truncate">{file.name}</span>
-                            <span className="text-slate-500">({(file.size / (1024 * 1024)).toFixed(2)} MB)</span>
+                            <span className="text-stone-500">({(file.size / (1024 * 1024)).toFixed(2)} MB)</span>
                           </div>
                           <button
                             type="button"
                             onClick={() => handleRemoveFile(index)}
-                            className="text-slate-500 hover:text-rose-400 p-1"
+                            className="text-stone-400 hover:text-rose-600 p-1"
                           >
                             <X size={15} />
                           </button>
@@ -471,19 +471,19 @@ export default function B2BPartnerPage() {
 
               {/* SECTION 4: ADDITIONAL NOTES */}
               <div className="space-y-4 pt-4">
-                <div className="border-b border-slate-800 pb-2">
-                  <h2 className="text-base font-black uppercase tracking-wider text-[#D4AF37]">
+                <div className="border-b border-stone-200 pb-2">
+                  <h2 className="text-xs font-extrabold uppercase tracking-widest text-[#A44A3F]">
                     4. Additional Information
                   </h2>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300">Estimated Monthly Pax / Client Volume</label>
+                  <label className="text-xs font-bold text-stone-700">Estimated Monthly Pax / Client Volume</label>
                   <select
                     name="estimatedVolume"
                     value={formData.estimatedVolume}
                     onChange={handleChange}
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none"
+                    className="w-full bg-[#EFECE6] border border-stone-300 px-4 py-3 text-sm text-[#172A3A] focus:border-[#A44A3F] focus:outline-none"
                   >
                     <option value="1-10 pax / month">1 - 10 pax / month</option>
                     <option value="10-30 pax / month">10 - 30 pax / month</option>
@@ -493,14 +493,14 @@ export default function B2BPartnerPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300">Special Notes or Requirements</label>
+                  <label className="text-xs font-bold text-stone-700">Special Notes or Requirements</label>
                   <textarea
                     name="additionalNotes"
                     rows={4}
                     value={formData.additionalNotes}
                     onChange={handleChange}
                     placeholder="Tell us about specific destinations or regions you are interested in..."
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 p-4 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none resize-y"
+                    className="w-full bg-[#EFECE6] border border-stone-300 p-4 text-sm text-[#172A3A] placeholder-stone-400 focus:border-[#A44A3F] focus:outline-none resize-y font-normal"
                   />
                 </div>
               </div>
@@ -509,7 +509,7 @@ export default function B2BPartnerPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full rounded-xl bg-gradient-to-r from-[#D4AF37] via-amber-400 to-[#B8860B] py-4 text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg hover:scale-[1.01] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full bg-[#172A3A] hover:bg-[#A44A3F] py-4 text-xs font-extrabold uppercase tracking-widest text-white shadow-xs transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <>

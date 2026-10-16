@@ -125,8 +125,8 @@ export default function Header() {
         {/* Thin tricolour ribbon, inspired by Nepal's flag without reproducing it literally */}
         <div className="absolute inset-x-0 top-0 flex h-[3px]">
           <span className="w-[17%] bg-[#B32636]" />
-          <span className="w-[66%] bg-gradient-to-r from-[#B88A3B]/70 via-[#E9D6A7] to-[#B88A3B]/70" />
-          <span className="w-[17%] bg-[#173B68]" />
+          <span className="w-[20%] bg-gradient-to-r from-[#B88A3B]/70 via-[#E9D6A7] to-[#B88A3B]/70" />
+          <span className="w-[10%] bg-[#173B68]" />
         </div>
 
         <div className="relative mx-auto flex min-h-[86px] max-w-7xl items-center justify-between gap-5 px-4 py-3 sm:px-6 lg:min-h-[100px] lg:px-8">
@@ -136,20 +136,19 @@ export default function Header() {
           <Link
             href="/"
             onClick={() => setOpen(false)}
-            className="group relative z-10 flex min-w-0 items-center gap-3.5 focus:outline-none"
+            className="group relative z-10 flex min-w-0 items-center gap-2.5 focus:outline-none"
             aria-label="Kudan Travel and Tours home"
           >
-            <div className="relative flex h-[58px] w-[66px] shrink-0 items-center justify-center rounded-tl-2xl rounded-br-2xl border border-[#D8C49B]/80 bg-white p-2 shadow-[0_3px_12px_rgba(16,29,50,0.07)] transition-all duration-300 group-hover:border-[#B32636]/45 group-hover:shadow-md sm:h-[66px] sm:w-[74px]">
-              <span className="absolute -right-1.5 -top-1.5 h-3 w-3 rounded-full border-2 border-[#FFFEFB] bg-[#B32636]" />
+            <div className="relative flex h-[58px] w-[66px] shrink-0 items-center justify-center p-1 sm:h-[66px] sm:w-[110px]">
               <img src="/logo.png" alt="Kudan Travel & Tours logo" className="h-full w-full object-contain" />
             </div>
 
             <div className="relative min-w-0 border-l border-[#D8C49B] pl-3.5 sm:pl-4">
               <div className="flex items-baseline gap-1.5 whitespace-nowrap">
-                <span className="font-serif text-[21px] font-bold leading-none tracking-[0.035em] text-[#101D32] transition-colors group-hover:text-[#A92332] sm:text-[25px] lg:text-[29px]">
+                <span className="font-serif text-[21px] font-bold leading-none tracking-[0.035em] text-[#0047AB] transition-colors group-hover:text-[#A92332] sm:text-[25px] lg:text-[29px]">
                   KUDAN
                 </span>
-                <span className="font-serif text-[21px] font-normal leading-none tracking-tight text-[#A92332] sm:text-[25px] lg:text-[29px]">
+                <span className="font-serif text-[21px] font-bold leading-none tracking-tight text-[#101D32] sm:text-[25px] lg:text-[29px]">
                   TRAVEL
                 </span>
               </div>

@@ -165,7 +165,7 @@ const REVIEWS = [
 ];
 
 /* =========================================================
-    INDUSTRY LINKS
+    INDUSTRY LINKS (With Individual Sizing Classes)
 ========================================================= */
 
 const ACCREDITATIONS = [
@@ -174,18 +174,21 @@ const ACCREDITATIONS = [
     src: "/natta.png",
     title: "NATTA",
     subtitle: "Nepal Association of Tour & Travel Agents",
+    imgClass: "w-32 h-20 object-contain", // <-- Change size for NATTA here
   },
   {
     href: "https://www.taan.org.np/",
     src: "/taan.png",
     title: "TAAN",
     subtitle: "Trekking Agencies' Association of Nepal",
+    imgClass: "w-28 h-28 object-contain", // <-- Change size for TAAN here
   },
   {
     href: "https://ntb.gov.np/",
     src: "/ntb.png",
     title: "Nepal Tourism Board",
     subtitle: "Official National Tourism Authority",
+    imgClass: "w-36 h-24 object-contain", // <-- Change size for NTB here
   },
 ];
 
@@ -211,46 +214,46 @@ export default function LuxuryLandingSection() {
 
       {/* ===================================================
           1. HERO — FULL BACKGROUND KUMARI.PNG & SEPARATE FLAG.GIF
-      =================================================== */}
+      ================================================== */}
 
       <section className="relative isolate flex min-h-[620px] items-center overflow-hidden bg-[#102B3A] sm:min-h-[680px] lg:min-h-[750px]">
-        {/* SEPARATE ANIMATED NEPAL FLAG BADGE */}
-          <div className="hidden lg:flex flex-col justify-top relative">
-            <div className="  shadow-2x1 backdrop-blur-md flex flex-col items-Top">
-              <img
-                src="/flag.gif"
-                alt="Animated Nepal Flag"
-                className="h-44 w-auto object-contain"
-              />
-              <span className="mt-2 text-[20px] font-black uppercase tracking-[0.2em] text-[#ffffff]">
-                Nepal
-              </span>
-            </div>
-          </div>
-
-        {/* Full Background Kumari Image with subtle contrast gradient */}
+        
+        {/* Full Background Kumari Image optimized for mobile and desktop */}
         <img
           src="/kumari.png"
           alt="Kumari Goddess heritage background representation of Nepal"
           fetchPriority="high"
-          className="absolute inset-0 -z-20 h-full w-full object-cover object-center scale-105"
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-right sm:object-center"
         />
 
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071923]/90 via-[#0B202C]/20 to-[#102B3A]/0" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#071923]/40 via-transparent to-black/20" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071923]/95 via-[#0B202C]/60 to-[#102B3A]/30 sm:from-[#071923]/90 sm:via-[#0B202C]/20 sm:to-[#102B3A]/0" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#071923]/70 via-transparent to-black/30" />
 
-        <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between px-5 py-20 sm:px-8 lg:px-14">
+        <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between px-5 py-16 sm:px-8 lg:px-14">
 
           <div className="max-w-3xl text-white">
 
-            <div className="mb-6 inline-flex items-center gap-2 border-l-2 border-[#D4B477] pl-4 bg-black/20 py-1 px-3 backdrop-blur-xs">
+            {/* ANIMATED NEPAL FLAG BADGE (Bigger size: h-12 sm:h-16) */}
+            <div className="mb-6 inline-flex items-center gap-3.5 bg-black/40 py-2 px-4 backdrop-blur-md border border-white/10 shadow-lg">
+              <img
+                src="/flag.gif"
+                alt="Animated Nepal Flag"
+                className="h-12 sm:h-16 w-auto object-contain"
+              />
+              <span className="h-6 w-px bg-white/20" />
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-[#ffffff] sm:text-sm">
+                Nepal
+              </span>
+            </div>
+
+            <div className="mb-4 inline-flex items-center gap-2 border-l-2 border-[#D4B477] pl-4 bg-black/20 py-1 px-3 backdrop-blur-xs">
               <Sparkles size={16} className="text-[#E3C58F]" />
               <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#F0D9AC] sm:text-xs">
                 The Living Goddess Heritage & Culture
               </span>
             </div>
 
-            <h1 className="max-w-3xl font-serif text-4xl font-medium leading-[1.08] tracking-tight sm:text-6xl lg:text-[72px]">
+            <h1 className="max-w-3xl font-serif text-3xl font-medium leading-[1.1] tracking-tight sm:text-6xl lg:text-[72px]">
               Sacred traditions,
               <br />
               royal heritage,
@@ -260,7 +263,7 @@ export default function LuxuryLandingSection() {
               </span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-sm leading-7 text-white/90 sm:text-base sm:leading-8">
+            <p className="mt-5 max-w-xl text-sm leading-6 text-white/95 sm:text-base sm:leading-8">
               Experience the profound cultural heartbeat of Kathmandu Valley, majestic Himalayan vistas, and warm Nepalese hospitality curated with absolute precision.
             </p>
 
@@ -275,14 +278,14 @@ export default function LuxuryLandingSection() {
 
               <Link
                 href="/contact-us"
-                className="inline-flex min-h-12 items-center justify-center gap-3 border border-white/50 bg-white/5 px-7 py-4 text-xs font-bold uppercase tracking-[0.13em] text-white backdrop-blur-sm transition hover:bg-white hover:text-[#172A3A]"
+                className="inline-flex min-h-12 items-center justify-center gap-3 border border-white/50 bg-white/10 px-7 py-4 text-xs font-bold uppercase tracking-[0.13em] text-white backdrop-blur-sm transition hover:bg-white hover:text-[#172A3A]"
               >
                 Plan Your Journey
                 <ChevronRight size={16} />
               </Link>
             </div>
 
-            <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-4 border-t border-white/20 pt-6 text-xs text-white/80">
+            <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-4 border-t border-white/20 pt-6 text-xs text-white/90">
               <span className="flex items-center gap-2">
                 <Mountain size={16} className="text-[#E3C58F]" />
                 Himalayan Expeditions
@@ -299,8 +302,6 @@ export default function LuxuryLandingSection() {
 
           </div>
 
-          
-
         </div>
 
       </section>
@@ -308,7 +309,7 @@ export default function LuxuryLandingSection() {
 
       {/* ===================================================
           2. INTRODUCTION STRIP
-      =================================================== */}
+      ================================================== */}
 
       <section className="border-b border-[#E6DFD2] bg-[#FCFAF6]">
         <div className="mx-auto grid max-w-[1320px] grid-cols-1 gap-6 px-5 py-8 sm:grid-cols-3 sm:px-8 lg:px-14">
@@ -344,12 +345,11 @@ export default function LuxuryLandingSection() {
             </div>
           ))}
         </div>
-        
       </section>
 
       {/* ===================================================
           3. FEATURED TOUR PACKAGES
-      =================================================== */}
+      ================================================== */}
 
       <section
         id="featured-tours"
@@ -477,7 +477,7 @@ export default function LuxuryLandingSection() {
 
       {/* ===================================================
           4. B2B PARTNERSHIP
-      =================================================== */}
+      ================================================== */}
 
       <section className="relative overflow-hidden bg-[#102B3A] text-white">
         <div className="pointer-events-none absolute -right-20 -top-24 h-80 w-80 rounded-full border border-white/[0.08]" />
@@ -549,8 +549,8 @@ export default function LuxuryLandingSection() {
       </section>
 
       {/* ===================================================
-          5. MEMBERSHIPS & INDUSTRY LINKS (CREAM BACKGROUND WITH PROMINENT NAVY BLUE LOGO BOXES)
-      =================================================== */}
+          5. MEMBERSHIPS & INDUSTRY LINKS (With Individual Sizing)
+      ================================================== */}
 
       <section className="border-b border-[#E6DFD2] bg-[#FCFAF6] py-16 lg:py-24">
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-14">
@@ -575,18 +575,18 @@ export default function LuxuryLandingSection() {
                 rel="noopener noreferrer"
                 className="group flex flex-col items-center bg-white border border-[#E6DFD2] p-8 text-center transition-all duration-300 hover:border-[#D4B477] hover:shadow-xl"
               >
-                {/* Large, crystal clear Navy Blue display box */}
-                <div className="w-full gap-0 h-50 bg-[#102B3A]/80 flex items-center justify-center shadow-inner mb-6 transition-transform duration-300 group-hover:scale-105">
-  <img
-    src={item.src}
-    alt={item.title}
-    loading="lazy"
-    className="w-30 h-30 object-contain filter brightness-125 drop-shadow-lg"
-    onError={(event) => {
-      event.currentTarget.style.display = "none";
-    }}
-  />
-</div>
+                {/* Logo Box with individual image sizing via item.imgClass */}
+                <div className="w-full h-44 bg-[#102B3A]/80 flex items-center justify-center shadow-inner mb-6 transition-transform duration-300 group-hover:scale-105 px-4">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    loading="lazy"
+                    className={`${item.imgClass} filter brightness-125 drop-shadow-lg`}
+                    onError={(event) => {
+                      event.currentTarget.style.display = "none";
+                    }}
+                  />
+                </div>
 
                 <h3 className="text-lg font-serif font-bold text-[#102B3A] group-hover:text-[#A44A3F] transition-colors">
                   {item.title}
@@ -607,7 +607,7 @@ export default function LuxuryLandingSection() {
 
       {/* ===================================================
           6. TESTIMONIALS
-      =================================================== */}
+      ================================================== */}
 
       <section className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 sm:py-24 lg:px-14">
         <div className="mb-10 max-w-2xl">
@@ -661,7 +661,7 @@ export default function LuxuryLandingSection() {
 
       {/* ===================================================
           7. FINAL CALL TO ACTION
-      =================================================== */}
+      ================================================== */}
 
       <section className="px-5 pb-16 sm:px-8 sm:pb-20 lg:px-14">
         <div className="relative mx-auto max-w-[1320px] overflow-hidden bg-[#EDE5D5] px-6 py-12 sm:px-12 sm:py-14 lg:px-16 shadow-md">

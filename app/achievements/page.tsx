@@ -376,11 +376,11 @@ export default function Achievements() {
   });
 
   return (
-    <div className="bg-[#F7F5F0] text-[#172A3A] font-serif selection:bg-[#A44A3F] selection:text-white min-h-screen relative overflow-x-hidden py-12 lg:py-20">
+    <div className="bg-[#F7F5F0] text-[#172A3A] font-serif selection:bg-[#A44A3F] selection:text-white min-h-screen relative overflow-x-hidden py-8 sm:py-12 lg:py-20">
       
       {/* HEADER SECTION */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl mb-16">
-        <div className="flex items-center gap-2 mb-6">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl mb-12 sm:mb-16">
+        <div className="flex items-center gap-2 mb-4 sm:mb-6">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-xs font-sans font-extrabold uppercase tracking-widest text-stone-500 hover:text-[#A44A3F] transition-colors"
@@ -395,16 +395,16 @@ export default function Achievements() {
             <Sparkles size={13} className="text-[#A44A3F]" />
             100% Verified Credentials & Milestones
           </span>
-          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#172A3A] mt-2">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#172A3A] mt-2">
             Our Official Honors & Awards
           </h1>
-          <p className="mt-3 max-w-3xl text-sm sm:text-base leading-relaxed text-stone-600 font-normal">
+          <p className="mt-3 max-w-3xl text-xs sm:text-sm lg:text-base leading-relaxed text-stone-600 font-normal">
             Showcasing our official authorizations, partner hotel recognitions, and industry excellence milestones across South Asia.
           </p>
         </div>
 
         {/* STATS OVERVIEW CARDS */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 font-sans">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-3 font-sans">
           {[
             { number: "24", label: "Official Certificates & Honors", highlight: "24 Industry Milestones" },
             { number: "Partners", label: "Core Hotel & Airline Affiliations", highlight: "Full Sector Approval" },
@@ -412,13 +412,13 @@ export default function Achievements() {
           ].map((stat, idx) => (
             <div 
               key={idx}
-              className="bg-white border border-stone-200/90 p-5 shadow-sm"
+              className="bg-white border border-stone-200/90 p-4 sm:p-5 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <span className="text-2xl sm:text-3xl font-serif font-bold text-[#172A3A]">
                   {stat.number}
                 </span>
-                <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+                <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0" />
               </div>
               <p className="mt-2 text-xs font-bold uppercase tracking-wider text-stone-700">
                 {stat.label}
@@ -433,7 +433,8 @@ export default function Achievements() {
 
       {/* FILTER & GALLERY SECTION */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-        <div className="flex flex-wrap gap-2 pb-6 border-b border-stone-200/90 font-sans">
+        {/* Responsive Flex Filter Bar */}
+        <div className="flex flex-wrap items-center gap-2 pb-6 border-b border-stone-200/90 font-sans">
           {[
             { label: "All Credentials (24)", value: "all" },
             { label: "Government & NTB", value: "government" },
@@ -444,7 +445,7 @@ export default function Achievements() {
             <button
               key={tab.value}
               onClick={() => setFilter(tab.value)}
-              className={`px-4 py-2 text-xs font-extrabold uppercase tracking-widest transition-all ${
+              className={`px-3 sm:px-4 py-2 text-[11px] sm:text-xs font-extrabold uppercase tracking-wider sm:tracking-widest transition-all ${
                 filter === tab.value
                   ? "bg-[#172A3A] text-white shadow-xs"
                   : "border border-stone-300 bg-white text-stone-700 hover:border-[#A44A3F] hover:text-[#A44A3F]"
@@ -456,7 +457,7 @@ export default function Achievements() {
         </div>
 
         {/* CERTIFICATE GRID */}
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 font-sans">
+        <div className="mt-8 sm:mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 font-sans">
           {filteredCertificates.map((cert) => {
             const Icon = cert.icon;
             return (
@@ -466,7 +467,7 @@ export default function Achievements() {
               >
                 <div>
                   {/* BORDERLESS IMAGE CONTAINER */}
-                  <div className="relative h-64 w-full bg-stone-100 overflow-hidden flex items-center justify-center p-2">
+                  <div className="relative h-56 sm:h-64 w-full bg-stone-100 overflow-hidden flex items-center justify-center p-2">
                     <img
                       src={cert.image}
                       alt={cert.title}
@@ -495,7 +496,7 @@ export default function Achievements() {
 
                   <div className="mt-4">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-[#A44A3F]">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-[#A44A3F] min-w-0">
                         <Icon size={13} className="shrink-0 text-[#A44A3F]" />
                         <span className="truncate">{cert.issuer}</span>
                       </span>
@@ -504,10 +505,10 @@ export default function Achievements() {
                       </span>
                     </div>
 
-                    <h3 className="mt-2 text-lg font-serif font-bold text-[#172A3A] group-hover:text-[#A44A3F] transition-colors leading-snug">
+                    <h3 className="mt-2 text-base sm:text-lg font-serif font-bold text-[#172A3A] group-hover:text-[#A44A3F] transition-colors leading-snug">
                       {cert.title}
                     </h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-stone-600 font-normal">
+                    <p className="mt-1.5 text-xs leading-relaxed text-stone-600 font-normal line-clamp-2">
                       {cert.description}
                     </p>
                   </div>
@@ -529,15 +530,15 @@ export default function Achievements() {
       {/* INTERACTIVE ZOOM & PAN MODAL PORTAL */}
       {mounted && selectedCert && createPortal(
         <div
-          className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/80 p-4 sm:p-6 backdrop-blur-sm font-sans"
+          className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/80 p-3 sm:p-6 backdrop-blur-sm font-sans"
           onClick={() => setSelectedCert(null)}
         >
           <div 
-            className="relative max-w-4xl w-full bg-white border border-stone-200 p-6 sm:p-8 shadow-2xl"
+            className="relative max-w-4xl w-full bg-white border border-stone-200 p-4 sm:p-8 shadow-2xl max-h-[92vh] flex flex-col overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Control Bar */}
-            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-4 sm:absolute sm:top-6 sm:right-6 sm:z-20">
               <div className="flex items-center gap-1 border border-stone-300 bg-[#EFECE6] p-1">
                 <button
                   onClick={handleZoomIn}
@@ -580,7 +581,7 @@ export default function Achievements() {
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseUp}
-              className={`relative w-full h-[55vh] sm:h-[65vh] bg-stone-100 border border-stone-200 p-4 flex items-center justify-center overflow-hidden ${
+              className={`relative w-full h-[50vh] sm:h-[65vh] bg-stone-100 border border-stone-200 p-2 sm:p-4 flex items-center justify-center overflow-hidden mt-2 sm:mt-0 ${
                 scale > 1 ? (isDragging ? "cursor-grabbing" : "cursor-grab") : "cursor-default"
               }`}
             >
@@ -598,10 +599,10 @@ export default function Achievements() {
             </div>
 
             {/* Modal Info Footer */}
-            <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-stone-200 pt-4">
+            <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-stone-200 pt-4">
               <div>
-                <div className="flex items-center gap-3">
-                  <h3 className="text-xl font-serif font-bold text-[#172A3A]">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#172A3A]">
                     {selectedCert.title}
                   </h3>
                   <span className="border border-stone-300 bg-[#EFECE6] px-2 py-0.5 text-[10px] font-mono font-bold text-[#172A3A]">
@@ -609,7 +610,7 @@ export default function Achievements() {
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-stone-600 font-normal">
-                  {selectedCert.issuer} • Issued {selectedCert.year}
+                  {selectedCert.issuer} — Issued {selectedCert.year}
                 </p>
               </div>
 

@@ -4,14 +4,14 @@ import React, { useState, useRef, useEffect } from "react";
 import { Sparkles, X, MapPin, ZoomIn, ZoomOut, RotateCcw, ChevronLeft, ChevronRight, Download } from "lucide-react";
 
 const photos = [
-  ["Nepal Himalaya", "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1400&q=90", "Inbound Nepal"],
-  ["Pokhara Lakeside", "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=1400&q=90", "Inbound Nepal"],
-  ["Everest Region", "https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?auto=format&fit=crop&w=1400&q=90", "Inbound Nepal"],
-  ["Bangkok & Pattaya", "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1400&q=90", "International"],
-  ["Dubai Desert Safari", "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=90", "International"],
-  ["Bali Getaway", "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1400&q=90", "International"],
+  ["Nepal Himalaya", "ebc.jpeg", "Inbound Nepal"],
+  ["Pokhara Lakeside", "pokhara.jpeg", "Inbound Nepal"],
+  ["Everest Region", "abc.jpeg", "Inbound Nepal"],
+  ["Bangkok & Pattaya", "thailand.jpeg", "International"],
+  ["Dubai Desert Safari", "dubai.jpeg", "International"],
+  ["Bali Getaway", "bali.jpg", "International"],
   ["Singapore Cityscape", "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1400&q=90", "International"],
-  ["Nepalese Culture & Art", "https://images.unsplash.com/photo-1571679654681-ba01b9e1e117?auto=format&fit=crop&w=1400&q=90", "Inbound Nepal"],
+  ["Nepalese Culture & Art", "kathmandu.jpeg", "Inbound Nepal"],
   ["Himalayan Mountain Road", "https://images.unsplash.com/photo-1528543606781-2f6e6857f318?auto=format&fit=crop&w=1400&q=90", "Transport & Fleet"],
   ["Chitwan National Park", "https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=1400&q=90", "Inbound Nepal"],
   ["Ha Long Bay Cruise", "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1400&q=90", "International"],

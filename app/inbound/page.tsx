@@ -30,7 +30,7 @@ const INBOUND_TOURS: TourItem[] = [
     price: "NPR 58,000",
     rating: 4.9,
     reviewsCount: 124,
-    image: "/pokhara.png",
+    image: "/pokhara.jpeg",
     badge: "SIGNATURE JOURNEY",
   },
   {
@@ -43,7 +43,7 @@ const INBOUND_TOURS: TourItem[] = [
     price: "NPR 185,000",
     rating: 4.8,
     reviewsCount: 65,
-    image: "/bhutan.png",
+    image: "/bhutan.jpeg",
     badge: "SPECIAL PACKAGE",
   },
   {
@@ -56,7 +56,7 @@ const INBOUND_TOURS: TourItem[] = [
     price: "NPR 115,000",
     rating: 5.0,
     reviewsCount: 98,
-    image: "/ebc.png",
+    image: "/ebc.jpeg",
     badge: "EXPEDITION",
   },
   {
@@ -69,7 +69,7 @@ const INBOUND_TOURS: TourItem[] = [
     price: "NPR 88,000",
     rating: 4.9,
     reviewsCount: 112,
-    image: "/annapurna.png",
+    image: "/abc.jpeg",
     badge: "CLASSIC TREK",
   },
   {
@@ -82,7 +82,7 @@ const INBOUND_TOURS: TourItem[] = [
     price: "NPR 45,000",
     rating: 4.9,
     reviewsCount: 88,
-    image: "/muktinath.png",
+    image: "/muktinath.jpeg",
     badge: "OVERLAND",
   },
   {
@@ -95,7 +95,7 @@ const INBOUND_TOURS: TourItem[] = [
     price: "NPR 28,000",
     rating: 4.8,
     reviewsCount: 76,
-    image: "/chitwan.png",
+    image: "/chitwan.jpeg",
     badge: "WILDLIFE SAFARI",
   },
 ];

@@ -38,7 +38,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "KATHMANDU • BANDIPUR • POKHARA • NAGARKOT",
     duration: "7N / 8D",
     price: "NPR 58,000",
-    image: "/pokhara.png",
+    image: "/pokhara.jpeg",
     pdfUrl: "/pdf/ktm-bandipur-pokhara-7n8d.pdf",
     description: "An immersive 8-day journey across Nepal's iconic hill stations, heritage cities, and serene lakes. Experience Boudhanath, Patan, scenic drives to Bandipur, Phewa Lake boating, Sarangkot sunrise, Nagarkot Himalayan views, traditional rickshaw rides, and authentic cultural dance dinners.",
     highlights: [
@@ -63,7 +63,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "KATHMANDU • THIMPHU • PUNAKHA • PARO",
     duration: "9N / 10D",
     price: "NPR 185,000",
-    image: "/bhutan.png",
+    image: "/bhutan.jpeg",
     pdfUrl: "/pdf/nepal-bhutan-10d.pdf",
     description: "A grand cross-border Himalayan voyage capturing the cultural essence of Nepal and the magical kingdom of Bhutan. Highlights include Tiger's Nest Monastery, Punakha Dzong, Dochula Pass, Bhaktapur cooking class, Namobuddha, and UNESCO World Heritage sites.",
     highlights: [
@@ -90,7 +90,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "KATHMANDU • THIMPHU • PUNAKHA • PARO",
     duration: "9N / 10D",
     price: "NPR 185,000",
-    image: "/bhutan.png",
+    image: "/bhutan.jpeg",
     pdfUrl: "/pdf/nepal-bhutan-10d.pdf",
     description: "A grand cross-border Himalayan voyage capturing the cultural essence of Nepal and the magical kingdom of Bhutan. Highlights include Tiger's Nest Monastery, Punakha Dzong, Dochula Pass, Bhaktapur cooking class, Namobuddha, and UNESCO World Heritage sites.",
     highlights: [
@@ -117,7 +117,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "KATHMANDU • BANDIPUR • POKHARA • LUMBINI",
     duration: "9N / 10D",
     price: "NPR 82,000",
-    image: "/pokhara.png",
+    image: "/pokhara.jpeg",
     pdfUrl: "/pdf/grand-nepal-10d.pdf",
     description: "The complete essential Nepal experience. Journey through the capital's heritage, peaceful hilltop Bandipur, Pokhara's lakes and caves, Lord Buddha's birthplace in Lumbini, Namobuddha monastery, and Nagarkot's mountain views.",
     highlights: [
@@ -144,7 +144,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "KATHMANDU • BHAKTAPUR • PATAN",
     duration: "3N / 4D",
     price: "NPR 25,000",
-    image: "/pokhara.png",
+    image: "/pokhara.jpeg",
     pdfUrl: "/pdf/kathmandu-valley-4d.pdf",
     description: "Explore UNESCO World Heritage Sites including Pashupatinath, Swayambhunath, and the historic Durbar Squares of Kathmandu, Patan, and Bhaktapur.",
     highlights: [
@@ -164,7 +164,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "LUKLA • NAMCHE • GORAKSHEP • EBC",
     duration: "13N / 14D",
     price: "NPR 115,000",
-    image: "/ebc.png",
+    image: "/ebc.jpeg",
     pdfUrl: "/pdf/ebc-14d-itinerary.pdf",
     description: "The ultimate Himalayan trek to the base of Mount Everest (5,364m). Walk through iconic Sherpa villages, ancient monasteries, suspension bridges over the Dudh Koshi river, and stand face-to-face with the world's highest peak from Kala Patthar viewpoint (5,545m).",
     highlights: [
@@ -195,7 +195,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "LUKLA • NAMCHE • GORAKSHEP • EBC",
     duration: "13N / 14D",
     price: "NPR 115,000",
-    image: "/ebc.png",
+    image: "/ebc.jpeg",
     pdfUrl: "/pdf/ebc-14d-itinerary.pdf",
     description: "The ultimate Himalayan trek to the base of Mount Everest (5,364m). Walk through iconic Sherpa villages, ancient monasteries, suspension bridges over the Dudh Koshi river, and stand face-to-face with the world's highest peak from Kala Patthar viewpoint (5,545m).",
     highlights: [
@@ -226,7 +226,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "BESISAHAR • MANANG • THORONG LA • MUKTINATH",
     duration: "11N / 12D",
     price: "NPR 88,000",
-    image: "/annapurna.png",
+    image: "/abc.jpeg",
     pdfUrl: "/pdf/annapurna-circuit-12d.pdf",
     description: "Traverse one of the world's most renowned classic treks. Cross the formidable Thorong La Pass at 5,416m, descend to the sacred temple of Muktinath, explore apple orchards in Marpha, and relax at Pokhara's Fewa Lake.",
     highlights: [
@@ -255,7 +255,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "BESISAHAR • MANANG • THORONG LA • MUKTINATH",
     duration: "11N / 12D",
     price: "NPR 88,000",
-    image: "/annapurna.png",
+    image: "/abc.jpeg",
     pdfUrl: "/pdf/annapurna-circuit-12d.pdf",
     description: "Traverse one of the world's most renowned classic treks. Cross the formidable Thorong La Pass at 5,416m, descend to the sacred temple of Muktinath, explore apple orchards in Marpha, and relax at Pokhara's Fewa Lake.",
     highlights: [
@@ -284,7 +284,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "POKHARA • GHANDRUK • ABC (4,130m)",
     duration: "9N / 10D",
     price: "NPR 65,000",
-    image: "/annapurna.png",
+    image: "/abc.jpeg",
     pdfUrl: "/pdf/abc-10d-itinerary.pdf",
     description: "Trek through lush rhododendron forests, traditional Gurung villages, and natural hot springs, culminating in the 360-degree mountain amphitheater inside the Annapurna Sanctuary at 4,130m.",
     highlights: [
@@ -311,7 +311,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "POKHARA • TATOPANI • JOMSOM • MUKTINATH",
     duration: "5N / 6D",
     price: "NPR 45,000",
-    image: "/muktinath.png",
+    image: "/muktinath.jpeg",
     pdfUrl: "/pdf/mustang-overland-6d.pdf",
     description: "Experience the rain-shadow desert landscapes of Mustang without arduous high-altitude walking. Ride in a private 4WD vehicle through Kali Gandaki gorge, visit Muktinath 108 water spouts, and taste apple brandy in Marpha.",
     highlights: [
@@ -334,7 +334,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "POKHARA • TATOPANI • JOMSOM • MUKTINATH",
     duration: "5N / 6D",
     price: "NPR 45,000",
-    image: "/muktinath.png",
+    image: "/muktinath.jpeg",
     pdfUrl: "/pdf/mustang-overland-6d.pdf",
     description: "Experience the rain-shadow desert landscapes of Mustang without arduous high-altitude walking. Ride in a private 4WD vehicle through Kali Gandaki gorge, visit Muktinath 108 water spouts, and taste apple brandy in Marpha.",
     highlights: [
@@ -357,7 +357,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "POKHARA • SARANGKOT • PEACE PAGODA",
     duration: "4N / 5D",
     price: "NPR 35,000",
-    image: "/pokhara.png",
+    image: "/pokhara.jpeg",
     pdfUrl: "/pdf/pokhara-leisure-5d.pdf",
     description: "Relax by Fewa Lake, witness breathtaking Annapurna views from Sarangkot sunrise, and explore caves, waterfalls, and peaceful temples.",
     highlights: [
@@ -378,7 +378,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "POKHARA • SARANGKOT • PEACE PAGODA",
     duration: "4N / 5D",
     price: "NPR 35,000",
-    image: "/pokhara.png",
+    image: "/pokhara.jpeg",
     pdfUrl: "/pdf/pokhara-leisure-5d.pdf",
     description: "Relax by Fewa Lake, witness breathtaking Annapurna views from Sarangkot sunrise, and explore caves, waterfalls, and peaceful temples.",
     highlights: [
@@ -399,7 +399,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "CHITWAN NATIONAL PARK • RAPTI RIVER",
     duration: "2N / 3D",
     price: "NPR 28,000",
-    image: "/chitwan.png",
+    image: "/chitwan.jpeg",
     pdfUrl: "/pdf/chitwan-safari-3d.pdf",
     description: "Venture into Nepal's first national park to spot rare One-Horned Rhinos, Bengal Tigers, exotic birds, and experience Tharu cultural dance.",
     highlights: [
@@ -418,7 +418,7 @@ const INBOUND_DATA: Record<string, TourDetails> = {
     locations: "CHITWAN NATIONAL PARK • RAPTI RIVER",
     duration: "2N / 3D",
     price: "NPR 28,000",
-    image: "/chitwan.png",
+    image: "/chitwan.jpeg",
     pdfUrl: "/pdf/chitwan-safari-3d.pdf",
     description: "Venture into Nepal's first national park to spot rare One-Horned Rhinos, Bengal Tigers, exotic birds, and experience Tharu cultural dance.",
     highlights: [

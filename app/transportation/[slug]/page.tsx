@@ -175,27 +175,27 @@ export default function TransportationDetailPage({
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white py-12 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#FDFBF7] text-[#1E293B] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Back Link */}
         <Link
           href="/transportation"
-          className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-[#D4AF37] transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-bold text-[#475569] hover:text-[#3F6212] transition-colors"
         >
           <ArrowLeft size={16} />
           <span>Back to Fleet List</span>
         </Link>
 
         {/* Hero Banner */}
-        <div className="relative h-80 sm:h-96 w-full overflow-hidden rounded-3xl border border-slate-800 shadow-2xl">
+        <div className="relative h-80 sm:h-96 w-full overflow-hidden border border-[#E2D9C8] shadow-xl">
           <img
             src={vehicle.image}
             alt={vehicle.title}
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent" />
           <div className="absolute bottom-6 left-6 right-6">
-            <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#D4AF37] bg-slate-900/80 px-3 py-1 rounded-full border border-[#D4AF37]/30 backdrop-blur">
+            <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#3F6212] bg-[#F9F6EE]/90 px-3 py-1 border border-[#3F6212]/30 backdrop-blur">
               <Users size={13} />
               {vehicle.capacity}
             </span>
@@ -207,29 +207,29 @@ export default function TransportationDetailPage({
 
         {/* Details Section */}
         <div className="grid gap-8 md:grid-cols-[2fr_1fr]">
-          <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl space-y-6">
+          <div className="border border-[#E2D9C8] bg-white p-8 shadow-md space-y-6">
             <div>
-              <h2 className="text-xl font-bold text-white mb-3">
+              <h2 className="text-xl font-bold text-[#0F172A] mb-3">
                 Vehicle Overview
               </h2>
-              <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
+              <p className="text-[#334155] leading-relaxed text-sm sm:text-base">
                 {vehicle.description}
               </p>
             </div>
 
             <div>
-              <h3 className="text-lg font-bold text-white mb-4">
+              <h3 className="text-lg font-bold text-[#0F172A] mb-4">
                 What's Included
               </h3>
               <ul className="grid gap-3">
                 {vehicle.inclusions.map((item, index) => (
                   <li
                     key={index}
-                    className="flex items-center gap-3 text-sm text-slate-200"
+                    className="flex items-center gap-3 text-sm text-[#334155]"
                   >
                     <CheckCircle2
                       size={18}
-                      className="text-[#D4AF37] shrink-0"
+                      className="text-[#3F6212] shrink-0"
                     />
                     <span>{item}</span>
                   </li>
@@ -239,22 +239,22 @@ export default function TransportationDetailPage({
           </div>
 
           {/* Pricing Box */}
-          <div className="flex flex-col justify-between rounded-3xl border border-[#D4AF37]/30 bg-slate-900 p-6 shadow-xl h-fit">
+          <div className="flex flex-col justify-between border border-[#3F6212]/30 bg-[#F9F6EE] p-6 shadow-md h-fit">
             <div>
-              <span className="block text-xs font-bold uppercase tracking-wider text-slate-400">
+              <span className="block text-xs font-bold uppercase tracking-wider text-[#64748B]">
                 Rate Standard
               </span>
-              <p className="text-3xl font-black text-[#D4AF37] mt-1">
+              <p className="text-3xl font-black text-[#3F6212] mt-1">
                 {vehicle.price}
               </p>
 
-              <div className="mt-6 border-t border-b border-slate-800 py-4 text-xs font-bold text-slate-300 space-y-3">
+              <div className="mt-6 border-t border-b border-[#E2D9C8] py-4 text-xs font-bold text-[#334155] space-y-3">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck size={16} className="text-[#D4AF37]" />
+                  <ShieldCheck size={16} className="text-[#3F6212]" />
                   <span>Model: {vehicle.vehicleType}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Fuel size={16} className="text-[#D4AF37]" />
+                  <Fuel size={16} className="text-[#3F6212]" />
                   <span>Driver & Fuel Costs Covered</span>
                 </div>
               </div>
@@ -263,25 +263,25 @@ export default function TransportationDetailPage({
         </div>
 
         {/* ENQUIRY FORM SECTION */}
-        <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-10 shadow-2xl space-y-8">
+        <div className="border border-[#E2D9C8] bg-white p-6 sm:p-10 shadow-xl space-y-8">
           <div>
-            <span className="text-xs font-extrabold uppercase tracking-widest text-[#D4AF37] block">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-[#3F6212] block">
               ENQUIRY
             </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-white mt-1">
+            <h2 className="text-2xl sm:text-4xl font-black text-[#0F172A] mt-1">
               Tell us about your journey
             </h2>
           </div>
 
           {submitted ? (
-            <div className="rounded-2xl border border-emerald-500/40 bg-emerald-950/40 p-6 text-center space-y-2">
-              <div className="inline-flex p-3 rounded-full bg-emerald-500/20 text-emerald-400 mb-1">
+            <div className="border border-emerald-600/40 bg-emerald-50 p-6 text-center space-y-2">
+              <div className="inline-flex p-3 bg-emerald-600/20 text-emerald-800 mb-1">
                 <Check size={24} />
               </div>
-              <h3 className="text-lg font-bold text-white">
+              <h3 className="text-lg font-bold text-[#0F172A]">
                 Enquiry Submitted Successfully!
               </h3>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-[#334155]">
                 Thank you for reaching out. Our transport team will contact you shortly with availability and a customized quote.
               </p>
             </div>
@@ -290,7 +290,7 @@ export default function TransportationDetailPage({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {/* Full Name */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 block">
+                  <label className="text-xs font-bold text-[#1E293B] block">
                     Full Name
                   </label>
                   <input
@@ -300,13 +300,13 @@ export default function TransportationDetailPage({
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="Your full name"
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none transition-colors"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] placeholder-[#94A3B8] focus:border-[#3F6212] focus:outline-none transition-colors"
                   />
                 </div>
 
                 {/* Email */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 block">
+                  <label className="text-xs font-bold text-[#1E293B] block">
                     Email
                   </label>
                   <input
@@ -316,13 +316,13 @@ export default function TransportationDetailPage({
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="you@example.com"
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none transition-colors"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] placeholder-[#94A3B8] focus:border-[#3F6212] focus:outline-none transition-colors"
                   />
                 </div>
 
                 {/* WhatsApp / Phone */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 block">
+                  <label className="text-xs font-bold text-[#1E293B] block">
                     WhatsApp / Phone
                   </label>
                   <input
@@ -332,13 +332,13 @@ export default function TransportationDetailPage({
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+977 9800000000"
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none transition-colors"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] placeholder-[#94A3B8] focus:border-[#3F6212] focus:outline-none transition-colors"
                   />
                 </div>
 
                 {/* Country Dropdown */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 block">
+                  <label className="text-xs font-bold text-[#1E293B] block">
                     Country
                   </label>
                   <select
@@ -346,7 +346,7 @@ export default function TransportationDetailPage({
                     required
                     value={formData.country}
                     onChange={handleChange}
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none transition-colors cursor-pointer"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] focus:border-[#3F6212] focus:outline-none transition-colors cursor-pointer"
                   >
                     {COUNTRIES.map((c) => (
                       <option key={c} value={c}>
@@ -358,14 +358,14 @@ export default function TransportationDetailPage({
 
                 {/* Travel Destination */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 block">
+                  <label className="text-xs font-bold text-[#1E293B] block">
                     Travel Destination
                   </label>
                   <select
                     name="travelDestination"
                     value={formData.travelDestination}
                     onChange={handleChange}
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none transition-colors cursor-pointer"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] focus:border-[#3F6212] focus:outline-none transition-colors cursor-pointer"
                   >
                     <option value="Kathmandu">Kathmandu</option>
                     <option value="Pokhara">Pokhara</option>
@@ -379,14 +379,14 @@ export default function TransportationDetailPage({
 
                 {/* Service Required */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 block">
+                  <label className="text-xs font-bold text-[#1E293B] block">
                     Service Required
                   </label>
                   <select
                     name="serviceRequired"
                     value={formData.serviceRequired}
                     onChange={handleChange}
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none transition-colors cursor-pointer"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] focus:border-[#3F6212] focus:outline-none transition-colors cursor-pointer"
                   >
                     <option value="Transportation Rental">
                       Transportation Rental ({vehicle.title})
@@ -399,10 +399,10 @@ export default function TransportationDetailPage({
                   </select>
                 </div>
 
-                {/* Arrival Date (Native Calendar Picker Popup) */}
+                {/* Arrival Date */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-                    <Calendar size={13} className="text-[#D4AF37]" />
+                  <label className="text-xs font-bold text-[#1E293B] flex items-center gap-1.5">
+                    <Calendar size={13} className="text-[#3F6212]" />
                     Arrival Date
                   </label>
                   <input
@@ -412,14 +412,14 @@ export default function TransportationDetailPage({
                     value={formData.arrivalDate}
                     onChange={handleChange}
                     onClick={(e) => e.currentTarget.showPicker?.()}
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none transition-colors cursor-pointer"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] focus:border-[#3F6212] focus:outline-none transition-colors cursor-pointer"
                   />
                 </div>
 
-                {/* Departure Date (Native Calendar Picker Popup) */}
+                {/* Departure Date */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-                    <Calendar size={13} className="text-[#D4AF37]" />
+                  <label className="text-xs font-bold text-[#1E293B] flex items-center gap-1.5">
+                    <Calendar size={13} className="text-[#3F6212]" />
                     Departure Date
                   </label>
                   <input
@@ -429,14 +429,14 @@ export default function TransportationDetailPage({
                     value={formData.departureDate}
                     onChange={handleChange}
                     onClick={(e) => e.currentTarget.showPicker?.()}
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none transition-colors cursor-pointer"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] focus:border-[#3F6212] focus:outline-none transition-colors cursor-pointer"
                   />
                 </div>
 
                 {/* Estimated Arrival Time (ETA) */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-                    <Clock size={13} className="text-[#D4AF37]" />
+                  <label className="text-xs font-bold text-[#1E293B] flex items-center gap-1.5">
+                    <Clock size={13} className="text-[#3F6212]" />
                     Estimated Arrival Time (ETA)
                   </label>
                   <input
@@ -445,25 +445,25 @@ export default function TransportationDetailPage({
                     value={formData.arrivalTime}
                     onChange={handleChange}
                     onClick={(e) => e.currentTarget.showPicker?.()}
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none transition-colors cursor-pointer"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] focus:border-[#3F6212] focus:outline-none transition-colors cursor-pointer"
                   />
                 </div>
 
-                {/* Interactive Number of Travelers (+ / - Counter Upto 50+) */}
+                {/* Number of Travelers Counter */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 block">
+                  <label className="text-xs font-bold text-[#1E293B] block">
                     Number of Travelers
                   </label>
-                  <div className="flex items-center justify-between rounded-xl bg-slate-950 border border-slate-800 p-2 text-sm text-white">
+                  <div className="flex items-center justify-between bg-[#FDFBF7] border border-[#E2D9C8] p-2 text-sm text-[#0F172A]">
                     <button
                       type="button"
                       onClick={handleDecrementTravelers}
                       disabled={travelersCount <= 1}
-                      className="h-9 w-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:border-[#D4AF37] disabled:opacity-40 transition-colors"
+                      className="h-9 w-9 bg-[#E2D9C8]/50 border border-[#E2D9C8] flex items-center justify-center text-[#1E293B] hover:text-[#0F172A] hover:border-[#3F6212] disabled:opacity-40 transition-colors"
                     >
                       <Minus size={14} />
                     </button>
-                    <span className="font-bold text-white text-sm">
+                    <span className="font-bold text-[#0F172A] text-sm">
                       {travelersCount} {travelersCount === 1 ? "Traveler" : "Travelers"}
                       {travelersCount === 50 ? "+" : ""}
                     </span>
@@ -471,7 +471,7 @@ export default function TransportationDetailPage({
                       type="button"
                       onClick={handleIncrementTravelers}
                       disabled={travelersCount >= 50}
-                      className="h-9 w-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:border-[#D4AF37] disabled:opacity-40 transition-colors"
+                      className="h-9 w-9 bg-[#E2D9C8]/50 border border-[#E2D9C8] flex items-center justify-center text-[#1E293B] hover:text-[#0F172A] hover:border-[#3F6212] disabled:opacity-40 transition-colors"
                     >
                       <Plus size={14} />
                     </button>
@@ -480,14 +480,14 @@ export default function TransportationDetailPage({
 
                 {/* Travel Style */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 block">
+                  <label className="text-xs font-bold text-[#1E293B] block">
                     Travel Style
                   </label>
                   <select
                     name="travelStyle"
                     value={formData.travelStyle}
                     onChange={handleChange}
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none transition-colors cursor-pointer"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] focus:border-[#3F6212] focus:outline-none transition-colors cursor-pointer"
                   >
                     <option value="">Select travel style</option>
                     <option value="Private & Leisure">Private & Leisure</option>
@@ -503,14 +503,14 @@ export default function TransportationDetailPage({
 
                 {/* Approximate Budget */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-300 block">
+                  <label className="text-xs font-bold text-[#1E293B] block">
                     Approximate Budget
                   </label>
                   <select
                     name="approximateBudget"
                     value={formData.approximateBudget}
                     onChange={handleChange}
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none transition-colors cursor-pointer"
+                    className="w-full bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] focus:border-[#3F6212] focus:outline-none transition-colors cursor-pointer"
                   >
                     <option value="">Select budget</option>
                     <option value="Standard">Standard</option>
@@ -522,7 +522,7 @@ export default function TransportationDetailPage({
 
               {/* Tell Us More */}
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-300 block">
+                <label className="text-xs font-bold text-[#1E293B] block">
                   Tell Us More
                 </label>
                 <textarea
@@ -531,14 +531,14 @@ export default function TransportationDetailPage({
                   value={formData.additionalInfo}
                   onChange={handleChange}
                   placeholder="Tell us about your trip, preferred itinerary, transportation needs, hotel requirements, activities, or anything else you would like us to know."
-                  className="w-full rounded-xl bg-slate-950 border border-slate-800 p-4 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none transition-colors resize-y"
+                  className="w-full bg-[#FDFBF7] border border-[#E2D9C8] p-4 text-sm text-[#0F172A] placeholder-[#94A3B8] focus:border-[#3F6212] focus:outline-none transition-colors resize-y"
                 />
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full rounded-xl bg-gradient-to-r from-[#D4AF37] via-amber-400 to-[#B8860B] py-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
+                className="w-full bg-[#1E3A8A] py-3.5 text-xs font-black uppercase tracking-wider text-white shadow-lg hover:bg-[#1e40af] transition-all flex items-center justify-center gap-2"
               >
                 <Send size={15} />
                 <span>Submit Enquiry</span>

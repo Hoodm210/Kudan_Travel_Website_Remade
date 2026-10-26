@@ -50,7 +50,7 @@ const INBOUND_TOURS: Tour[] = [
     rating: 4.9,
     reviewsCount: 124,
     image:
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=85",
+      "pokhara.jpeg",
     badge: "Signature Journey",
   },
   {
@@ -63,7 +63,7 @@ const INBOUND_TOURS: Tour[] = [
     rating: 5.0,
     reviewsCount: 98,
     image:
-      "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=85",
+      "/ebc.jpeg",
     badge: "Himalayan Adventure",
   },
   {
@@ -76,7 +76,7 @@ const INBOUND_TOURS: Tour[] = [
     rating: 4.8,
     reviewsCount: 65,
     image:
-      "https://images.unsplash.com/photo-1585869110973-7280be312084?auto=format&fit=crop&w=1200&q=85",
+      "bhutan.jpeg",
     badge: "Cultural Discovery",
   },
 ];
@@ -96,7 +96,7 @@ const OUTBOUND_TOURS: Tour[] = [
     rating: 4.7,
     reviewsCount: 210,
     image:
-      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=85",
+      "thailand.jpeg",
     badge: "Popular Escape",
   },
   {
@@ -109,7 +109,7 @@ const OUTBOUND_TOURS: Tour[] = [
     rating: 4.9,
     reviewsCount: 180,
     image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85",
+      "dubai.jpeg",
     badge: "Luxury Escape",
   },
   {
@@ -122,7 +122,7 @@ const OUTBOUND_TOURS: Tour[] = [
     rating: 4.9,
     reviewsCount: 142,
     image:
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+      "bali.jpg",
     badge: "Island Retreat",
   },
 ];
@@ -174,21 +174,21 @@ const ACCREDITATIONS = [
     src: "/natta.png",
     title: "NATTA",
     subtitle: "Nepal Association of Tour & Travel Agents",
-    imgClass: "w-32 h-20 object-contain", // <-- Change size for NATTA here
+    imgClass: "w-15 h-full object-contain", // <-- Change size for NATTA here
   },
   {
     href: "https://www.taan.org.np/",
     src: "/taan.png",
     title: "TAAN",
     subtitle: "Trekking Agencies' Association of Nepal",
-    imgClass: "w-28 h-28 object-contain", // <-- Change size for TAAN here
+    imgClass: "w-15 h-full object-contain", // <-- Change size for TAAN here
   },
   {
     href: "https://ntb.gov.np/",
     src: "/ntb.png",
     title: "Nepal Tourism Board",
     subtitle: "Official National Tourism Authority",
-    imgClass: "w-36 h-24 object-contain", // <-- Change size for NTB here
+    imgClass: "w-30 h-30 object-contain", // <-- Change size for NTB here
   },
 ];
 
@@ -552,7 +552,7 @@ export default function LuxuryLandingSection() {
           5. MEMBERSHIPS & INDUSTRY LINKS (With Individual Sizing)
       ================================================== */}
 
-      <section className="border-b border-[#E6DFD2] bg-[#FCFAF6] py-16 lg:py-24">
+      <section className="border-b border-[#E6DFD2] bg-[#d3d7db]/20 py-16 lg:py-24">
         <div className="mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-14">
           <div className="mx-auto mb-12 max-w-xl text-center">
             <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#A44A3F]">
@@ -573,10 +573,10 @@ export default function LuxuryLandingSection() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col items-center bg-white border border-[#E6DFD2] p-8 text-center transition-all duration-300 hover:border-[#D4B477] hover:shadow-xl"
+                className="group flex flex-col items-center bg-white  p-8 text-center transition-all duration-300  hover:shadow-xl"
               >
                 {/* Logo Box with individual image sizing via item.imgClass */}
-                <div className="w-full h-44 bg-[#102B3A]/80 flex items-center justify-center shadow-inner mb-6 transition-transform duration-300 group-hover:scale-105 px-4">
+                <div className="w-full h-full bg-[#102B3A]/100 flex items-center justify-center shadow-inner mb-6 transition-transform duration-300 group-hover:scale-105 px-4">
                   <img
                     src={item.src}
                     alt={item.title}

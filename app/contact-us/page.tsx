@@ -334,18 +334,18 @@ export default function ContactUsPage() {
   ========================================================= */
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white py-12 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#FDFBF7] text-[#1E293B] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-10">
 
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs font-extrabold uppercase tracking-[0.3em] text-[#D4AF37]">
+          <span className="text-xs font-extrabold uppercase tracking-[0.3em] text-[#3F6212]">
             KUDAN TRAVEL & TOURS
           </span>
-          <h1 className="text-4xl sm:text-5xl font-black text-white mt-3">
+          <h1 className="text-4xl sm:text-5xl font-black text-[#0F172A] mt-3">
             Plan Your Journey
           </h1>
-          <p className="text-slate-400 mt-4 text-sm sm:text-base leading-relaxed">
+          <p className="text-[#475569] mt-4 text-sm sm:text-base leading-relaxed">
             Tell us what you need and our travel consultant will prepare a personalized
             response for your journey.
           </p>
@@ -355,32 +355,32 @@ export default function ContactUsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* FORM / RESULT */}
-          <div className="lg:col-span-8 rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-10 shadow-2xl">
+          <div className="lg:col-span-8 rounded-3xl border border-[#E2D9C8] bg-white p-6 sm:p-10 shadow-xl">
             {submitted && generatedPlan ? (
               <div className="space-y-7">
-                <div className="rounded-2xl border border-emerald-500/40 bg-emerald-950/30 p-4 flex items-center justify-center gap-3 text-emerald-400">
+                <div className="rounded-2xl border border-emerald-600/40 bg-emerald-50 p-4 flex items-center justify-center gap-3 text-emerald-800">
                   <Check size={20} />
                   <span className="text-sm font-bold">
                     Your enquiry has been processed successfully.
                   </span>
                 </div>
 
-                <div className="rounded-2xl border border-[#D4AF37]/30 bg-slate-950 p-6 sm:p-8 shadow-xl space-y-7">
-                  <div className="border-b border-slate-800 pb-5">
-                    <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+                <div className="rounded-2xl border border-[#3F6212]/30 bg-[#F9F6EE] p-6 sm:p-8 shadow-md space-y-7">
+                  <div className="border-b border-[#E2D9C8] pb-5">
+                    <span className="text-xs font-black uppercase tracking-widest text-[#3F6212]">
                       Kudan Travel
                     </span>
-                    <h2 className="text-2xl sm:text-3xl font-black mt-2">
+                    <h2 className="text-2xl sm:text-3xl font-black mt-2 text-[#0F172A]">
                       {generatedPlan.travelerName}
                     </h2>
-                    <div className="text-xs text-slate-400 mt-3 flex flex-wrap gap-4">
+                    <div className="text-xs text-[#475569] mt-3 flex flex-wrap gap-4">
                       <span className="flex items-center gap-1.5">
-                        <MapPin size={14} className="text-[#D4AF37]" />
+                        <MapPin size={14} className="text-[#3F6212]" />
                         {generatedPlan.destinations}
                       </span>
                       {formData.arrivalDate && formData.departureDate && (
                         <span className="flex items-center gap-1.5">
-                          <Calendar size={14} className="text-[#D4AF37]" />
+                          <Calendar size={14} className="text-[#3F6212]" />
                           {formData.arrivalDate} to {formData.departureDate}
                         </span>
                       )}
@@ -388,43 +388,43 @@ export default function ContactUsPage() {
                   </div>
 
                   {generatedPlan.outline && (
-                    <div className="rounded-xl bg-slate-900 border border-slate-800 p-4">
-                      <h3 className="text-xs uppercase tracking-widest font-black text-[#D4AF37] mb-2">
+                    <div className="rounded-xl bg-white border border-[#E2D9C8] p-4">
+                      <h3 className="text-xs uppercase tracking-widest font-black text-[#3F6212] mb-2">
                         Trip Overview
                       </h3>
-                      <p className="text-sm text-slate-300 leading-relaxed">
+                      <p className="text-sm text-[#334155] leading-relaxed">
                         {generatedPlan.outline}
                       </p>
                     </div>
                   )}
 
                   {generatedPlan.itinerary.length > 0 ? (
-                    <div className="space-y-7 border-l-2 border-[#D4AF37]/40 pl-5 sm:pl-7">
+                    <div className="space-y-7 border-l-2 border-[#3F6212]/40 pl-5 sm:pl-7">
                       {generatedPlan.itinerary.map((item, index) => (
                         <div key={index} className="relative space-y-3">
-                          <div className="absolute -left-[27px] sm:-left-[35px] top-1.5 h-3 w-3 rounded-full border-2 border-[#D4AF37] bg-slate-950" />
+                          <div className="absolute -left-[27px] sm:-left-[35px] top-1.5 h-3 w-3 rounded-full border-2 border-[#3F6212] bg-[#F9F6EE]" />
                           <div>
-                            <span className="text-xs font-black uppercase tracking-wider text-[#D4AF37]">
+                            <span className="text-xs font-black uppercase tracking-wider text-[#3F6212]">
                               {item.day || `Day ${index + 1}`}
                             </span>
-                            <h3 className="text-lg sm:text-xl font-bold text-white mt-1">
+                            <h3 className="text-lg sm:text-xl font-bold text-[#0F172A] mt-1">
                               {item.title || "Travel Day"}
                             </h3>
                             {item.date && (
-                              <p className="text-xs text-slate-500 mt-1">{item.date}</p>
+                              <p className="text-xs text-[#64748B] mt-1">{item.date}</p>
                             )}
                           </div>
 
                           {item.destination && (
-                            <p className="text-xs text-slate-400">
-                              <strong className="text-slate-300">Location:</strong> {item.destination}
+                            <p className="text-xs text-[#475569]">
+                              <strong className="text-[#1E293B]">Location:</strong> {item.destination}
                             </p>
                           )}
 
                           {item.highlights && item.highlights.length > 0 && (
                             <div className="space-y-1">
                               {item.highlights.map((highlight, hIndex) => (
-                                <p key={hIndex} className="text-sm text-slate-300">
+                                <p key={hIndex} className="text-sm text-[#334155]">
                                   • {highlight}
                                 </p>
                               ))}
@@ -432,43 +432,43 @@ export default function ContactUsPage() {
                           )}
 
                           {item.details && (
-                            <p className="text-sm text-slate-300 leading-relaxed">
+                            <p className="text-sm text-[#334155] leading-relaxed">
                               {item.details}
                             </p>
                           )}
 
                           {item.meals && (
-                            <p className="text-xs text-slate-400">
-                              <strong className="text-slate-300">Meals:</strong> {item.meals}
+                            <p className="text-xs text-[#475569]">
+                              <strong className="text-[#1E293B]">Meals:</strong> {item.meals}
                             </p>
                           )}
 
                           {item.overnight && (
-                            <p className="text-xs text-slate-400">
-                              <strong className="text-slate-300">Overnight:</strong> {item.overnight}
+                            <p className="text-xs text-[#475569]">
+                              <strong className="text-[#1E293B]">Overnight:</strong> {item.overnight}
                             </p>
                           )}
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="rounded-xl bg-slate-900 p-5 text-sm text-slate-300">
+                    <div className="rounded-xl bg-white p-5 text-sm text-[#334155]">
                       Your enquiry has been received. Our travel consultant will review the requirements and contact you shortly.
                     </div>
                   )}
 
-                  <div className="pt-5 border-t border-slate-800 flex flex-wrap gap-4 justify-between">
+                  <div className="pt-5 border-t border-[#E2D9C8] flex flex-wrap gap-4 justify-between">
                     <button
                       type="button"
                       onClick={resetForm}
-                      className="text-xs text-slate-400 hover:text-white underline"
+                      className="text-xs text-[#475569] hover:text-[#0F172A] underline"
                     >
                       Submit another enquiry
                     </button>
                     <button
                       type="button"
                       onClick={() => window.print()}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold hover:border-[#D4AF37]"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1E3A8A] text-white text-xs font-bold hover:bg-[#1e40af] transition-colors"
                     >
                       <Printer size={14} />
                       Print / Save PDF
@@ -481,13 +481,13 @@ export default function ContactUsPage() {
                 {/* STEP 1: SERVICE SELECTION */}
                 <section className="space-y-4">
                   <div>
-                    <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+                    <span className="text-xs font-black uppercase tracking-widest text-[#3F6212]">
                       Step 1
                     </span>
-                    <h2 className="text-xl font-bold mt-1">
+                    <h2 className="text-xl font-bold mt-1 text-[#0F172A]">
                       What can we help you with?
                     </h2>
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-[#64748B] mt-1">
                       Select the service you are interested in.
                     </p>
                   </div>
@@ -509,23 +509,23 @@ export default function ContactUsPage() {
                           }
                           className={`text-left rounded-2xl border p-4 transition-all ${
                             active
-                              ? "border-[#D4AF37] bg-[#D4AF37]/10"
-                              : "border-slate-800 bg-slate-950 hover:border-slate-600"
+                              ? "border-[#3F6212] bg-[#3F6212]/10"
+                              : "border-[#E2D9C8] bg-[#FDFBF7] hover:border-[#CBD5E1]"
                           }`}
                         >
                           <div className="flex gap-3">
                             <div
                               className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 ${
                                 active
-                                  ? "bg-[#D4AF37] text-slate-950"
-                                  : "bg-slate-800 text-slate-400"
+                                  ? "bg-[#3F6212] text-white"
+                                  : "bg-[#E2D9C8]/50 text-[#475569]"
                               }`}
                             >
                               <Icon size={18} />
                             </div>
                             <div>
-                              <p className="text-sm font-bold">{service.label}</p>
-                              <p className="text-xs text-slate-500 mt-1">
+                              <p className="text-sm font-bold text-[#0F172A]">{service.label}</p>
+                              <p className="text-xs text-[#64748B] mt-1">
                                 {service.description}
                               </p>
                             </div>
@@ -539,10 +539,10 @@ export default function ContactUsPage() {
                 {/* STEP 2: PERSONAL INFORMATION */}
                 <section className="space-y-4">
                   <div>
-                    <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+                    <span className="text-xs font-black uppercase tracking-widest text-[#3F6212]">
                       Step 2
                     </span>
-                    <h2 className="text-xl font-bold mt-1">Your Information</h2>
+                    <h2 className="text-xl font-bold mt-1 text-[#0F172A]">Your Information</h2>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -584,7 +584,7 @@ export default function ContactUsPage() {
 
                 {/* INBOUND TOUR CONFIGURATION */}
                 {isInbound && (
-                  <section className="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+                  <section className="space-y-5 rounded-2xl border border-[#E2D9C8] bg-[#FDFBF7] p-5">
                     <SectionTitle
                       number="3"
                       title="Nepal Inbound Tour"
@@ -613,7 +613,7 @@ export default function ContactUsPage() {
 
                 {/* OUTBOUND TOUR CONFIGURATION */}
                 {isOutbound && (
-                  <section className="space-y-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+                  <section className="space-y-5 rounded-2xl border border-[#E2D9C8] bg-[#FDFBF7] p-5">
                     <SectionTitle
                       number="3"
                       title="Outbound Holiday"
@@ -642,7 +642,7 @@ export default function ContactUsPage() {
 
                 {/* ADDITIONAL INFORMATION */}
                 <section className="space-y-3">
-                  <label className="text-xs font-bold text-slate-300">
+                  <label className="text-xs font-bold text-[#1E293B]">
                     PROVIDE DETAILS ABOUT ITINERARY
                   </label>
                   <textarea
@@ -651,7 +651,7 @@ export default function ContactUsPage() {
                     value={formData.additionalInfo}
                     onChange={handleChange}
                     placeholder="More details about your trip, preferences, or special requests..."
-                    className="w-full rounded-xl bg-slate-950 border border-slate-800 p-4 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none resize-y"
+                    className="w-full rounded-xl bg-[#FDFBF7] border border-[#E2D9C8] p-4 text-sm text-[#0F172A] placeholder-[#94A3B8] focus:border-[#3F6212] focus:outline-none resize-y"
                   />
                 </section>
 
@@ -668,7 +668,7 @@ export default function ContactUsPage() {
                 <button
                   type="submit"
                   disabled={isGenerating}
-                  className="w-full rounded-xl bg-gradient-to-r from-[#D4AF37] via-amber-400 to-[#B8860B] py-4 text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg hover:scale-[1.01] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full rounded-xl bg-[#20374a] py-4 text-xs font-black uppercase tracking-wider text-white shadow-lg hover:bg-[#944304] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   {isGenerating ? (
                     <>
@@ -687,15 +687,15 @@ export default function ContactUsPage() {
           </div>
 
           {/* SIDEBAR */}
-          <aside className="lg:col-span-4 rounded-3xl border border-slate-800 bg-slate-900 p-6 sm:p-8 space-y-7 shadow-2xl">
+          <aside className="lg:col-span-4 rounded-3xl border border-[#E2D9C8] bg-white p-6 sm:p-8 space-y-7 shadow-xl">
             <div>
-              <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+              <span className="text-xs font-black uppercase tracking-widest text-[#3F6212]">
                 Kudan Travel
               </span>
-              <h2 className="text-2xl font-black text-white mt-2">
+              <h2 className="text-2xl font-black text-[#0F172A] mt-2">
                 Travel Made Simple
               </h2>
-              <p className="text-sm text-slate-400 mt-3 leading-relaxed">
+              <p className="text-sm text-[#475569] mt-3 leading-relaxed">
                 Whether you are visiting Nepal or travelling abroad, our team can assist with your travel itinerary.
               </p>
             </div>
@@ -716,7 +716,7 @@ export default function ContactUsPage() {
               />
 
               <ContactItem
-                icon={<Phone size={18} className="text-amber-400" />}
+                icon={<Phone size={18} className="text-[#3F6212]" />}
                 title="Phone / WhatsApp"
                 content={
                   <span className="block space-y-1">
@@ -724,13 +724,13 @@ export default function ContactUsPage() {
                       href="https://wa.me/9779851101214"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-slate-200 hover:text-green-400 transition-colors"
+                      className="inline-flex items-center gap-2 text-[#334155] hover:text-emerald-700 transition-colors"
                     >
-                      <MessageCircle size={15} className="text-green-500 inline-block flex-shrink-0" />
+                      <MessageCircle size={15} className="text-emerald-600 inline-block flex-shrink-0" />
                       <span>+977 9851101214 (WhatsApp)</span>
                     </a>
-                    <span className="block text-xs text-slate-400 pt-1">
-                      <strong className="text-slate-300 font-medium">Office Landlines:</strong>
+                    <span className="block text-xs text-[#64748B] pt-1">
+                      <strong className="text-[#1E293B] font-medium">Office Landlines:</strong>
                       <br />
                       01-4005191 / 92 / 93 / 94 / 95
                     </span>
@@ -779,13 +779,13 @@ export default function ContactUsPage() {
               />
 
               <ContactItem
-                icon={<HelpCircle size={18} className="text-amber-400" />}
+                icon={<HelpCircle size={18} className="text-[#3F6212]" />}
                 title="General Enquiries"
                 content={
                   <span className="block space-y-1">
                     <a
                       href="mailto:krishna@kudantravel.com"
-                      className="hover:text-amber-400 transition-colors block"
+                      className="hover:text-[#3F6212] transition-colors block"
                     >
                       krishna@kudantravel.com
                     </a>
@@ -793,9 +793,9 @@ export default function ContactUsPage() {
                       href="https://wa.me/9779851196584"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-slate-300 hover:text-green-400 transition-colors"
+                      className="inline-flex items-center gap-2 text-[#334155] hover:text-emerald-700 transition-colors"
                     >
-                      <MessageCircle size={15} className="text-green-500 inline-block flex-shrink-0" />
+                      <MessageCircle size={15} className="text-emerald-600 inline-block flex-shrink-0" />
                       <span>+977 9851196584 (WhatsApp & Phone)</span>
                     </a>
                   </span>
@@ -816,24 +816,24 @@ export default function ContactUsPage() {
             </div>
 
             {/* LIVE GOOGLE MAPS WIDGET BOX */}
-            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-3 shadow-inner">
+            <div className="bg-[#FDFBF7] p-5 rounded-2xl border border-[#E2D9C8] space-y-3 shadow-sm">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-amber-400">
+                <div className="flex items-center gap-2 text-[#3F6212]">
                   <MapPin size={18} />
-                  <h3 className="text-sm font-semibold text-white">Our Location</h3>
+                  <h3 className="text-sm font-semibold text-[#0F172A]">Our Location</h3>
                 </div>
                 <a
                   href="https://maps.app.goo.gl/DDCUvk2aBSb7KL416"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-[11px] font-medium text-amber-400 hover:text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 px-2.5 py-1 rounded-md transition-colors"
+                  className="flex items-center gap-1 text-[11px] font-medium text-[#3F6212] hover:text-[#2d470d] bg-[#3F6212]/10 hover:bg-[#3F6212]/20 px-2.5 py-1 rounded-md transition-colors"
                 >
                   <span>Open in Maps</span>
                   <ExternalLink size={12} />
                 </a>
               </div>
 
-              <div className="relative w-full h-[220px] rounded-lg overflow-hidden border border-slate-800">
+              <div className="relative w-full h-[220px] rounded-lg overflow-hidden border border-[#E2D9C8]">
                 <iframe
                   title="Kudan Travel and Tours Location"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.030561582236!2d85.3175!3d27.7172!2m3!1f0!2f0!3f0!3f2!1f10!2i32!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDQzJzAyLjAiTiA4NcKwMTknMDMuMCJF!5e0!3m2!1sen!2snp!4v1650000000000!5m2!1sen!2snp"
@@ -848,11 +848,11 @@ export default function ContactUsPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-[#D4AF37]/20 bg-[#D4AF37]/5 p-5">
-              <p className="text-xs uppercase tracking-widest font-black text-[#D4AF37]">
+            <div className="rounded-2xl border border-[#3F6212]/20 bg-[#3F6212]/5 p-5">
+              <p className="text-xs uppercase tracking-widest font-black text-[#3F6212]">
                 Services
               </p>
-              <p className="text-sm text-slate-300 mt-2 leading-relaxed">
+              <p className="text-sm text-[#334155] mt-2 leading-relaxed">
                 Inbound Tours (Nepal) • Outbound Tours (International Holidays)
               </p>
             </div>
@@ -886,7 +886,7 @@ function InputField({
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-xs font-bold text-slate-300">{label}</label>
+      <label className="text-xs font-bold text-[#1E293B]">{label}</label>
       <input
         type={type}
         name={name}
@@ -894,7 +894,7 @@ function InputField({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-[#D4AF37] focus:outline-none"
+        className="w-full rounded-xl bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] placeholder-[#94A3B8] focus:border-[#3F6212] focus:outline-none"
       />
     </div>
   );
@@ -915,12 +915,12 @@ function SelectField({
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-xs font-bold text-slate-300">{label}</label>
+      <label className="text-xs font-bold text-[#1E293B]">{label}</label>
       <select
         name={name}
         value={value}
         onChange={onChange}
-        className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-sm text-white focus:border-[#D4AF37] focus:outline-none"
+        className="w-full rounded-xl bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-sm text-[#0F172A] focus:border-[#3F6212] focus:outline-none"
       >
         <option value="">Select</option>
         {options.map((option) => (
@@ -944,11 +944,11 @@ function SectionTitle({
 }) {
   return (
     <div>
-      <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+      <span className="text-xs font-black uppercase tracking-widest text-[#3F6212]">
         Step {number}
       </span>
-      <h2 className="text-lg font-bold text-white mt-1">{title}</h2>
-      <p className="text-xs text-slate-500 mt-1">{description}</p>
+      <h2 className="text-lg font-bold text-[#0F172A] mt-1">{title}</h2>
+      <p className="text-xs text-[#64748B] mt-1">{description}</p>
     </div>
   );
 }
@@ -964,24 +964,24 @@ function TravelerCounter({
 }) {
   return (
     <div className="space-y-2">
-      <label className="text-xs font-bold text-slate-300">Number of Travelers</label>
-      <div className="flex items-center justify-between rounded-xl bg-slate-950 border border-slate-800 p-2">
+      <label className="text-xs font-bold text-[#1E293B]">Number of Travelers</label>
+      <div className="flex items-center justify-between rounded-xl bg-[#FDFBF7] border border-[#E2D9C8] p-2">
         <button
           type="button"
           onClick={decrement}
           disabled={travelersCount <= 1}
-          className="h-9 w-9 rounded-lg bg-slate-800 flex items-center justify-center disabled:opacity-40"
+          className="h-9 w-9 rounded-lg bg-[#E2D9C8]/60 text-[#1E293B] flex items-center justify-center disabled:opacity-40"
         >
           <Minus size={14} />
         </button>
-        <span className="font-bold text-sm">
+        <span className="font-bold text-sm text-[#0F172A]">
           {travelersCount} {travelersCount === 1 ? "Traveler" : "Travelers"}
         </span>
         <button
           type="button"
           onClick={increment}
           disabled={travelersCount >= 50}
-          className="h-9 w-9 rounded-lg bg-slate-800 flex items-center justify-center disabled:opacity-40"
+          className="h-9 w-9 rounded-lg bg-[#E2D9C8]/60 text-[#1E293B] flex items-center justify-center disabled:opacity-40"
         >
           <Plus size={14} />
         </button>
@@ -1086,12 +1086,12 @@ function DestinationSelector({
 }) {
   return (
     <div className="space-y-3">
-      <label className="text-xs font-bold text-slate-300">Destinations</label>
+      <label className="text-xs font-bold text-[#1E293B]">Destinations</label>
       <div className="flex flex-wrap gap-2">
         {destinations.map((destination) => (
           <span
             key={destination}
-            className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-xs font-bold text-[#D4AF37]"
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-[#3F6212]/10 border border-[#3F6212]/30 text-xs font-bold text-[#3F6212]"
           >
             <MapPin size={12} />
             {destination}
@@ -1111,7 +1111,7 @@ function DestinationSelector({
               handleAddDestination(e.target.value);
             }
           }}
-          className="sm:col-span-6 rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-xs text-white"
+          className="sm:col-span-6 rounded-xl bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-xs text-[#0F172A]"
         >
           <option value="">Select destination</option>
           {options.map((destination) => (
@@ -1133,12 +1133,12 @@ function DestinationSelector({
               }
             }}
             placeholder="Or type destination..."
-            className="w-full rounded-xl bg-slate-950 border border-slate-800 px-4 py-3 text-xs text-white placeholder-slate-500"
+            className="w-full rounded-xl bg-[#FDFBF7] border border-[#E2D9C8] px-4 py-3 text-xs text-[#0F172A] placeholder-[#94A3B8]"
           />
           <button
             type="button"
             onClick={() => handleAddDestination()}
-            className="px-4 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold shrink-0"
+            className="px-4 rounded-xl bg-[#253c5c] text-white text-xs font-bold shrink-0 hover:bg-[#944304] transition-colors"
           >
             <Plus size={14} />
           </button>
@@ -1159,10 +1159,10 @@ function ContactItem({
 }) {
   return (
     <div className="flex items-start gap-3">
-      <div className="text-[#D4AF37] mt-1">{icon}</div>
+      <div className="text-[#3F6212] mt-1">{icon}</div>
       <div>
-        <p className="font-bold text-white text-sm">{title}</p>
-        <p className="text-slate-400 text-xs mt-1 leading-relaxed">{content}</p>
+        <p className="font-bold text-[#0F172A] text-sm">{title}</p>
+        <p className="text-[#475569] text-xs mt-1 leading-relaxed">{content}</p>
       </div>
     </div>
   );

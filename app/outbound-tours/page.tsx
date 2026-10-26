@@ -27,7 +27,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 85,000",
     rating: 4.9,
     reviewsCount: 142,
-    image: "/bali.png",
+    image: "/bali.jpg",
     badge: "ISLAND ESCAPE",
   },
   {
@@ -39,7 +39,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 55,000",
     rating: 4.8,
     reviewsCount: 210,
-    image: "/thailand.png",
+    image: "/thai.jpg",
     badge: "BESTSELLER",
   },
   {
@@ -51,7 +51,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 68,000",
     rating: 4.9,
     reviewsCount: 175,
-    image: "/thailand.png",
+    image: "/thailand.jpeg",
     badge: "GRAND TOUR",
   },
   {
@@ -63,7 +63,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 115,000",
     rating: 4.8,
     reviewsCount: 130,
-    image: "/singapore.png",
+    image: "/singapore.jpeg",
     badge: "CITY SAFARI",
   },
   {
@@ -75,7 +75,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 65,000",
     rating: 4.7,
     reviewsCount: 115,
-    image: "/malaysia.png",
+    image: "/malaysia.jpeg",
     badge: "POPULAR",
   },
   {
@@ -87,7 +87,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 225,000",
     rating: 5.0,
     reviewsCount: 88,
-    image: "/japan.png",
+    image: "/japan.jpeg",
     badge: "PREMIUM",
   },
   {
@@ -99,7 +99,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 285,000",
     rating: 5.0,
     reviewsCount: 64,
-    image: "/switzerland-italy.png",
+    image: "/swiss.png",
     badge: "EUROPE SPECIAL",
   },
   {
@@ -111,7 +111,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 78,000",
     rating: 4.7,
     reviewsCount: 42,
-    image: "/laos.png",
+    image: "/laos.jpeg",
     badge: "CULTURAL TRAIL",
   },
   {
@@ -123,7 +123,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 62,000",
     rating: 4.9,
     reviewsCount: 156,
-    image: "/vietnam.png",
+    image: "/vietnam.jpeg",
     badge: "TRENDING",
   },
   {
@@ -135,7 +135,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 95,000",
     rating: 4.9,
     reviewsCount: 180,
-    image: "/dubai.png",
+    image: "/dubai.jpeg",
     badge: "DESERT SAFARI",
   },
   {
@@ -147,7 +147,7 @@ const OUTBOUND_TOURS: TourItem[] = [
     price: "NPR 110,000",
     rating: 5.0,
     reviewsCount: 92,
-    image: "/maldives.png",
+    image: "/maldives.jpeg",
     badge: "LUXURY BEACH",
   },
 ];

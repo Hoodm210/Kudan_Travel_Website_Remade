@@ -1,121 +1,135 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import SectionTitle from "@/components/SectionTitle";
-import { MapPin, Calendar, Star, ArrowRight, Compass } from "lucide-react";
+import { MapPin, Calendar, Star, ArrowRight, Globe2 } from "lucide-react";
 
-interface TourItem {
+interface InboundTourItem {
   id: string;
   slug: string;
-  category: "cultural" | "trekking" | "wildlife" | "adventure";
   title: string;
   locations: string;
   duration: string;
-  price: string;
   rating: number;
   reviewsCount: number;
   image: string;
   badge?: string;
 }
 
-const INBOUND_TOURS: TourItem[] = [
+const INBOUND_TOURS: InboundTourItem[] = [
   {
     id: "ktm-bandipur-pokhara-nagarkot",
     slug: "ktm-bandipur-pokhara-nagarkot",
-    category: "cultural",
-    title: "Kathmandu, Bandipur & Pokhara Heritage",
-    locations: "KATHMANDU • BANDIPUR • POKHARA",
+    title: "Kathmandu, Bandipur, Pokhara & Nagarkot Heritage",
+    locations: "KATHMANDU • BANDIPUR • POKHARA • NAGARKOT",
     duration: "7N / 8D",
-    price: "NPR 58,000",
     rating: 4.9,
-    reviewsCount: 124,
+    reviewsCount: 142,
     image: "/pokhara.jpeg",
-    badge: "SIGNATURE JOURNEY",
+    badge: "HERITAGE & HILLS",
   },
   {
     id: "10-days-nepal-bhutan-tour",
     slug: "10-days-nepal-bhutan-tour",
-    category: "cultural",
-    title: "Ultimate Nepal & Bhutan Kingdom Tour",
-    locations: "KATHMANDU • THIMPHU • PARO",
+    title: "Ultimate Nepal & Bhutan Himalayan Kingdom Tour",
+    locations: "KATHMANDU • THIMPHU • PUNAKHA • PARO",
     duration: "9N / 10D",
-    price: "NPR 185,000",
-    rating: 4.8,
-    reviewsCount: 65,
+    rating: 5.0,
+    reviewsCount: 96,
     image: "/bhutan.jpeg",
-    badge: "SPECIAL PACKAGE",
+    badge: "CROSS-BORDER",
+  },
+  {
+    id: "10-days-nepal-tour",
+    slug: "10-days-nepal-tour",
+    title: "Grand Nepal Cultural & Spiritual Circuit",
+    locations: "KATHMANDU • BANDIPUR • POKHARA • LUMBINI",
+    duration: "9N / 10D",
+    rating: 4.9,
+    reviewsCount: 118,
+    image: "/pokhara.jpeg",
+    badge: "CULTURAL CIRCUIT",
+  },
+  {
+    id: "kathmandu-valley-cultural-tour",
+    slug: "kathmandu-valley-cultural-tour",
+    title: "Kathmandu Valley Cultural Heritage",
+    locations: "KATHMANDU • BHAKTAPUR • PATAN",
+    duration: "3N / 4D",
+    rating: 4.8,
+    reviewsCount: 88,
+    image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&q=80&w=800",
+    badge: "UNESCO HERITAGE",
   },
   {
     id: "ebc-trek",
     slug: "ebc-trek",
-    category: "trekking",
     title: "Everest Base Camp & Kala Patthar Expedition",
     locations: "LUKLA • NAMCHE • GORAKSHEP • EBC",
     duration: "13N / 14D",
-    price: "NPR 115,000",
     rating: 5.0,
-    reviewsCount: 98,
+    reviewsCount: 210,
     image: "/ebc.jpeg",
-    badge: "EXPEDITION",
+    badge: "HIMALAYAN TREK",
   },
   {
     id: "annapurna-circuit",
     slug: "annapurna-circuit",
-    category: "trekking",
     title: "Annapurna Circuit & Thorong La Pass Trek",
-    locations: "BESISAHAR • MANANG • POKHARA",
+    locations: "BESISAHAR • MANANG • THORONG LA • MUKTINATH",
     duration: "11N / 12D",
-    price: "NPR 88,000",
     rating: 4.9,
-    reviewsCount: 112,
+    reviewsCount: 155,
     image: "/abc.jpeg",
-    badge: "CLASSIC TREK",
+    badge: "HIGH PASS TREK",
+  },
+  {
+    id: "annapurna-base-camp-trek",
+    slug: "annapurna-base-camp-trek",
+    title: "Annapurna Base Camp & Sanctuary Trek",
+    locations: "POKHARA • GHANDRUK • ABC (4,130m)",
+    duration: "9N / 10D",
+    rating: 4.9,
+    reviewsCount: 165,
+    image: "/abc.jpeg",
+    badge: "SANCTUARY TREK",
   },
   {
     id: "mustang-overland",
     slug: "mustang-overland",
-    category: "trekking",
     title: "Muktinath & Lower Mustang Overland Safari",
-    locations: "POKHARA • JOMSOM • MUKTINATH",
+    locations: "POKHARA • TATOPANI • JOMSOM • MUKTINATH",
     duration: "5N / 6D",
-    price: "NPR 45,000",
-    rating: 4.9,
-    reviewsCount: 88,
+    rating: 4.8,
+    reviewsCount: 110,
     image: "/muktinath.jpeg",
-    badge: "OVERLAND",
+    badge: "4WD SAFARI",
+  },
+  {
+    id: "pokhara-leisure-tour",
+    slug: "pokhara-leisure-tour",
+    title: "Pokhara Lake & Mountain Escape",
+    locations: "POKHARA • SARANGKOT • PEACE PAGODA",
+    duration: "4N / 5D",
+    rating: 4.9,
+    reviewsCount: 130,
+    image: "/pokhara.jpeg",
+    badge: "LAKE & LEISURE",
   },
   {
     id: "chitwan-national-park-safari",
     slug: "chitwan-national-park-safari",
-    category: "wildlife",
     title: "Chitwan Wildlife Jungle Safari",
     locations: "CHITWAN NATIONAL PARK • RAPTI RIVER",
     duration: "2N / 3D",
-    price: "NPR 28,000",
     rating: 4.8,
-    reviewsCount: 76,
+    reviewsCount: 145,
     image: "/chitwan.jpeg",
     badge: "WILDLIFE SAFARI",
   },
 ];
 
-const TABS = [
-  { id: "all", label: "All Packages" },
-  { id: "cultural", label: "Cultural & Heritage" },
-  { id: "trekking", label: "Trekking & Hiking" },
-  { id: "wildlife", label: "Wildlife Safari" },
-  { id: "adventure", label: "Adventure & Leisure" },
-];
-
-export default function InboundPage() {
-  const [activeTab, setActiveTab] = useState("all");
-
-  const filteredTours =
-    activeTab === "all"
-      ? INBOUND_TOURS
-      : INBOUND_TOURS.filter((tour) => tour.category === activeTab);
-
+export default function InboundToursPage() {
   return (
     <main className="min-h-screen bg-[#F7F5F0] text-[#172A3A] font-serif selection:bg-[#A44A3F] selection:text-white">
       
@@ -125,67 +139,49 @@ export default function InboundPage() {
           <div className="flex flex-col items-start max-w-2xl">
             
             <div className="inline-flex items-center gap-1.5 bg-white px-3 py-1 text-[10px] font-sans font-extrabold uppercase tracking-widest text-[#A44A3F] border border-stone-200 shadow-xs mb-4">
-              <Compass size={13} className="text-[#A44A3F]" />
-              <span>Inbound Nepal & Kingdom Expeditions</span>
+              <Globe2 size={13} className="text-[#A44A3F]" />
+              <span>Inbound Nepal & Himalayan Journeys</span>
             </div>
 
             <SectionTitle
-              eyebrow="Curated Journeys"
-              title="Inbound Nepal & Bhutan Journeys"
+              eyebrow="Experience Nepal"
+              title="Heritage, Treks & Cultural Escapes"
               light={false}
             />
             
             <p className="mt-3 text-sm sm:text-base text-stone-600 leading-relaxed font-sans font-normal">
-              Experience the ancient stupas of Kathmandu, sacred Himalayan valleys, high-altitude trekking circuits, and wildlife sanctuaries with an accredited local operator.
+              Carefully curated inbound experiences across Nepal—from UNESCO World Heritage sites and mountain lake escapes to high-altitude Himalayan trekking and jungle safaris.
             </p>
 
           </div>
         </div>
       </section>
 
-      {/* PACKAGES & FILTER */}
+      {/* PACKAGES GRID */}
       <section className="relative py-12 bg-[#F7F5F0]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
 
-          {/* Category Filter */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-3 border-b border-stone-200/80 font-sans">
-            {TABS.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
-                  activeTab === tab.id
-                    ? "bg-[#172A3A] text-white shadow-xs"
-                    : "bg-white text-stone-600 hover:text-[#172A3A] border border-stone-200"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Cards Grid */}
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredTours.map((tour) => (
+          {/* Tour Cards Grid */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {INBOUND_TOURS.map((tour) => (
               <Link
                 key={tour.id}
                 href={`/inbound/${tour.slug}`}
                 className="group flex flex-col justify-between bg-white border border-stone-200/90 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
               >
                 <div>
-                  {/* Flush Borderless Image Header */}
+                  {/* Image Header */}
                   <div className="relative h-52 sm:h-56 w-full bg-stone-100 overflow-hidden">
                     <img
                       src={tour.image}
                       alt={tour.title}
                       className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       onError={(e) => {
-                        // Fallback image if local file isn't present yet
                         e.currentTarget.src = "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80";
                       }}
                     />
 
-                    {/* Badge */}
+                    {/* Category Badge */}
                     {tour.badge && (
                       <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs px-2.5 py-1 shadow-xs">
                         <span className="text-[9px] font-sans font-black uppercase tracking-widest text-[#172A3A]">
@@ -194,7 +190,7 @@ export default function InboundPage() {
                       </div>
                     )}
 
-                    {/* Image Footer Info Overlay */}
+                    {/* Duration & Rating Bar */}
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 flex items-center justify-between text-white font-sans text-[11px] font-semibold">
                       <div className="flex items-center gap-1.2">
                         <Calendar size={13} className="text-amber-400" />
@@ -216,7 +212,6 @@ export default function InboundPage() {
                       <span className="truncate">{tour.locations}</span>
                     </div>
 
-                    {/* EXACT HEADER STYLING SPECIFIED */}
                     <h3 className="min-h-[3.5rem] font-serif text-xl leading-snug text-[#172A3A] transition group-hover:text-[#A44A3F]">
                       {tour.title}
                     </h3>
@@ -226,18 +221,13 @@ export default function InboundPage() {
                 </div>
 
                 {/* Card Action Footer */}
-                <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 flex items-end justify-between font-sans">
-                  <div>
-                    <span className="block text-[9px] font-extrabold uppercase tracking-widest text-stone-400">
-                      STARTING FROM
-                    </span>
-                    <span className="text-base font-extrabold text-[#172A3A]">
-                      {tour.price}
-                    </span>
-                  </div>
+                <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 flex items-center justify-between font-sans">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-stone-500">
+                    Private Tour
+                  </span>
 
                   <div className="flex items-center gap-1 text-[11px] font-extrabold uppercase tracking-widest text-[#A44A3F] group-hover:translate-x-1 transition-transform">
-                    <span>DISCOVER</span>
+                    <span>EXPLORE ITINERARY</span>
                     <ArrowRight size={13} />
                   </div>
                 </div>

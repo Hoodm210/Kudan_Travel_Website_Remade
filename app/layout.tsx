@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 import { Inter, Playfair_Display } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+// @ts-ignore -- Next.js handles global CSS imports at build time.
 import "@/app/globals.css";
 
 const sansFont = Inter({
@@ -146,7 +148,7 @@ const jsonLd = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html

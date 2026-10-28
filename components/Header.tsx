@@ -27,11 +27,26 @@ const navLinks = [
 
 const services = [
   {
-    name: "Inbound Nepal",
+    name: "Nepal",
     description: "Himalayan journeys & cultural heritage",
     href: "/inbound",
     icon: Globe2,
     accent: "text-[#A92332] bg-[#A92332]/[0.07] border-[#A92332]/15",
+  },
+    
+  {
+    name: "Bhutan",
+    description: "Discover destinations around the world",
+    href: "/Bhutan",
+    icon: Compass,
+    accent: "text-[#173B68] bg-[#173B68]/[0.07] border-[#173B68]/15",
+  },
+   {
+    name: "India",
+    description: "Discover destinations around the world",
+    href: "/India",
+    icon: Compass,
+    accent: "text-[#173B68] bg-[#173B68]/[0.07] border-[#173B68]/15",
   },
   {
     name: "Domestic Flights",
@@ -39,13 +54,6 @@ const services = [
     href: "/domestic-flights",
     icon: Plane,
     accent: "text-[#9B6B22] bg-[#B88A3B]/[0.09] border-[#B88A3B]/20",
-  },
-  {
-    name: "Outbound Tours",
-    description: "Discover destinations around the world",
-    href: "/outbound-tours",
-    icon: Compass,
-    accent: "text-[#173B68] bg-[#173B68]/[0.07] border-[#173B68]/15",
   },
   {
     name: "Transport Services",
@@ -145,7 +153,7 @@ export default function Header() {
 
             <div className="relative min-w-0 border-l border-[#D8C49B] pl-3.5 sm:pl-4">
               <div className="flex items-baseline gap-1.5 whitespace-nowrap">
-                <span className="font-serif text-[21px] font-bold leading-none tracking-[0.035em] text-[#0047AB] transition-colors group-hover:text-[#A92332] sm:text-[25px] lg:text-[29px]">
+                <span className="font-serif text-[21px] font-bold leading-none tracking-[0.035em] text-[#0c25b0] transition-colors group-hover:text-[#A92332] sm:text-[25px] lg:text-[29px]">
                   KUDAN
                 </span>
                 <span className="font-serif text-[21px] font-bold leading-none tracking-tight text-[#101D32] sm:text-[25px] lg:text-[29px]">
